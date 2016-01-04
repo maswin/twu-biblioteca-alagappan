@@ -19,6 +19,7 @@ public class BibliotecaView {
     }
 
     public void printBooks(List<Book> books) {
+        outputWriter.println("List Of Books Available");
         for(Book book : books) {
             outputWriter.println(book);
         }

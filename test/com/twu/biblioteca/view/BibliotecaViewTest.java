@@ -29,6 +29,8 @@ public class BibliotecaViewTest {
         Book book2 = Mockito.mock(Book.class);
         books.add(book2);
         bibliotecaView.printBooks(books);
+
+        verify(outputWriter).println("List Of Books Available");
         verify(outputWriter).println(book1);
         verify(outputWriter).println(book2);
     }
