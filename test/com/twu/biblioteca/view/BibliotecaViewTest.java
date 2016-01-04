@@ -2,7 +2,6 @@ package com.twu.biblioteca.view;
 
 import com.twu.biblioteca.Book;
 import com.twu.biblioteca.InputOutput.OutputWriter;
-import com.twu.biblioteca.view.BibliotecaView;
 import org.junit.Test;
 import org.mockito.Mockito;
 import java.util.ArrayList;

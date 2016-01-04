@@ -1,6 +1,5 @@
 package com.twu.biblioteca.InputOutput;
 
-import com.twu.biblioteca.InputOutput.OutputWriter;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
