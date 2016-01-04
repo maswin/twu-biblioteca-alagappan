@@ -15,7 +15,7 @@ public class Biblioteca {
     }
 
     private void displayBooks() {
-        bibliotecaView.displayBooks(books);
+        bibliotecaView.printBooks(books);
     }
 
     private void printWelcomeMessage() {

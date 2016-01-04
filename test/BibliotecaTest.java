@@ -22,6 +22,6 @@ public class BibliotecaTest {
         List<Book> books = new ArrayList<>();
         Biblioteca biblioteca = new Biblioteca(books, bibliotecaView);
         biblioteca.start();
-        verify(bibliotecaView).displayBooks(books);
+        verify(bibliotecaView).printBooks(books);
     }
 }

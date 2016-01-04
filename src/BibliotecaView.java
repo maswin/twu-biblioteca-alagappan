@@ -13,7 +13,7 @@ public class BibliotecaView {
         outputWriter.println(welcomeMessage);
     }
 
-    public void displayBooks(List<Book> books) {
+    public void printBooks(List<Book> books) {
         for(Book book : books) {
             outputWriter.println(book);
         }
