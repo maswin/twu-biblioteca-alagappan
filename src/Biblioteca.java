@@ -1,24 +1,24 @@
 import java.util.List;
 
 public class Biblioteca {
-    private String welcomeMessage;
     private List<String> books;
+    private BibliotecaView bibliotecaView;
 
-    public Biblioteca(String welcomeMessage, List<String> books) {
-        this.welcomeMessage = welcomeMessage;
+    public Biblioteca(List<String> books, BibliotecaView bibliotecaView) {
         this.books = books;
+        this.bibliotecaView = bibliotecaView;
     }
 
-    public void start(OutputWriter outputWriter) {
-        printWelcomeMessage(outputWriter);
-        displayAllBooks(outputWriter);
+    public void start() {
+        printWelcomeMessage();
+        displayBooks();
     }
 
-    private void displayAllBooks(OutputWriter outputWriter) {
-        outputWriter.println(books);
+    private void displayBooks() {
+        bibliotecaView.displayBooks(books);
     }
 
-    private void printWelcomeMessage(OutputWriter outputWriter) {
-        outputWriter.println(welcomeMessage);
+    private void printWelcomeMessage() {
+        bibliotecaView.printWelcomeMessage();
     }
 }
