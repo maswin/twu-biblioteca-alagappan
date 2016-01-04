@@ -1,3 +1,8 @@
+package com.twu.biblioteca;
+
+import com.twu.biblioteca.Book;
+import com.twu.biblioteca.view.BibliotecaView;
+
 import java.util.List;
 
 public class Biblioteca {

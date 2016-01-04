@@ -1,3 +1,8 @@
+package com.twu.biblioteca.view;
+
+import com.twu.biblioteca.Book;
+import com.twu.biblioteca.InputOutput.OutputWriter;
+
 import java.util.List;
 
 public class BibliotecaView {

@@ -1,3 +1,6 @@
+package com.twu.biblioteca;
+
+import com.twu.biblioteca.Book;
 import org.junit.Test;
 
 

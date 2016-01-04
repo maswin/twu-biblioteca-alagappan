@@ -1,3 +1,8 @@
+package com.twu.biblioteca;
+
+import com.twu.biblioteca.Biblioteca;
+import com.twu.biblioteca.Book;
+import com.twu.biblioteca.view.BibliotecaView;
 import org.junit.Test;
 import org.mockito.Mockito;
 
