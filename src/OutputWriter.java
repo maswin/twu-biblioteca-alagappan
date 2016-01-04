@@ -8,7 +8,7 @@ public class OutputWriter {
         printWriter = new PrintWriter(out);
     }
 
-    public void println(String output) {
+    public void println(Object output) {
         printWriter.println(output);
         printWriter.flush();
     }
