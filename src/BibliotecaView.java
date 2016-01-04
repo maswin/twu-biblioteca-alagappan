@@ -13,8 +13,8 @@ public class BibliotecaView {
         outputWriter.println(welcomeMessage);
     }
 
-    public void displayBooks(List<String> books) {
-        for(String book : books) {
+    public void displayBooks(List<Book> books) {
+        for(Book book : books) {
             outputWriter.println(book);
         }
     }

@@ -1,6 +1,5 @@
 import org.junit.Test;
 import org.mockito.Mockito;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,11 +19,13 @@ public class BibliotecaViewTest {
     public void shouldPrintListOfBooks() throws Exception {
         OutputWriter outputWriter = Mockito.mock(OutputWriter.class);
         BibliotecaView bibliotecaView = new BibliotecaView("Welcome to Biblioteca !!", outputWriter);
-        List<String> books = new ArrayList<>();
-        books.add("abc");
-        books.add("def");
+        List<Book> books = new ArrayList<>();
+        Book book1 = Mockito.mock(Book.class);
+        books.add(book1);
+        Book book2 = Mockito.mock(Book.class);
+        books.add(book2);
         bibliotecaView.displayBooks(books);
-        verify(outputWriter).println("abc");
-        verify(outputWriter).println("def");
+        verify(outputWriter).println(book1);
+        verify(outputWriter).println(book2);
     }
 }

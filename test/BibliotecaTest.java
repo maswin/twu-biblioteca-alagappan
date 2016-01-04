@@ -11,7 +11,7 @@ public class BibliotecaTest {
     @Test
     public void shouldDisplayWelcomeMessageWhenApplicationIsStarted() {
         BibliotecaView bibliotecaView = Mockito.mock(BibliotecaView.class);
-        Biblioteca biblioteca = new Biblioteca(new ArrayList<String>(), bibliotecaView);
+        Biblioteca biblioteca = new Biblioteca(new ArrayList<Book>(), bibliotecaView);
         biblioteca.start();
         verify(bibliotecaView).printWelcomeMessage();
     }
@@ -19,7 +19,7 @@ public class BibliotecaTest {
     @Test
     public void shouldDisplayListOfBooksAfterWelcomeMessage() {
         BibliotecaView bibliotecaView = Mockito.mock(BibliotecaView.class);
-        List<String> books = new ArrayList<>();
+        List<Book> books = new ArrayList<>();
         Biblioteca biblioteca = new Biblioteca(books, bibliotecaView);
         biblioteca.start();
         verify(bibliotecaView).displayBooks(books);
