@@ -15,7 +15,7 @@ public class MenuView {
     }
 
     public void displayMenu(Map<Integer, String> menuOptions) {
-        outputWriter.println("Menu Options :");
+        outputWriter.println("menu Options :");
         for(Map.Entry<Integer, String> menuOption : menuOptions.entrySet()){
             outputWriter.println(menuOption.getKey()+" "+menuOption.getValue());
         }

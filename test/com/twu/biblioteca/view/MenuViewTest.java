@@ -31,7 +31,7 @@ public class MenuViewTest {
     public void shouldDisplayMenuOptions() throws Exception {
         MenuView menuView = new MenuView(outputWriter, inputReader);
         menuView.displayMenu(menuOptions);
-        verify(outputWriter).println("Menu Options :");
+        verify(outputWriter).println("menu Options :");
         verify(outputWriter).println("1 option 1");
         verify(outputWriter).println("2 option 2");
     }
