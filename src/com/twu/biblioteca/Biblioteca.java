@@ -5,6 +5,7 @@ import com.twu.biblioteca.view.MenuView;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class Biblioteca {
     private List<Book> books;
@@ -45,19 +46,16 @@ public class Biblioteca {
 
     private void checkOutBook() {
         int bookId = bibliotecaView.getBookId();
-        Book bookToRemove = null;
-        for(Book book : books) {
-            if(book.isSameBookId(bookId)) {
-                bookToRemove = book;
-                break;
-            }
-        }
-        if(bookToRemove != null) {
-            books.remove(bookToRemove);
+
+        Optional<Book> foundBook = books.stream().filter(b -> b.isSameBookId(bookId)).findFirst();
+
+        if(foundBook.isPresent()) {
+            books.remove(foundBook.get());
             bibliotecaView.printSuccessfulCheckoutMessage();
         } else {
             bibliotecaView.printUnSuccessfulCheckoutMessage();
         }
+
     }
 
     private void printWelcomeMessage() {

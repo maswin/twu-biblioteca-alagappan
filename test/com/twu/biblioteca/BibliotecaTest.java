@@ -67,7 +67,7 @@ public class BibliotecaTest {
     @Test
     public void checkoutAvailableBookAndDisplaySuccessMessage() {
         List<Book> books = new ArrayList<>();
-        books.add(new Book(0, "book1", "author1", 1234));
+        books.add(new Book(0, "book1", "author1", 1234, true));
         when(menuView.getMenuOption()).thenReturn(3,2);
 
         Biblioteca biblioteca = new Biblioteca(books, menuOptions, bibliotecaView, menuView);
@@ -79,7 +79,7 @@ public class BibliotecaTest {
     @Test
     public void showFailureMessageOnTryingToCheckoutUnAvailableBook() {
         List<Book> books = new ArrayList<>();
-        books.add(new Book(1, "book1", "author1", 1234));
+        books.add(new Book(1, "book1", "author1", 1234, true));
         when(menuView.getMenuOption()).thenReturn(3,2);
 
         Biblioteca biblioteca = new Biblioteca(books, menuOptions, bibliotecaView, menuView);

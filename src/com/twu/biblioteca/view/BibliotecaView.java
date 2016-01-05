@@ -23,6 +23,7 @@ public class BibliotecaView {
 
     public void printBooks(List<Book> books) {
         outputWriter.println("List Of Books Available");
+
         books.forEach(book ->  outputWriter.println(book));
     }
 
