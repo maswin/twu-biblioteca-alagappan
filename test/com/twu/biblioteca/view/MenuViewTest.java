@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class MenuViewTest {
 
@@ -30,7 +31,16 @@ public class MenuViewTest {
     @Test
     public void shouldReadMenuOption() throws Exception {
         MenuView menuView = new MenuView(outputWriter, inputReader);
+        when(inputReader.read()).thenReturn("1");
         menuView.getMenuOption();
         verify(inputReader).read();
+    }
+
+
+    @Test
+    public void shouldDisplayInvalidMenuOption() throws Exception {
+        MenuView menuView = new MenuView(outputWriter, inputReader);
+        menuView.displayInvalidOption();
+        verify(outputWriter).println("Select a valid option!");
     }
 }

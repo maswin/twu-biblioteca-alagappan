@@ -20,4 +20,8 @@ public class MenuView {
     public int getMenuOption() {
         return Integer.parseInt(inputReader.read());
     }
+
+    public void displayInvalidOption() {
+        outputWriter.println("Select a valid option!");
+    }
 }

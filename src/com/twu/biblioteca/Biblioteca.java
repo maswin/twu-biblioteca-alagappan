@@ -19,9 +19,11 @@ public class Biblioteca {
 
     public void start() {
         printWelcomeMessage();
-        menuView.displayMenu();
-        int option = menuView.getMenuOption();
-        performOperation(option);
+        do {
+            menuView.displayMenu();
+            int option = menuView.getMenuOption();
+            performOperation(option);
+        } while (true);
     }
 
     private void performOperation(int option) {
