@@ -1,12 +1,13 @@
 package com.twu.biblioteca.InputOutput;
 
+import java.io.InputStream;
 import java.util.Scanner;
 
 public class InputReader {
     private Scanner scanner;
 
-    public InputReader(Scanner scanner) {
-        this.scanner = scanner;
+    public InputReader(InputStream in) {
+        this.scanner = new Scanner(in);
     }
 
     public String read() {
