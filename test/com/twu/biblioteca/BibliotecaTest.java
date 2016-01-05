@@ -9,8 +9,8 @@ import org.mockito.Mockito;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class BibliotecaTest {
 
@@ -30,20 +30,22 @@ public class BibliotecaTest {
         verify(bibliotecaView).printWelcomeMessage();
     }
 
-//    @Test
-//    public void shouldDisplayListOfBooksAfterWelcomeMessage() {
-//        BibliotecaView bibliotecaView = Mockito.mock(BibliotecaView.class);
-//        List<Book> books = new ArrayList<>();
-//        Biblioteca biblioteca = new Biblioteca(books, bibliotecaView);
-//        biblioteca.start();
-//        verify(bibliotecaView).printBooks(books);
-//    }
-
     @Test
     public void shouldDisplayMenuAfterWelcomeMessage() {
         List<Book> books = new ArrayList<>();
         Biblioteca biblioteca = new Biblioteca(books, bibliotecaView, menuView);
         biblioteca.start();
+        verify(bibliotecaView).printWelcomeMessage();
         verify(menuView).displayMenu();
     }
+
+    @Test
+    public void shouldDisplayListOfBooksAfterChoosingMenuOptionOne() {
+        List<Book> books = new ArrayList<>();
+        when(menuView.getMenuOption()).thenReturn(1);
+        Biblioteca biblioteca = new Biblioteca(books, bibliotecaView, menuView);
+        biblioteca.start();
+        verify(bibliotecaView).printBooks(books);
+    }
+
 }

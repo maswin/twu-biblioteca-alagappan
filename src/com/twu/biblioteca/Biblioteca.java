@@ -20,10 +20,15 @@ public class Biblioteca {
     public void start() {
         printWelcomeMessage();
         menuView.displayMenu();
+        int option = menuView.getMenuOption();
+        performOperation(option);
     }
 
-    private void displayBooks() {
-        bibliotecaView.printBooks(books);
+    private void performOperation(int option) {
+        switch (option) {
+            case 1 : bibliotecaView.printBooks(books);
+                break;
+        }
     }
 
     private void printWelcomeMessage() {
