@@ -26,7 +26,11 @@ public class BibliotecaView {
         books.forEach(book ->  outputWriter.println(book));
     }
 
-    public String getBookName() {
-        return inputReader.readLine();
+    public int getBookId() {
+        return inputReader.readInt();
+    }
+
+    public void printSuccessfulCheckoutMessage() {
+        outputWriter.println("Thank you! Enjoy the book");
     }
 }

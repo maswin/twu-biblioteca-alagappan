@@ -1,5 +1,6 @@
 package com.twu.biblioteca.view;
 
+import com.twu.biblioteca.Biblioteca;
 import com.twu.biblioteca.Book;
 import com.twu.biblioteca.InputOutput.InputReader;
 import com.twu.biblioteca.InputOutput.OutputWriter;
@@ -48,11 +49,18 @@ public class BibliotecaViewTest {
     }
 
     @Test
-    public void shouldGetBookNameFromUser() {
+    public void shouldGetBookIdFromUser() {
         BibliotecaView bibliotecaView = new BibliotecaView("Welcome to com.twu.biblioteca.Biblioteca !!", outputWriter, inputReader);
 
-        when(inputReader.readLine()).thenReturn("book name");
-        assertEquals("book name", bibliotecaView.getBookName());
+        when(inputReader.readInt()).thenReturn(2);
+        assertEquals(2, bibliotecaView.getBookId());
 
+    }
+
+    @Test
+    public void shouldPrintSuccessMessage() throws Exception {
+        BibliotecaView bibliotecaView = new BibliotecaView("Welcome to com.twu.biblioteca.Biblioteca !!", outputWriter, inputReader);
+        bibliotecaView.printSuccessfulCheckoutMessage();
+        verify(outputWriter).println("Thank you! Enjoy the book");
     }
 }

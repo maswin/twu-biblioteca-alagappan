@@ -36,8 +36,19 @@ public class Biblioteca {
                 break;
             case 2 :
                 break;
+            case 3 : checkOutBook();
+                break;
             default : menuView.displayInvalidOption();
                 break;
+        }
+    }
+
+    private void checkOutBook() {
+        int bookId = bibliotecaView.getBookId();
+        Book bookToRemove = books.stream().findFirst().filter(book -> book.isSameBookId(bookId)).get();
+        if(bookToRemove != null) {
+            books.remove(bookToRemove);
+            bibliotecaView.printSuccessfulCheckoutMessage();
         }
     }
 

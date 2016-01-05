@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -57,10 +58,21 @@ public class BibliotecaTest {
     @Test
     public void displayInvalidMenuOptionWhenOptionNotInListIsGivenAsInput() {
         List<Book> books = new ArrayList<>();
-        when(menuView.getMenuOption()).thenReturn(3,2);
+        when(menuView.getMenuOption()).thenReturn(13,2);
         Biblioteca biblioteca = new Biblioteca(books, menuOptions, bibliotecaView, menuView);
         biblioteca.start();
         verify(menuView).displayInvalidOption();
     }
 
+    @Test
+    public void checkoutAvailableBookAndDisplaySuccessMessage() {
+        List<Book> books = new ArrayList<>();
+        books.add(new Book(0, "book1", "author1", 1234));
+        when(menuView.getMenuOption()).thenReturn(3,2);
+
+        Biblioteca biblioteca = new Biblioteca(books, menuOptions, bibliotecaView, menuView);
+        biblioteca.start();
+        assertEquals(0, books.size());
+        verify(bibliotecaView).printSuccessfulCheckoutMessage();
+    }
 }

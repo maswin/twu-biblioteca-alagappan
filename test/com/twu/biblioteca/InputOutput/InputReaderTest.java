@@ -24,4 +24,12 @@ public class InputReaderTest {
         InputReader inputReader =new InputReader(in);
         assertEquals("input input",inputReader.readLine());
     }
+
+    @Test
+    public void shouldReadInteger() {
+        String input = "1";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        InputReader inputReader =new InputReader(in);
+        assertEquals(1,inputReader.readInt());
+    }
 }
