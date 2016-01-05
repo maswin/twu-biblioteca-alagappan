@@ -6,7 +6,9 @@ import com.twu.biblioteca.view.BibliotecaView;
 import com.twu.biblioteca.view.MenuView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BibliotecaApp {
 
@@ -15,9 +17,10 @@ public class BibliotecaApp {
         InputReader inputReader = new InputReader(System.in);
         BibliotecaView bibliotecaView = new BibliotecaView("Welcome to Biblioteca !!",outputWriter);
         MenuView menuView = new MenuView(outputWriter, inputReader);
-        List<String> menuOptions = new ArrayList<>();
-        menuOptions.add("1. List of Books");
-        menuOptions.add("2. Quit");
+        Map<Integer, String> menuOptions = new HashMap<>();
+
+        menuOptions.put(1, "List of Books");
+        menuOptions.put(2, "Quit");
         List<Book> books = new ArrayList<>();
         books.add(new Book("Harry Potter", "J.K.Rowling", 2005));
         books.add(new Book("2 States", "Chetan Bhagat", 2010));

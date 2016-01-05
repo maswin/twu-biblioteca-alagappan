@@ -7,7 +7,9 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -16,13 +18,13 @@ public class BibliotecaTest {
 
     private BibliotecaView bibliotecaView;
     private MenuView menuView;
-    private List<String> menuOptions;
+    private Map<Integer, String> menuOptions;
 
     @Before
     public void setUp() throws Exception {
         bibliotecaView = Mockito.mock(BibliotecaView.class);
         menuView = Mockito.mock(MenuView.class);
-        menuOptions = new ArrayList<>();
+        menuOptions = new HashMap<>();
     }
 
     @Test

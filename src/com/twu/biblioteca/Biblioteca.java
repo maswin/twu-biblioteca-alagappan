@@ -4,14 +4,15 @@ import com.twu.biblioteca.view.BibliotecaView;
 import com.twu.biblioteca.view.MenuView;
 
 import java.util.List;
+import java.util.Map;
 
 public class Biblioteca {
     private List<Book> books;
-    private List<String> menuOptions;
+    private Map<Integer, String> menuOptions;
     private BibliotecaView bibliotecaView;
     private MenuView menuView;
 
-    public Biblioteca(List<Book> books, List<String> menuOptions, BibliotecaView bibliotecaView, MenuView menuView) {
+    public Biblioteca(List<Book> books, Map<Integer, String> menuOptions, BibliotecaView bibliotecaView, MenuView menuView) {
         this.books = books;
         this.menuOptions = menuOptions;
         this.bibliotecaView = bibliotecaView;

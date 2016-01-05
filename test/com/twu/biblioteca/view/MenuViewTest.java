@@ -6,8 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -16,23 +16,24 @@ public class MenuViewTest {
 
     private OutputWriter outputWriter;
     private InputReader inputReader;
+    private Map<Integer, String> menuOptions;
 
     @Before
     public void setUp() {
         outputWriter = Mockito.mock(OutputWriter.class);
         inputReader = Mockito.mock(InputReader.class);
+        menuOptions = new HashMap<>();
+        menuOptions.put(1, "option 1");
+        menuOptions.put(2, "option 2");
     }
 
     @Test
     public void shouldDisplayMenuOptions() throws Exception {
         MenuView menuView = new MenuView(outputWriter, inputReader);
-        List<String> menuOptions = new ArrayList<>();
-        menuOptions.add("1. option 1");
-        menuOptions.add("2. option 2");
         menuView.displayMenu(menuOptions);
         verify(outputWriter).println("Menu Options :");
-        verify(outputWriter).println("1. option 1");
-        verify(outputWriter).println("2. option 2");
+        verify(outputWriter).println("1 option 1");
+        verify(outputWriter).println("2 option 2");
     }
 
     @Test

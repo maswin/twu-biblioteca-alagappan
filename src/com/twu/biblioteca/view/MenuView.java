@@ -3,7 +3,7 @@ package com.twu.biblioteca.view;
 import com.twu.biblioteca.InputOutput.InputReader;
 import com.twu.biblioteca.InputOutput.OutputWriter;
 
-import java.util.List;
+import java.util.Map;
 
 public class MenuView {
     private OutputWriter outputWriter;
@@ -14,10 +14,10 @@ public class MenuView {
         this.inputReader = inputReader;
     }
 
-    public void displayMenu(List<String> menuOptions) {
+    public void displayMenu(Map<Integer, String> menuOptions) {
         outputWriter.println("Menu Options :");
-        for(String menuOption : menuOptions){
-            outputWriter.println(menuOption);
+        for(Map.Entry<Integer, String> menuOption : menuOptions.entrySet()){
+            outputWriter.println(menuOption.getKey()+" "+menuOption.getValue());
         }
     }
 
