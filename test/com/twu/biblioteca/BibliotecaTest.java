@@ -19,6 +19,7 @@ public class BibliotecaTest {
 
     private BibliotecaView bibliotecaView;
     private MenuView menuView;
+    private Books books;
     private Map<Integer, String> menuOptions;
 
     @Before
@@ -26,11 +27,13 @@ public class BibliotecaTest {
         bibliotecaView = Mockito.mock(BibliotecaView.class);
         menuView = Mockito.mock(MenuView.class);
         menuOptions = new HashMap<>();
+        //List<Book> bookList = new ArrayList<>();
+        books = Mockito.mock(Books.class);
     }
 
     @Test
     public void shouldDisplayWelcomeMessageWhenApplicationIsStarted() {
-        Biblioteca biblioteca = new Biblioteca(new ArrayList<Book>(), menuOptions, bibliotecaView, menuView);
+        Biblioteca biblioteca = new Biblioteca(books, menuOptions, bibliotecaView, menuView);
         when(menuView.getMenuOption()).thenReturn(2);
         biblioteca.start();
         verify(bibliotecaView).printWelcomeMessage();
@@ -38,7 +41,6 @@ public class BibliotecaTest {
 
     @Test
     public void shouldDisplayMenuAfterWelcomeMessage() {
-        List<Book> books = new ArrayList<>();
         when(menuView.getMenuOption()).thenReturn(2);
         Biblioteca biblioteca = new Biblioteca(books, menuOptions, bibliotecaView, menuView);
         biblioteca.start();
@@ -48,16 +50,14 @@ public class BibliotecaTest {
 
     @Test
     public void shouldDisplayListOfBooksAfterChoosingMenuOptionOne() {
-        List<Book> books = new ArrayList<>();
         when(menuView.getMenuOption()).thenReturn(1,2);
         Biblioteca biblioteca = new Biblioteca(books, menuOptions, bibliotecaView, menuView);
         biblioteca.start();
-        verify(bibliotecaView).printBooks(books);
+        verify(bibliotecaView).printBooks(books.getAvailableBookList());
     }
 
     @Test
     public void displayInvalidMenuOptionWhenOptionNotInListIsGivenAsInput() {
-        List<Book> books = new ArrayList<>();
         when(menuView.getMenuOption()).thenReturn(13,2);
         Biblioteca biblioteca = new Biblioteca(books, menuOptions, bibliotecaView, menuView);
         biblioteca.start();
@@ -66,25 +66,26 @@ public class BibliotecaTest {
 
     @Test
     public void checkoutAvailableBookAndDisplaySuccessMessage() {
-        List<Book> books = new ArrayList<>();
-        books.add(new Book(0, "book1", "author1", 1234, true));
         when(menuView.getMenuOption()).thenReturn(3,2);
+        when(bibliotecaView.getBookId()).thenReturn(3);
+        when(books.findBookById(3)).thenReturn(new Book(1, "a", "b", 2011, true));
 
         Biblioteca biblioteca = new Biblioteca(books, menuOptions, bibliotecaView, menuView);
         biblioteca.start();
-        assertEquals(0, books.size());
+
+        verify(books).checkOut(3);
         verify(bibliotecaView).printSuccessfulCheckoutMessage();
     }
 
     @Test
     public void showFailureMessageOnTryingToCheckoutUnAvailableBook() {
-        List<Book> books = new ArrayList<>();
-        books.add(new Book(1, "book1", "author1", 1234, true));
         when(menuView.getMenuOption()).thenReturn(3,2);
-
+        when(bibliotecaView.getBookId()).thenReturn(3);
+        when(books.findBookById(3)).thenReturn(null);
         Biblioteca biblioteca = new Biblioteca(books, menuOptions, bibliotecaView, menuView);
+
         biblioteca.start();
-        assertEquals(1, books.size());
+
         verify(bibliotecaView).printUnSuccessfulCheckoutMessage();
     }
 }

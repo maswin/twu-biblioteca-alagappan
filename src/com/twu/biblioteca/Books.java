@@ -2,6 +2,7 @@ package com.twu.biblioteca;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class Books {
     private List<Book> bookList;
@@ -18,8 +19,8 @@ public class Books {
         return null;
     }
 
-    public List<Book> getBookList() {
-        return bookList;
+    public List<Book> getAvailableBookList() {
+        return bookList.stream().filter(book -> book.isBookAvailable()).collect(Collectors.toList());
     }
 
     public boolean checkOut(int bookId) {

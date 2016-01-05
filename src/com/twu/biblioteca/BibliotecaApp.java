@@ -21,9 +21,10 @@ public class BibliotecaApp {
 
         menuOptions.put(1, "List of Books");
         menuOptions.put(2, "Quit");
-        List<Book> books = new ArrayList<>();
-        books.add(new Book(0, "Harry Potter", "J.K.Rowling", 2005, true));
-        books.add(new Book(0, "2 States", "Chetan Bhagat", 2010, true));
+        List<Book> bookList = new ArrayList<>();
+        bookList.add(new Book(0, "Harry Potter", "J.K.Rowling", 2005, true));
+        bookList.add(new Book(0, "2 States", "Chetan Bhagat", 2010, true));
+        Books books = new Books(bookList);
         Biblioteca biblioteca = new Biblioteca(books, menuOptions, bibliotecaView, menuView);
         biblioteca.start();
     }

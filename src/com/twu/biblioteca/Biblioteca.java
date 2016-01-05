@@ -8,12 +8,12 @@ import java.util.Map;
 import java.util.Optional;
 
 public class Biblioteca {
-    private List<Book> books;
+    private Books books;
     private Map<Integer, String> menuOptions;
     private BibliotecaView bibliotecaView;
     private MenuView menuView;
 
-    public Biblioteca(List<Book> books, Map<Integer, String> menuOptions, BibliotecaView bibliotecaView, MenuView menuView) {
+    public Biblioteca(Books books, Map<Integer, String> menuOptions, BibliotecaView bibliotecaView, MenuView menuView) {
         this.books = books;
         this.menuOptions = menuOptions;
         this.bibliotecaView = bibliotecaView;
@@ -33,7 +33,7 @@ public class Biblioteca {
 
     private void performOperation(int option) {
         switch (option) {
-            case 1 : bibliotecaView.printBooks(books);
+            case 1 : bibliotecaView.printBooks(books.getAvailableBookList());
                 break;
             case 2 :
                 break;
@@ -47,10 +47,10 @@ public class Biblioteca {
     private void checkOutBook() {
         int bookId = bibliotecaView.getBookId();
 
-        Optional<Book> foundBook = books.stream().filter(b -> b.isSameBookId(bookId)).findFirst();
+        Book foundBook = books.findBookById(bookId);
 
-        if(foundBook.isPresent()) {
-            books.remove(foundBook.get());
+        if(foundBook != null) {
+            books.checkOut(bookId);
             bibliotecaView.printSuccessfulCheckoutMessage();
         } else {
             bibliotecaView.printUnSuccessfulCheckoutMessage();
