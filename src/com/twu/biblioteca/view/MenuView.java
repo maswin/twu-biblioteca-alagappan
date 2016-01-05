@@ -6,7 +6,6 @@ public class MenuView {
     private OutputWriter outputWriter;
 
     public MenuView(OutputWriter outputWriter) {
-
         this.outputWriter = outputWriter;
     }
 
