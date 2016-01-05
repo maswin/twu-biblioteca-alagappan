@@ -45,10 +45,18 @@ public class Biblioteca {
 
     private void checkOutBook() {
         int bookId = bibliotecaView.getBookId();
-        Book bookToRemove = books.stream().findFirst().filter(book -> book.isSameBookId(bookId)).get();
+        Book bookToRemove = null;
+        for(Book book : books) {
+            if(book.isSameBookId(bookId)) {
+                bookToRemove = book;
+                break;
+            }
+        }
         if(bookToRemove != null) {
             books.remove(bookToRemove);
             bibliotecaView.printSuccessfulCheckoutMessage();
+        } else {
+            bibliotecaView.printUnSuccessfulCheckoutMessage();
         }
     }
 

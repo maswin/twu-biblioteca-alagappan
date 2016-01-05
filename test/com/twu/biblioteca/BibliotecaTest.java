@@ -75,4 +75,16 @@ public class BibliotecaTest {
         assertEquals(0, books.size());
         verify(bibliotecaView).printSuccessfulCheckoutMessage();
     }
+
+    @Test
+    public void showFailureMessageOnTryingToCheckoutUnAvailableBook() {
+        List<Book> books = new ArrayList<>();
+        books.add(new Book(1, "book1", "author1", 1234));
+        when(menuView.getMenuOption()).thenReturn(3,2);
+
+        Biblioteca biblioteca = new Biblioteca(books, menuOptions, bibliotecaView, menuView);
+        biblioteca.start();
+        assertEquals(1, books.size());
+        verify(bibliotecaView).printUnSuccessfulCheckoutMessage();
+    }
 }

@@ -33,4 +33,8 @@ public class BibliotecaView {
     public void printSuccessfulCheckoutMessage() {
         outputWriter.println("Thank you! Enjoy the book");
     }
+
+    public void printUnSuccessfulCheckoutMessage() {
+        outputWriter.println("That book is not available.");
+    }
 }
