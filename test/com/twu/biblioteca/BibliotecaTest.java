@@ -26,6 +26,7 @@ public class BibliotecaTest {
     @Test
     public void shouldDisplayWelcomeMessageWhenApplicationIsStarted() {
         Biblioteca biblioteca = new Biblioteca(new ArrayList<Book>(), bibliotecaView, menuView);
+        when(menuView.getMenuOption()).thenReturn(2);
         biblioteca.start();
         verify(bibliotecaView).printWelcomeMessage();
     }
@@ -33,6 +34,7 @@ public class BibliotecaTest {
     @Test
     public void shouldDisplayMenuAfterWelcomeMessage() {
         List<Book> books = new ArrayList<>();
+        when(menuView.getMenuOption()).thenReturn(2);
         Biblioteca biblioteca = new Biblioteca(books, bibliotecaView, menuView);
         biblioteca.start();
         verify(bibliotecaView).printWelcomeMessage();
@@ -42,10 +44,18 @@ public class BibliotecaTest {
     @Test
     public void shouldDisplayListOfBooksAfterChoosingMenuOptionOne() {
         List<Book> books = new ArrayList<>();
-        when(menuView.getMenuOption()).thenReturn(1);
+        when(menuView.getMenuOption()).thenReturn(1,2);
         Biblioteca biblioteca = new Biblioteca(books, bibliotecaView, menuView);
         biblioteca.start();
         verify(bibliotecaView).printBooks(books);
     }
 
+    @Test
+    public void displayInvalidMenuOptionWhenOptionNotInListIsGivenAsInput() {
+        List<Book> books = new ArrayList<>();
+        when(menuView.getMenuOption()).thenReturn(3,2);
+        Biblioteca biblioteca = new Biblioteca(books, bibliotecaView, menuView);
+        biblioteca.start();
+        verify(menuView).displayInvalidOption();
+    }
 }

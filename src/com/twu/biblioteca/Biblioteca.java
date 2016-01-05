@@ -19,16 +19,21 @@ public class Biblioteca {
 
     public void start() {
         printWelcomeMessage();
+        int option;
         do {
             menuView.displayMenu();
-            int option = menuView.getMenuOption();
+            option = menuView.getMenuOption();
             performOperation(option);
-        } while (true);
+        } while (option != 2);
     }
 
     private void performOperation(int option) {
         switch (option) {
             case 1 : bibliotecaView.printBooks(books);
+                break;
+            case 2 :
+                break;
+            default : menuView.displayInvalidOption();
                 break;
         }
     }
