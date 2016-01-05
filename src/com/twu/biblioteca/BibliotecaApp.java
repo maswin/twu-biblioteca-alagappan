@@ -15,7 +15,7 @@ public class BibliotecaApp {
     public static void main(String[] args) {
         OutputWriter outputWriter = new OutputWriter(System.out);
         InputReader inputReader = new InputReader(System.in);
-        BibliotecaView bibliotecaView = new BibliotecaView("Welcome to Biblioteca !!",outputWriter);
+        BibliotecaView bibliotecaView = new BibliotecaView("Welcome to Biblioteca !!",outputWriter, inputReader);
         MenuView menuView = new MenuView(outputWriter, inputReader);
         Map<Integer, String> menuOptions = new HashMap<>();
 
