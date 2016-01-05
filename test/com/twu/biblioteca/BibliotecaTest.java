@@ -16,16 +16,18 @@ public class BibliotecaTest {
 
     private BibliotecaView bibliotecaView;
     private MenuView menuView;
+    private List<String> menuOptions;
 
     @Before
     public void setUp() throws Exception {
         bibliotecaView = Mockito.mock(BibliotecaView.class);
         menuView = Mockito.mock(MenuView.class);
+        menuOptions = new ArrayList<>();
     }
 
     @Test
     public void shouldDisplayWelcomeMessageWhenApplicationIsStarted() {
-        Biblioteca biblioteca = new Biblioteca(new ArrayList<Book>(), bibliotecaView, menuView);
+        Biblioteca biblioteca = new Biblioteca(new ArrayList<Book>(), menuOptions, bibliotecaView, menuView);
         when(menuView.getMenuOption()).thenReturn(2);
         biblioteca.start();
         verify(bibliotecaView).printWelcomeMessage();
@@ -35,17 +37,17 @@ public class BibliotecaTest {
     public void shouldDisplayMenuAfterWelcomeMessage() {
         List<Book> books = new ArrayList<>();
         when(menuView.getMenuOption()).thenReturn(2);
-        Biblioteca biblioteca = new Biblioteca(books, bibliotecaView, menuView);
+        Biblioteca biblioteca = new Biblioteca(books, menuOptions, bibliotecaView, menuView);
         biblioteca.start();
         verify(bibliotecaView).printWelcomeMessage();
-        verify(menuView).displayMenu();
+        verify(menuView).displayMenu(menuOptions);
     }
 
     @Test
     public void shouldDisplayListOfBooksAfterChoosingMenuOptionOne() {
         List<Book> books = new ArrayList<>();
         when(menuView.getMenuOption()).thenReturn(1,2);
-        Biblioteca biblioteca = new Biblioteca(books, bibliotecaView, menuView);
+        Biblioteca biblioteca = new Biblioteca(books, menuOptions, bibliotecaView, menuView);
         biblioteca.start();
         verify(bibliotecaView).printBooks(books);
     }
@@ -54,8 +56,9 @@ public class BibliotecaTest {
     public void displayInvalidMenuOptionWhenOptionNotInListIsGivenAsInput() {
         List<Book> books = new ArrayList<>();
         when(menuView.getMenuOption()).thenReturn(3,2);
-        Biblioteca biblioteca = new Biblioteca(books, bibliotecaView, menuView);
+        Biblioteca biblioteca = new Biblioteca(books, menuOptions, bibliotecaView, menuView);
         biblioteca.start();
         verify(menuView).displayInvalidOption();
     }
+
 }

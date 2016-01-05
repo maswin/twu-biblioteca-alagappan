@@ -15,10 +15,13 @@ public class BibliotecaApp {
         InputReader inputReader = new InputReader(System.in);
         BibliotecaView bibliotecaView = new BibliotecaView("Welcome to Biblioteca !!",outputWriter);
         MenuView menuView = new MenuView(outputWriter, inputReader);
+        List<String> menuOptions = new ArrayList<>();
+        menuOptions.add("1. List of Books");
+        menuOptions.add("2. Quit");
         List<Book> books = new ArrayList<>();
         books.add(new Book("Harry Potter", "J.K.Rowling", 2005));
         books.add(new Book("2 States", "Chetan Bhagat", 2010));
-        Biblioteca biblioteca = new Biblioteca(books, bibliotecaView, menuView);
+        Biblioteca biblioteca = new Biblioteca(books, menuOptions, bibliotecaView, menuView);
         biblioteca.start();
     }
 }

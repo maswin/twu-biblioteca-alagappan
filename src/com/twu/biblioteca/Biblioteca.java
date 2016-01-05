@@ -7,11 +7,13 @@ import java.util.List;
 
 public class Biblioteca {
     private List<Book> books;
+    private List<String> menuOptions;
     private BibliotecaView bibliotecaView;
     private MenuView menuView;
 
-    public Biblioteca(List<Book> books, BibliotecaView bibliotecaView, MenuView menuView) {
+    public Biblioteca(List<Book> books, List<String> menuOptions, BibliotecaView bibliotecaView, MenuView menuView) {
         this.books = books;
+        this.menuOptions = menuOptions;
         this.bibliotecaView = bibliotecaView;
         this.menuView = menuView;
     }
@@ -21,7 +23,7 @@ public class Biblioteca {
         printWelcomeMessage();
         int option;
         do {
-            menuView.displayMenu();
+            menuView.displayMenu(menuOptions);
             option = menuView.getMenuOption();
             performOperation(option);
         } while (option != 2);
