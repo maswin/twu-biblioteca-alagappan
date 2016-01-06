@@ -3,12 +3,12 @@ package com.twu.biblioteca.command.menu;
 import com.twu.biblioteca.Library;
 import com.twu.biblioteca.view.BibliotecaView;
 
-public class CheckoutBookCommand implements MenuCommand {
+public class CheckOutBookCommand implements MenuCommand {
 
     private final BibliotecaView bibliotecaView;
     private final Library library;
 
-    public CheckoutBookCommand(BibliotecaView bibliotecaView, Library library) {
+    public CheckOutBookCommand(BibliotecaView bibliotecaView, Library library) {
         this.bibliotecaView = bibliotecaView;
         this.library = library;
     }

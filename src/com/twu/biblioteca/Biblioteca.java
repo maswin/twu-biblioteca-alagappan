@@ -31,7 +31,6 @@ public class Biblioteca {
         } while (!(command instanceof QuitCommand));
     }
 
-
     private void printWelcomeMessage() {
         bibliotecaView.printWelcomeMessage();
     }

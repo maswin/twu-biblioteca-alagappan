@@ -2,10 +2,7 @@ package com.twu.biblioteca;
 
 import com.twu.biblioteca.InputOutput.InputReader;
 import com.twu.biblioteca.InputOutput.OutputWriter;
-import com.twu.biblioteca.command.menu.CheckoutBookCommand;
-import com.twu.biblioteca.command.menu.DisplayBooksCommand;
-import com.twu.biblioteca.command.menu.MenuCommand;
-import com.twu.biblioteca.command.menu.QuitCommand;
+import com.twu.biblioteca.command.menu.*;
 import com.twu.biblioteca.view.BibliotecaView;
 import com.twu.biblioteca.view.MenuView;
 
@@ -24,7 +21,8 @@ public class BibliotecaApp {
         Map<Integer, String> menuOptions = new HashMap<>();
         menuOptions.put(1, "List of Books");
         menuOptions.put(2, "Checkout Book");
-        menuOptions.put(3, "Quit");
+        menuOptions.put(3, "CheckIn Book");
+        menuOptions.put(4, "Quit");
 
         List<Book> bookList = new ArrayList<>();
         bookList.add(new Book(1, "Harry Potter", "J.K.Rowling", 2005));
@@ -35,8 +33,9 @@ public class BibliotecaApp {
 
         Map<Integer, MenuCommand> menuCommands = new HashMap<>();
         menuCommands.put(1, new DisplayBooksCommand(bibliotecaView, library));
-        menuCommands.put(2, new CheckoutBookCommand(bibliotecaView, library));
-        menuCommands.put(3, new QuitCommand());
+        menuCommands.put(2, new CheckOutBookCommand(bibliotecaView, library));
+        menuCommands.put(3, new CheckInBookCommand(bibliotecaView, library));
+        menuCommands.put(4, new QuitCommand());
 
 
         Menu menu = new Menu(menuOptions, menuCommands);

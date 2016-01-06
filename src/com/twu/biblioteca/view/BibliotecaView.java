@@ -28,6 +28,7 @@ public class BibliotecaView {
     }
 
     public int getBookId() {
+        outputWriter.println("Enter Book Id :");
         return inputReader.readInt();
     }
 
@@ -38,4 +39,6 @@ public class BibliotecaView {
     public void printUnSuccessfulCheckoutMessage() {
         outputWriter.println("That book is not available.");
     }
+
+
 }

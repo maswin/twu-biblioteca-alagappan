@@ -13,8 +13,16 @@ public class Library {
         this.borrowedBooks = borrowedBooks;
     }
 
-    public Book findBookById(int bookId) {
+    private Book findBookById(int bookId) {
         Optional<Book> foundBook = books.stream().filter(b -> b.isSameBookId(bookId)).findFirst();
+        if(foundBook.isPresent()) {
+            return foundBook.get();
+        }
+        return null;
+    }
+
+    private Book findBorrowedBookById(int bookId) {
+        Optional<Book> foundBook = borrowedBooks.stream().filter(b -> b.isSameBookId(bookId)).findFirst();
         if(foundBook.isPresent()) {
             return foundBook.get();
         }
@@ -38,5 +46,20 @@ public class Library {
     public boolean isBookAvailable(int bookId) {
         Optional<Book> foundBook = books.stream().filter(b -> b.isSameBookId(bookId)).findFirst();
         return foundBook.isPresent();
+    }
+
+    public boolean isBorrowedBook(int bookId) {
+        Optional<Book> foundBook = borrowedBooks.stream().filter(b -> b.isSameBookId(bookId)).findFirst();
+        return foundBook.isPresent();
+    }
+
+    public boolean checkIn(int bookId) {
+        Book book = findBorrowedBookById(bookId);
+        if(book != null) {
+            books.add(book);
+            borrowedBooks.remove(book);
+            return true;
+        }
+        return false;
     }
 }

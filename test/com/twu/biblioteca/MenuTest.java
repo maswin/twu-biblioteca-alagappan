@@ -3,11 +3,14 @@ package com.twu.biblioteca;
 import com.twu.biblioteca.command.menu.MenuCommand;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class MenuTest {
 
@@ -29,4 +32,11 @@ public class MenuTest {
         assertEquals(menuOptions, menu.getMenuOptions());
     }
 
+    @Test
+    public void shouldReturnTrueIfCommandIsAvailable() throws Exception {
+        MenuCommand menuCommand = Mockito.mock(MenuCommand.class);
+        menuCommands.put(1, menuCommand);
+        Menu menu = new Menu(menuOptions, menuCommands);
+        assertTrue(menu.containsCommand(1));
+    }
 }

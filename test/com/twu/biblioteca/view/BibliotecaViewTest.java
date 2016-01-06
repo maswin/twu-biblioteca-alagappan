@@ -54,6 +54,7 @@ public class BibliotecaViewTest {
 
         when(inputReader.readInt()).thenReturn(2);
         assertEquals(2, bibliotecaView.getBookId());
+        verify(outputWriter).println("Enter Book Id :");
 
     }
 
