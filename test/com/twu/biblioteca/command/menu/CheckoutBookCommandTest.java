@@ -1,6 +1,5 @@
 package com.twu.biblioteca.command.menu;
 
-import com.twu.biblioteca.Book;
 import com.twu.biblioteca.Library;
 import com.twu.biblioteca.view.BibliotecaView;
 import org.junit.Test;
@@ -23,7 +22,7 @@ public class CheckOutBookCommandTest {
         menuCommand.performCommand();
 
         verify(library).checkOut(bookId);
-        verify(bibliotecaView).printSuccessfulCheckoutMessage();
+        verify(bibliotecaView).printSuccessfulBookCheckoutMessage();
     }
 
     @Test
@@ -36,7 +35,7 @@ public class CheckOutBookCommandTest {
 
         menuCommand.performCommand();
 
-        verify(bibliotecaView).printUnSuccessfulCheckoutMessage();
+        verify(bibliotecaView).printUnSuccessfulBookCheckoutMessage();
     }
 
 

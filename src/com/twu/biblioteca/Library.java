@@ -39,8 +39,8 @@ public class Library {
         return false;
     }
 
-    public List<Book> getDistinctListOfBooks() {
-        return books.stream().distinct().collect(Collectors.toList());
+    public List<Book> getListOfBooks() {
+        return books;
     }
 
     public boolean isBookAvailable(int bookId) {

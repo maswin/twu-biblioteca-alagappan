@@ -23,7 +23,7 @@ public class BibliotecaView {
 
     public void printBooks(List<Book> books) {
         outputWriter.println("List Of Books Available");
-
+        outputWriter.println(String.format("%10s %-25s %-20s %s", "ISBN", "Book Name", "Author Name", "Year"));
         books.forEach(book ->  outputWriter.println(book));
     }
 
@@ -32,13 +32,12 @@ public class BibliotecaView {
         return inputReader.readInt();
     }
 
-    public void printSuccessfulCheckoutMessage() {
+    public void printSuccessfulBookCheckoutMessage() {
         outputWriter.println("Thank you! Enjoy the book");
     }
 
-    public void printUnSuccessfulCheckoutMessage() {
+    public void printUnSuccessfulBookCheckoutMessage() {
         outputWriter.println("That book is not available.");
     }
-
 
 }

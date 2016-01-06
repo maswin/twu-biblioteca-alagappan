@@ -16,9 +16,9 @@ public class CheckOutBookCommand implements MenuCommand {
     private void checkOutBook(int bookId) {
         if(library.isBookAvailable(bookId)) {
             library.checkOut(bookId);
-            bibliotecaView.printSuccessfulCheckoutMessage();
+            bibliotecaView.printSuccessfulBookCheckoutMessage();
         } else {
-            bibliotecaView.printUnSuccessfulCheckoutMessage();
+            bibliotecaView.printUnSuccessfulBookCheckoutMessage();
         }
     }
 

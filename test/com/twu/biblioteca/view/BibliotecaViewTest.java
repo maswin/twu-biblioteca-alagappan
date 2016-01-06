@@ -1,6 +1,5 @@
 package com.twu.biblioteca.view;
 
-import com.twu.biblioteca.Biblioteca;
 import com.twu.biblioteca.Book;
 import com.twu.biblioteca.InputOutput.InputReader;
 import com.twu.biblioteca.InputOutput.OutputWriter;
@@ -44,6 +43,7 @@ public class BibliotecaViewTest {
         bibliotecaView.printBooks(books);
 
         verify(outputWriter).println("List Of Books Available");
+        verify(outputWriter).println(String.format("%10s %-25s %-20s %s", "ISBN", "Book Name", "Author Name", "Year"));
         verify(outputWriter).println(book1);
         verify(outputWriter).println(book2);
     }
@@ -59,16 +59,16 @@ public class BibliotecaViewTest {
     }
 
     @Test
-    public void shouldPrintSuccessMessage() throws Exception {
+    public void shouldPrintSuccessBookCheckoutMessage() throws Exception {
         BibliotecaView bibliotecaView = new BibliotecaView("Welcome to com.twu.biblioteca.Biblioteca !!", outputWriter, inputReader);
-        bibliotecaView.printSuccessfulCheckoutMessage();
+        bibliotecaView.printSuccessfulBookCheckoutMessage();
         verify(outputWriter).println("Thank you! Enjoy the book");
     }
 
     @Test
-    public void shouldPrintUnSuccessMessage() throws Exception {
+    public void shouldPrintUnSuccessBookCheckoutMessage() throws Exception {
         BibliotecaView bibliotecaView = new BibliotecaView("Welcome to com.twu.biblioteca.Biblioteca !!", outputWriter, inputReader);
-        bibliotecaView.printUnSuccessfulCheckoutMessage();
+        bibliotecaView.printUnSuccessfulBookCheckoutMessage();
         verify(outputWriter).println("That book is not available.");
     }
 }
