@@ -10,6 +10,10 @@ public class InvalidCommand implements MenuCommand {
         this.menuView = menuView;
     }
 
+    public InvalidCommand() {
+
+    }
+
     @Override
     public void performCommand() {
         menuView.displayInvalidOption();

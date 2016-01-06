@@ -5,14 +5,12 @@ public class Book {
     private final String name;
     private final String authorName;
     private final int yearPublished;
-    private boolean isAvailable;
 
-    public Book(int bookId, String name, String authorName, int yearPublished, boolean isAvailable) {
+    public Book(int bookId, String name, String authorName, int yearPublished) {
         this.bookId = bookId;
         this.name = name;
         this.authorName = authorName;
         this.yearPublished = yearPublished;
-        this.isAvailable = isAvailable;
     }
 
     @Override
@@ -24,15 +22,4 @@ public class Book {
         return this.bookId == id;
     }
 
-    public boolean isBookAvailable() {
-        return isAvailable;
-    }
-
-    public void checkIn() {
-        this.isAvailable = true;
-    }
-
-    public void checkOut() {
-        this.isAvailable = false;
-    }
 }
