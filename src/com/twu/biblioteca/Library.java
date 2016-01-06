@@ -34,4 +34,9 @@ public class Library {
     public List<Book> getDistinctListOfBooks() {
         return books.stream().distinct().collect(Collectors.toList());
     }
+
+    public boolean isBookAvailable(int bookId) {
+        Optional<Book> foundBook = books.stream().filter(b -> b.isSameBookId(bookId)).findFirst();
+        return foundBook.isPresent();
+    }
 }

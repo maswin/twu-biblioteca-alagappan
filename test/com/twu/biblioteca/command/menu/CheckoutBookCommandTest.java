@@ -16,6 +16,7 @@ public class CheckoutBookCommandTest {
         Library library = Mockito.mock(Library.class);
         BibliotecaView bibliotecaView = Mockito.mock(BibliotecaView.class);
         int bookId = 12;
+        when(library.isBookAvailable(bookId)).thenReturn(true);
         when(bibliotecaView.getBookId()).thenReturn(bookId);
         Book book = Mockito.mock(Book.class);
         when(library.findBookById(bookId)).thenReturn(book);
@@ -28,7 +29,7 @@ public class CheckoutBookCommandTest {
     }
 
     @Test
-    public void shouldTryCheckingoutBookAndPrintUnSuccessMessageWhenBookIsUnAvailable() {
+    public void shouldTryCheckingOutBookAndPrintUnSuccessMessageWhenBookIsUnAvailable() {
         Library library = Mockito.mock(Library.class);
         BibliotecaView bibliotecaView = Mockito.mock(BibliotecaView.class);
         int bookId = 12;

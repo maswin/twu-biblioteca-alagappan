@@ -8,6 +8,7 @@ import java.util.List;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class LibraryTest {
 
@@ -44,5 +45,16 @@ public class LibraryTest {
         library.checkOut(21);
         assertEquals(3, books.size());
         assertEquals(1, borrowedBooks.size());
+    }
+
+    @Test
+    public void shouldReturnTrueIfBookIsAvailable() {
+        int bookId = 21;
+        Book book = new Book(bookId,"book4", "author4", 2000);
+        books.add(book);
+        List<Book> borrowedBooks = new ArrayList<>();
+        Library library = new Library(books, borrowedBooks);
+        assertTrue(library.isBookAvailable(bookId));
+
     }
 }
