@@ -29,11 +29,12 @@ public class BibliotecaApp {
         List<Book> bookList = new ArrayList<>();
         bookList.add(new Book(1, "Harry Potter", "J.K.Rowling", 2005));
         bookList.add(new Book(2, "2 States", "Chetan Bhagat", 2010));
-        Library library = new Library(bookList);
+        bookList.add(new Book(3, "2 States", "Chetan Bhagat", 2010));
+        Library library = new Library(bookList, bookList);
 
 
         Map<Integer, MenuCommand> menuCommands = new HashMap<>();
-        menuCommands.put(1, new DisplayBooksCommand(bibliotecaView, bookList));
+        menuCommands.put(1, new DisplayBooksCommand(bibliotecaView, library));
         menuCommands.put(2, new CheckoutBookCommand(bibliotecaView, library));
         menuCommands.put(3, new QuitCommand());
 
