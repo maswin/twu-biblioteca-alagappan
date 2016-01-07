@@ -28,7 +28,7 @@ public class BibliotecaView {
     }
 
     public int getBookId() {
-        outputWriter.println("Enter Book Id :");
+        outputWriter.println("Enter Book ISBN :");
         return inputReader.readInt();
     }
 
