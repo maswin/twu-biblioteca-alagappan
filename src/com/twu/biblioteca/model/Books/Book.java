@@ -1,6 +1,5 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.model.Books;
 
-import com.twu.biblioteca.Books.Copy;
 import com.twu.biblioteca.DTO.BookDTO;
 import com.twu.biblioteca.Exception.BookCopyPrcoeesingException;
 

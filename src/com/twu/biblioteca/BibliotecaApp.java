@@ -1,9 +1,11 @@
 package com.twu.biblioteca;
 
-import com.twu.biblioteca.Books.Copy;
+import com.twu.biblioteca.model.Books.Book;
+import com.twu.biblioteca.model.Books.Copy;
 import com.twu.biblioteca.InputOutput.InputReader;
 import com.twu.biblioteca.InputOutput.OutputWriter;
 import com.twu.biblioteca.command.menu.*;
+import com.twu.biblioteca.model.Library;
 import com.twu.biblioteca.view.BibliotecaView;
 import com.twu.biblioteca.view.MenuView;
 

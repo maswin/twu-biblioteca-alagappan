@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import com.twu.biblioteca.command.menu.QuitCommand;
+import com.twu.biblioteca.model.Library;
 import com.twu.biblioteca.view.BibliotecaView;
 import com.twu.biblioteca.view.MenuView;
 import org.junit.Before;

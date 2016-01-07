@@ -1,6 +1,6 @@
 package com.twu.biblioteca.command.menu;
 
-import com.twu.biblioteca.Library;
+import com.twu.biblioteca.model.Library;
 import com.twu.biblioteca.view.BibliotecaView;
 import org.junit.Test;
 import org.mockito.Mockito;

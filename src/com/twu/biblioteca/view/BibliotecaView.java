@@ -1,6 +1,5 @@
 package com.twu.biblioteca.view;
 
-import com.twu.biblioteca.Book;
 import com.twu.biblioteca.DTO.BookDTO;
 import com.twu.biblioteca.InputOutput.InputReader;
 import com.twu.biblioteca.InputOutput.OutputWriter;
