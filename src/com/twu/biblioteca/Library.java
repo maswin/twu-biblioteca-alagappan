@@ -1,63 +1,87 @@
 package com.twu.biblioteca;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Library {
     private List<Book> books;
-    private List<Book> borrowedBooks;
+    private Map<Book, Set<Integer>> borrowedBooks;
 
-    public Library(List<Book> books, List<Book> borrowedBooks) {
+    public Library(List<Book> books, Map<Book, Set<Integer>> borrowedBooks) {
         this.books = books;
         this.borrowedBooks = borrowedBooks;
     }
 
-    private Book findBookById(int bookId) {
-        Optional<Book> foundBook = books.stream().filter(b -> b.isSameBookId(bookId)).findFirst();
+    private Book findBookByIsbn(int isbn) {
+        Optional<Book> foundBook = books.stream().filter(b -> b.isIsbnOfThisBookType(isbn)).findFirst();
         if(foundBook.isPresent()) {
             return foundBook.get();
         }
         return null;
     }
 
-    private Book findBorrowedBookById(int bookId) {
-        Optional<Book> foundBook = borrowedBooks.stream().filter(b -> b.isSameBookId(bookId)).findFirst();
-        if(foundBook.isPresent()) {
-            return foundBook.get();
-        }
-        return null;
-    }
-
-    public boolean checkOut(int bookId) {
-        Book book = findBookById(bookId);
+    public boolean checkOut(int isbn) {
+        Book book = findBookByIsbn(isbn);
         if(book != null) {
-            books.remove(book);
-            borrowedBooks.add(book);
+            if(borrowedBooks.containsKey(book)) {
+                borrowedBooks.get(book).add(isbn);
+            } else {
+                Set<Integer> isbns = new HashSet<>();
+                isbns.add(isbn);
+                borrowedBooks.put(book, isbns);
+            }
             return true;
         }
         return false;
     }
 
-    public List<Book> getListOfBooks() {
-        return books;
+    private boolean isAllBooksBorrowed(Book book) {
+        if(borrowedBooks.containsKey(book)) {
+            return borrowedBooks.get(book).size() == book.numberOfBooksAvailable();
+        }
+        return false;
     }
 
-    public boolean isBookAvailable(int bookId) {
-        Optional<Book> foundBook = books.stream().filter(b -> b.isSameBookId(bookId)).findFirst();
+    public List<Book> getListOfAvailableBooks() {
+        return books.stream().filter(book -> !isAllBooksBorrowed(book)).collect(Collectors.toList());
+    }
+
+    public boolean isBookAvailable(int isbn) {
+        Optional<Book> foundBook = books.stream().filter(book ->
+                book.isIsbnOfThisBookType(isbn) && !isAllBooksBorrowed(book)
+        ).findFirst();
         return foundBook.isPresent();
     }
 
-    public boolean isBorrowedBook(int bookId) {
-        Optional<Book> foundBook = borrowedBooks.stream().filter(b -> b.isSameBookId(bookId)).findFirst();
-        return foundBook.isPresent();
+    public boolean isBorrowedBook(int isbn) {
+        for(Map.Entry<Book, Set<Integer>> bookSetEntry : borrowedBooks.entrySet()) {
+            Set<Integer> isbns = bookSetEntry.getValue();
+            if(isbns.contains(isbn)) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    public boolean checkIn(int bookId) {
-        Book book = findBorrowedBookById(bookId);
+    private Book findBorrowedBookByIsbn(int isbn) {
+        if(isBorrowedBook(isbn)) {
+            for(Map.Entry<Book, Set<Integer>> bookSetEntry : borrowedBooks.entrySet()) {
+                Set<Integer> isbns = bookSetEntry.getValue();
+                if(isbns.contains(isbn)) {
+                    return bookSetEntry.getKey();
+                }
+            }
+        }
+        return null;
+    }
+
+    public boolean checkIn(int isbn) {
+        Book book = findBorrowedBookByIsbn(isbn);
         if(book != null) {
-            books.add(book);
-            borrowedBooks.remove(book);
-            return true;
+            borrowedBooks.get(book).remove(isbn);
+            if(borrowedBooks.get(book).size() == 0) {
+                borrowedBooks.remove(book);
+            }
         }
         return false;
     }

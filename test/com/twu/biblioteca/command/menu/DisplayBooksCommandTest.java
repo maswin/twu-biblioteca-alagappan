@@ -19,7 +19,7 @@ public class DisplayBooksCommandTest {
         BibliotecaView bibliotecaView = Mockito.mock(BibliotecaView.class);
         Library library = Mockito.mock(Library.class);
         List<Book> books = new ArrayList<>();
-        when(library.getListOfBooks()).thenReturn(books);
+        when(library.getListOfAvailableBooks()).thenReturn(books);
         MenuCommand menuCommand = new DisplayBooksCommand(bibliotecaView, library);
         menuCommand.performCommand();
 

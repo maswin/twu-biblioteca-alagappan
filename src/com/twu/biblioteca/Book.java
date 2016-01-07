@@ -30,7 +30,7 @@ public class Book {
         return isbns.iterator().next();
     }
 
-    private boolean isAnyBookAvailable() {
+    public boolean isAnyBookAvailable() {
         return !isbns.isEmpty();
     }
 

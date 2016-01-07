@@ -22,10 +22,11 @@ public class BibliotecaApp {
         menuOptions.put(4, "Quit");
 
         List<Book> bookList = new ArrayList<>();
+        Map<Book, Set<Integer>> borrowedBooks = new HashMap<>();
         bookList.add(new Book(1, "Harry Potter", "J.K.Rowling", 2005, new HashSet<>()));
         bookList.add(new Book(2, "2 States", "Chetan Bhagat", 2010, new HashSet<>()));
         bookList.add(new Book(3, "2 States", "Chetan Bhagat", 2010, new HashSet<>()));
-        Library library = new Library(bookList, bookList);
+        Library library = new Library(bookList, borrowedBooks);
 
 
         Map<Integer, MenuCommand> menuCommands = new HashMap<>();
