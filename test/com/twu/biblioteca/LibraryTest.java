@@ -17,9 +17,9 @@ public class LibraryTest {
     @Before
     public void setUp() throws Exception {
         books = new ArrayList<>();
-        books.add(new Book(1,"book1", "author1", 2012));
-        books.add(new Book(2,"book2", "author2", 2013));
-        books.add(new Book(3,"book3", "author3", 2014));
+        books.add(new Book(1,"book1", "author1", 2012, new ArrayList<Integer>()));
+        books.add(new Book(2,"book2", "author2", 2013, new ArrayList<Integer>()));
+        books.add(new Book(3,"book3", "author3", 2014, new ArrayList<Integer>()));
     }
 
 //    @Test
@@ -38,7 +38,7 @@ public class LibraryTest {
 
     @Test
     public void shouldRemoveBookFromBooksAndAddInBorrowedBooksWhenThatBookIsCheckedOut() {
-        Book book = new Book(21,"book4", "author4", 2000);
+        Book book = new Book(21,"book4", "author4", 2000, new ArrayList<Integer>());
         books.add(book);
         List<Book> borrowedBooks = new ArrayList<>();
         Library library = new Library(books, borrowedBooks);
@@ -50,7 +50,7 @@ public class LibraryTest {
     @Test
     public void shouldReturnTrueIfBookIsAvailable() {
         int bookId = 21;
-        Book book = new Book(bookId,"book4", "author4", 2000);
+        Book book = new Book(bookId,"book4", "author4", 2000, new ArrayList<Integer>());
         books.add(book);
         List<Book> borrowedBooks = new ArrayList<>();
         Library library = new Library(books, borrowedBooks);
@@ -61,7 +61,7 @@ public class LibraryTest {
     @Test
     public void shouldReturnTrueIfBookIsBorrowed() {
         int bookId = 21;
-        Book book = new Book(bookId,"book4", "author4", 2000);
+        Book book = new Book(bookId,"book4", "author4", 2000, new ArrayList<Integer>());
         List<Book> borrowedBooks = new ArrayList<>();
         borrowedBooks.add(book);
         Library library = new Library(books, borrowedBooks);
@@ -70,7 +70,7 @@ public class LibraryTest {
 
     @Test
     public void shouldRemoveBookFromBorrowedBooksAndAddInBooksWhenThatBookIsCheckedIn() {
-        Book book = new Book(21,"book4", "author4", 2000);
+        Book book = new Book(21,"book4", "author4", 2000, new ArrayList<Integer>());
         List<Book> borrowedBooks = new ArrayList<>();
         borrowedBooks.add(book);
         Library library = new Library(books, borrowedBooks);
