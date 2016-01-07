@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.Exception.DataUnavailableException;
+
 import java.util.Set;
 
 public class Book {
@@ -32,7 +34,7 @@ public class Book {
                 return isbn;
             }
         }
-        return 0;
+        throw new DataUnavailableException("ISBN Not Available");
     }
 
     public boolean isIsbnOfThisBookType(int isbn) {

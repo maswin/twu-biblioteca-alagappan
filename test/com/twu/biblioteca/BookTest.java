@@ -1,12 +1,16 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.Exception.DataUnavailableException;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.zip.DataFormatException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -58,5 +62,17 @@ public class BookTest {
         Set<Integer> unavailableIsbn = new HashSet<>();
         unavailableIsbn.add(2345);
         assertEquals(3456, book.getFirstAvailableIsbn(unavailableIsbn));
+    }
+
+    @Rule
+    public ExpectedException expected = ExpectedException.none();
+
+    @Test
+    public void shouldThrowExceptionWhenFirstIsbnIsUnAvailable() {
+        expected.expect(DataUnavailableException.class);
+        expected.expectMessage("ISBN Not Available");
+        Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, isbn);
+        Set<Integer> unavailableIsbn = new HashSet<>();
+        book.getFirstAvailableIsbn(unavailableIsbn);
     }
 }
