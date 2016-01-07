@@ -25,14 +25,9 @@ public class BookTest {
     public void representBookAsAString() {
         isbn.add(1234);
         Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, isbn);
-        assertEquals(String.format("%-6d %-12d %-25s %-20s %d", 0, 1234, "Harry Potter", "J.K.Rowling", 2005), book.toString());
+        assertEquals(String.format("%-25s %-20s %d", "Harry Potter", "J.K.Rowling", 2005), book.toString());
     }
 
-    @Test
-    public void representUnavailableBookAsAString() {
-        Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, isbn);
-        assertEquals(String.format("%-6d %-12s %-25s %-20s %d", 0, "Unavailable", "Harry Potter", "J.K.Rowling", 2005), book.toString());
-    }
 
     @Test
     public void checkIfTheISBNBelongsToThisBook() {
@@ -47,5 +42,21 @@ public class BookTest {
         isbn.add(3456);
         Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, isbn);
         assertEquals(2, book.numberOfBooksAvailable());
+    }
+
+    @Test
+    public void shouldReturnFalseIfNoBookIsAvailable() {
+        Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, isbn);
+        assertFalse(book.isAnyBookAvailable());
+    }
+
+    @Test
+    public void shouldReturnFirstAvailableIsbnNotInUnavailableIsbnSet() {
+        isbn.add(2345);
+        isbn.add(3456);
+        Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, isbn);
+        Set<Integer> unavailableIsbn = new HashSet<>();
+        unavailableIsbn.add(2345);
+        assertEquals(3456, book.getFirstAvailableIsbn(unavailableIsbn));
     }
 }

@@ -19,19 +19,20 @@ public class Book {
 
     @Override
     public String toString() {
-        if(isAnyBookAvailable()) {
-            return String.format("%-6d %-12d %-25s %-20s %d", bookId, getFirstISBN(), name, authorName, yearPublished);
-        } else {
-            return String.format("%-6d %-12s %-25s %-20s %d", bookId, "Unavailable", name, authorName, yearPublished);
-        }
-    }
-
-    private int getFirstISBN() {
-        return isbns.iterator().next();
+        return String.format("%-25s %-20s %d", name, authorName, yearPublished);
     }
 
     public boolean isAnyBookAvailable() {
         return !isbns.isEmpty();
+    }
+
+    public int getFirstAvailableIsbn(Set<Integer> unavailableIsbns) {
+        for(Integer isbn : isbns) {
+            if(!unavailableIsbns.contains(isbn)) {
+                return isbn;
+            }
+        }
+        return 0;
     }
 
     public boolean isIsbnOfThisBookType(int isbn) {
