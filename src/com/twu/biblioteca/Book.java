@@ -7,14 +7,14 @@ public class Book {
     private final String name;
     private final String authorName;
     private final int yearPublished;
-    private Set<Integer> isbn;
+    private Set<Integer> isbns;
 
-    public Book(int bookId, String name, String authorName, int yearPublished, Set<Integer> isbn) {
+    public Book(int bookId, String name, String authorName, int yearPublished, Set<Integer> isbns) {
         this.bookId = bookId;
         this.name = name;
         this.authorName = authorName;
         this.yearPublished = yearPublished;
-        this.isbn = isbn;
+        this.isbns = isbns;
     }
 
     @Override
@@ -27,14 +27,22 @@ public class Book {
     }
 
     private int getFirstISBN() {
-        return isbn.iterator().next();
+        return isbns.iterator().next();
     }
 
     private boolean isAnyBookAvailable() {
-        return !isbn.isEmpty();
+        return !isbns.isEmpty();
     }
 
     public boolean isSameBookId(int id) {
         return this.bookId == id;
+    }
+
+    public boolean isIsbnOfThisBookType(int isbn) {
+        return isbns.contains(isbn);
+    }
+
+    public int numberOfBooksAvailable() {
+        return isbns.size();
     }
 }
