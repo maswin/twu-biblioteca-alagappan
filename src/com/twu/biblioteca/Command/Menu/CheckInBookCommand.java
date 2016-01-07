@@ -13,8 +13,8 @@ public class CheckInBookCommand implements MenuCommand {
     }
 
     private void checkInBook(int bookId) {
-        if(library.isBorrowedBook(bookId)) {
-            library.checkIn(bookId);
+        if(library.isBorrowedBookCopy(bookId)) {
+            library.checkInBookCopy(bookId);
         }
     }
 

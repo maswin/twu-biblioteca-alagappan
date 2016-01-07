@@ -15,13 +15,13 @@ public class CheckOutBookCommandTest {
         Library library = Mockito.mock(Library.class);
         BibliotecaView bibliotecaView = Mockito.mock(BibliotecaView.class);
         int bookId = 12;
-        when(library.isBookAvailable(bookId)).thenReturn(true);
+        when(library.isBorrowedBookCopy(bookId)).thenReturn(false);
         when(bibliotecaView.getBookId()).thenReturn(bookId);
         MenuCommand menuCommand = new CheckOutBookCommand(bibliotecaView, library);
 
         menuCommand.performCommand();
 
-        verify(library).checkOut(bookId);
+        verify(library).checkOutBookCopy(bookId);
         verify(bibliotecaView).printSuccessfulBookCheckoutMessage();
     }
 
@@ -30,6 +30,7 @@ public class CheckOutBookCommandTest {
         Library library = Mockito.mock(Library.class);
         BibliotecaView bibliotecaView = Mockito.mock(BibliotecaView.class);
         int bookId = 12;
+        when(library.isBorrowedBookCopy(bookId)).thenReturn(true);
         when(bibliotecaView.getBookId()).thenReturn(bookId);
         MenuCommand menuCommand = new CheckOutBookCommand(bibliotecaView, library);
 
@@ -37,6 +38,5 @@ public class CheckOutBookCommandTest {
 
         verify(bibliotecaView).printUnSuccessfulBookCheckoutMessage();
     }
-
 
 }

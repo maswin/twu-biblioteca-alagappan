@@ -1,99 +1,99 @@
 package com.twu.biblioteca;
 
-import junit.framework.Assert;
+import com.twu.biblioteca.Books.Copy;
+import com.twu.biblioteca.Exception.BookCopyPrcoeesingException;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+import org.mockito.Mockito;
 
 import java.util.*;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class LibraryTest {
 
     private List<Book> books;
-    private Set<Integer> borrowedIsbns;
-    private Set<Integer> isbns;
+    private Set<Copy> copies;
 
     @Before
     public void setUp() throws Exception {
         books = new ArrayList<>();
-        books.add(new Book(1,"book1", "author1", 2012, new HashSet<>()));
-        books.add(new Book(2,"book2", "author2", 2013, new HashSet<>()));
-        books.add(new Book(3,"book3", "author3", 2014, new HashSet<>()));
+        copies = new HashSet<>();
+    }
 
-        borrowedIsbns = new HashSet<>();
-        isbns = new HashSet<>();
+    @Rule
+    public ExpectedException expected = ExpectedException.none();
+
+    @Test
+    public void shouldCheckOutBookCopyWhenBookIsAvailable() {
+        int isbn = 2345;
+        Book book = Mockito.mock(Book.class);
+        when(book.isIsbnOfThisBookType(isbn)).thenReturn(true);
+        books.add(book);
+        Library library = new Library(books);
+        library.checkOutBookCopy(isbn);
+        verify(book).checkOutACopyByIsbn(isbn);
     }
 
     @Test
-    public void shouldAddInBorrowedBooksWhenThatBookIsCheckedOut() {
-        isbns.add(1234);
-        Book book = new Book(21,"book4", "author4", 2000, isbns);
+    public void shouldThrowExceptionWhenCheckOutBookCopyIsUnAvailable() {
+        expected.expect(BookCopyPrcoeesingException.class);
+        expected.expectMessage("Requested Book Copy UnAvailable");
+        int isbn = 2345;
+        Book book = Mockito.mock(Book.class);
+        when(book.isIsbnOfThisBookType(isbn)).thenReturn(false);
         books.add(book);
-        Library library = new Library(books, borrowedIsbns);
-        library.checkOut(1234);
-        assertEquals(4, books.size());
-        assertEquals(1, borrowedIsbns.size());
+        Library library = new Library(books);
+        library.checkOutBookCopy(isbn);
     }
 
     @Test
-    public void shouldNotAddBookInBorrowedBookWhenBookIsUnAvailable() {
-        isbns.add(1234);
-        Book book = new Book(21,"book4", "author4", 2000, isbns);
+    public void shouldCheckInBookCopyWhenBookIsBorrowed() {
+        int isbn = 2345;
+        Book book = Mockito.mock(Book.class);
+        when(book.isIsbnOfThisBookType(isbn)).thenReturn(true);
         books.add(book);
-        Library library = new Library(books, borrowedIsbns);
-        library.checkOut(2345);
-        assertEquals(4, books.size());
-        assertEquals(0, borrowedIsbns.size());
+        Library library = new Library(books);
+        library.checkInBookCopy(isbn);
+        verify(book).checkInACopyByIsbn(isbn);
     }
 
     @Test
-    public void shouldReturnTrueIfBookIsAvailable() {
-        int bookId = 21;
-        isbns.add(1234);
-        Book book = new Book(bookId,"book4", "author4", 2000, isbns);
+    public void shouldThrowExceptionWhenCheckInBookCopyIsUnAvailable() {
+        expected.expect(BookCopyPrcoeesingException.class);
+        expected.expectMessage("Requested Book Copy UnAvailable");
+        int isbn = 2345;
+        Book book = Mockito.mock(Book.class);
+        when(book.isIsbnOfThisBookType(isbn)).thenReturn(false);
         books.add(book);
-        Library library = new Library(books, borrowedIsbns);
-        assertTrue(library.isBookAvailable(1234));
+        Library library = new Library(books);
+        library.checkInBookCopy(isbn);
     }
 
     @Test
     public void shouldReturnTrueIfBookIsBorrowed() {
         int bookId = 21;
-        isbns.add(1234);
-        Book book = new Book(bookId, "book4", "author4", 2000, isbns);
+        copies.add(new Copy(1234, true));
+        Book book = new Book(bookId, "book4", "author4", 2000, copies);
         books.add(book);
-        borrowedIsbns.add(1234);
-        Library library = new Library(books, borrowedIsbns);
-        assertTrue(library.isBorrowedBook(1234));
+        Library library = new Library(books);
+        assertTrue(library.isBorrowedBookCopy(1234));
     }
 
     @Test
-    public void shouldRemoveBookFromBorrowedIsbnsWhenItIsCheckedIn() {
+    public void shouldReturnTrueIfBookIsAvailable() {
         int bookId = 21;
-        isbns.add(1234);
-        Book book = new Book(bookId, "book4", "author4", 2000, isbns);
+        copies.add(new Copy(1234, false));
+        Book book = new Book(bookId,"book4", "author4", 2000, copies);
         books.add(book);
-        borrowedIsbns.add(1234);
-        Library library = new Library(books, borrowedIsbns);
-        library.checkIn(1234);
-        assertEquals(4, books.size());
-        assertEquals(0, borrowedIsbns.size());
-    }
-
-    @Test
-    public void shouldReturnFalseWhenBookNotBorrowedIsCheckedIn() {
-        int bookId = 21;
-        isbns.add(1234);
-        Book book = new Book(bookId, "book4", "author4", 2000, isbns);
-        books.add(book);
-        borrowedIsbns.add(1234);
-        Library library = new Library(books, borrowedIsbns);
-        assertFalse(library.checkIn(1235));
-        assertEquals(4, books.size());
-        assertEquals(1, borrowedIsbns.size());
+        Library library = new Library(books);
+        assertTrue(library.isBookCopyAvailable(1234));
     }
 
 }

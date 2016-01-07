@@ -16,12 +16,12 @@ public class CheckInBookCommandTest {
         Library library = Mockito.mock(Library.class);
         BibliotecaView bibliotecaView = Mockito.mock(BibliotecaView.class);
         when(bibliotecaView.getBookId()).thenReturn(bookId);
-        when(library.isBorrowedBook(bookId)).thenReturn(true);
+        when(library.isBorrowedBookCopy(bookId)).thenReturn(true);
         MenuCommand menuCommand = new CheckInBookCommand(bibliotecaView, library);
 
         menuCommand.performCommand();
 
-        verify(library).checkIn(bookId);
+        verify(library).checkInBookCopy(bookId);
     }
 
 }

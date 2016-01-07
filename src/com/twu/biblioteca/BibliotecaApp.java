@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.Books.Copy;
 import com.twu.biblioteca.InputOutput.InputReader;
 import com.twu.biblioteca.InputOutput.OutputWriter;
 import com.twu.biblioteca.command.menu.*;
@@ -22,10 +23,13 @@ public class BibliotecaApp {
         menuOptions.put(4, "Quit");
 
         List<Book> bookList = new ArrayList<>();
-        bookList.add(new Book(1, "Harry Potter", "J.K.Rowling", 2005, new HashSet<>(Arrays.asList(1234))));
-        bookList.add(new Book(2, "2 States", "Chetan Bhagat", 2010, new HashSet<>(Arrays.asList(2345, 6789))));
-        bookList.add(new Book(3, "Half Girl Friend", "Chetan Bhagat", 2014, new HashSet<>(Arrays.asList(3457, 7890))));
-        Library library = new Library(bookList, new HashSet<>());
+        bookList.add(new Book(1, "Harry Potter", "J.K.Rowling", 2005,
+                new HashSet<>(Arrays.asList(new Copy(1234, false)))));
+        bookList.add(new Book(2, "2 States", "Chetan Bhagat", 2010,
+                new HashSet<>(Arrays.asList(new Copy(2345, false), new Copy(6789, false)))));
+        bookList.add(new Book(3, "Half Girl Friend", "Chetan Bhagat", 2014,
+                new HashSet<>(Arrays.asList(new Copy(3457, false), new Copy(7890, false)))));
+        Library library = new Library(bookList);
 
 
         Map<Integer, MenuCommand> menuCommands = new HashMap<>();

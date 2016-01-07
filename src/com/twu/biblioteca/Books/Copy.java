@@ -1,6 +1,7 @@
 package com.twu.biblioteca.Books;
 
 public class Copy {
+
     private final int isbn;
     private boolean isBorrowed;
 
@@ -20,4 +21,9 @@ public class Copy {
     public void checkIn() {
         isBorrowed = false;
     }
+
+    public int getIsbn() {
+        return isbn;
+    }
+
 }

@@ -1,16 +1,15 @@
 package com.twu.biblioteca;
 
-import com.twu.biblioteca.Exception.DataUnavailableException;
+import com.twu.biblioteca.Books.Copy;
+import com.twu.biblioteca.Exception.BookCopyPrcoeesingException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.zip.DataFormatException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -18,72 +17,120 @@ import static org.junit.Assert.assertTrue;
 
 public class BookTest {
 
-    private Set<Integer> isbn;
+    private Set<Copy> copies;
 
     @Before
     public void setUp() throws Exception {
-        isbn = new HashSet<>();
+        copies = new HashSet<>();
     }
 
     @Test
     public void representBookAsAString() {
-        isbn.add(1234);
-        Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, isbn);
+        copies.add(new Copy(1234, false));
+        Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, copies);
         assertEquals(String.format("%-25s %-20s %d", "Harry Potter", "J.K.Rowling", 2005), book.toString());
     }
 
-
     @Test
     public void checkIfTheISBNBelongsToThisBook() {
-        isbn.add(2345);
-        Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, isbn);
+        copies.add(new Copy(2345, false));
+        Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, copies);
         assertTrue(book.isIsbnOfThisBookType(2345));
     }
 
     @Test
-    public void shouldReturnTheNumberOfBooksAvailable() {
-        isbn.add(2345);
-        isbn.add(3456);
-        Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, isbn);
-        assertEquals(2, book.numberOfBooksAvailable());
-    }
-
-    @Test
     public void shouldReturnFalseIfNoBookIsAvailable() {
-        Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, isbn);
-        assertFalse(book.isAnyBookAvailable());
+        Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, copies);
+        assertFalse(book.isAnyCopyAvailable());
     }
 
     @Test
-    public void shouldReturnFirstAvailableIsbnNotInUnavailableIsbnSet() {
-        isbn.add(2345);
-        isbn.add(3456);
-        Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, isbn);
-        Set<Integer> unavailableIsbn = new HashSet<>();
-        unavailableIsbn.add(2345);
-        assertEquals(3456, book.getFirstAvailableIsbn(unavailableIsbn));
+    public void shouldReturnAnyAvailableIsbnNotBorrowed() {
+        Copy copy = new Copy(3456, false);
+        copies.add(new Copy(2345, true));
+        copies.add(copy);
+        Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, copies);
+        assertEquals(copy, book.getAnyUnBorrowedCopy());
     }
 
     @Rule
     public ExpectedException expected = ExpectedException.none();
 
     @Test
-    public void shouldThrowExceptionWhenFirstIsbnIsUnAvailable() {
-        expected.expect(DataUnavailableException.class);
-        expected.expectMessage("ISBN Not Available");
-        Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, isbn);
-        Set<Integer> unavailableIsbn = new HashSet<>();
-        book.getFirstAvailableIsbn(unavailableIsbn);
+    public void shouldThrowExceptionWhenNoUnBorrowedBookIsAvailable() {
+        expected.expect(BookCopyPrcoeesingException.class);
+        expected.expectMessage("No Book Copy Available");
+        Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, copies);
+        book.getAnyUnBorrowedCopy();
     }
 
     @Test
     public void shouldReturnTrueIfAnyUnBorrowedBookIsAvailable() {
-        isbn.add(2345);
-        isbn.add(3456);
-        Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, isbn);
-        Set<Integer> unavailableIsbn = new HashSet<>();
-        unavailableIsbn.add(2345);
-        assertTrue(book.isAnyBookAvailableUnBorrowed(unavailableIsbn));
+        copies.add(new Copy(2345, true));
+        copies.add(new Copy(3456, false));
+        Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, copies);
+        assertTrue(book.isAnyCopyAvailableUnBorrowed());
+    }
 
+    @Test
+    public void shouldReturnFalseIfNoUnBorrowedBookIsAvailable() {
+        copies.add(new Copy(2345, true));
+        copies.add(new Copy(3456, true));
+        Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, copies);
+        assertFalse(book.isAnyCopyAvailableUnBorrowed());
+    }
+
+    @Test
+    public void shouldCheckOutABookCopyByIsbnWhenAvailable() {
+        Copy copy = new Copy(2345, false);
+        copies.add(copy);
+        Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, copies);
+        book.checkOutACopyByIsbn(2345);
+        assertTrue(copy.isBorrowed());
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenBookCopyIsAlreadyBorrowedWhileCheckingOut() {
+        expected.expect(BookCopyPrcoeesingException.class);
+        expected.expectMessage("Requested Book Copy Already Borrowed");
+        Copy copy = new Copy(2345, true);
+        copies.add(copy);
+        Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, copies);
+        book.checkOutACopyByIsbn(2345);
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenBookCopyIsNotAvailableWhileCheckingOut() {
+        expected.expect(BookCopyPrcoeesingException.class);
+        expected.expectMessage("Requested Book Copy UnAvailable");
+        Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, copies);
+        book.checkOutACopyByIsbn(2345);
+    }
+
+    @Test
+    public void shouldCheckInABookCopyByIsbn() {
+        Copy copy = new Copy(2345, true);
+        copies.add(copy);
+        Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, copies);
+        book.checkInACopyByIsbn(2345);
+        assertFalse(copy.isBorrowed());
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenBookCopyIsNotBorrowedWhileCheckingIn() {
+        expected.expect(BookCopyPrcoeesingException.class);
+        expected.expectMessage("Requested Book Copy Was Not Borrowed");
+        Copy copy = new Copy(2345, false);
+        copies.add(copy);
+        Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, copies);
+        book.checkInACopyByIsbn(2345);
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenBookCopyIsNotAvailableWhileCheckingIn() {
+        expected.expect(BookCopyPrcoeesingException.class);
+        expected.expectMessage("Requested Book Copy UnAvailable");
+        Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, copies);
+        book.checkOutACopyByIsbn(2345);
     }
 }
