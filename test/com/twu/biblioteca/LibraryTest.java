@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import static junit.framework.TestCase.assertFalse;
@@ -17,9 +18,9 @@ public class LibraryTest {
     @Before
     public void setUp() throws Exception {
         books = new ArrayList<>();
-        books.add(new Book(1,"book1", "author1", 2012, new ArrayList<Integer>()));
-        books.add(new Book(2,"book2", "author2", 2013, new ArrayList<Integer>()));
-        books.add(new Book(3,"book3", "author3", 2014, new ArrayList<Integer>()));
+        books.add(new Book(1,"book1", "author1", 2012, new HashSet<>()));
+        books.add(new Book(2,"book2", "author2", 2013, new HashSet<>()));
+        books.add(new Book(3,"book3", "author3", 2014, new HashSet<>()));
     }
 
 //    @Test
@@ -38,7 +39,7 @@ public class LibraryTest {
 
     @Test
     public void shouldRemoveBookFromBooksAndAddInBorrowedBooksWhenThatBookIsCheckedOut() {
-        Book book = new Book(21,"book4", "author4", 2000, new ArrayList<Integer>());
+        Book book = new Book(21,"book4", "author4", 2000, new HashSet<>());
         books.add(book);
         List<Book> borrowedBooks = new ArrayList<>();
         Library library = new Library(books, borrowedBooks);
@@ -50,7 +51,7 @@ public class LibraryTest {
     @Test
     public void shouldReturnTrueIfBookIsAvailable() {
         int bookId = 21;
-        Book book = new Book(bookId,"book4", "author4", 2000, new ArrayList<Integer>());
+        Book book = new Book(bookId,"book4", "author4", 2000, new HashSet<>());
         books.add(book);
         List<Book> borrowedBooks = new ArrayList<>();
         Library library = new Library(books, borrowedBooks);
@@ -61,7 +62,7 @@ public class LibraryTest {
     @Test
     public void shouldReturnTrueIfBookIsBorrowed() {
         int bookId = 21;
-        Book book = new Book(bookId,"book4", "author4", 2000, new ArrayList<Integer>());
+        Book book = new Book(bookId,"book4", "author4", 2000, new HashSet<>());
         List<Book> borrowedBooks = new ArrayList<>();
         borrowedBooks.add(book);
         Library library = new Library(books, borrowedBooks);
@@ -70,7 +71,7 @@ public class LibraryTest {
 
     @Test
     public void shouldRemoveBookFromBorrowedBooksAndAddInBooksWhenThatBookIsCheckedIn() {
-        Book book = new Book(21,"book4", "author4", 2000, new ArrayList<Integer>());
+        Book book = new Book(21,"book4", "author4", 2000, new HashSet<>());
         List<Book> borrowedBooks = new ArrayList<>();
         borrowedBooks.add(book);
         Library library = new Library(books, borrowedBooks);

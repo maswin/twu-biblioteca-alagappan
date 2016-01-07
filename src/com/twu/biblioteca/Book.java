@@ -1,15 +1,15 @@
 package com.twu.biblioteca;
 
-import java.util.List;
+import java.util.Set;
 
 public class Book {
     private final int bookId;
     private final String name;
     private final String authorName;
     private final int yearPublished;
-    private List<Integer> isbn;
+    private Set<Integer> isbn;
 
-    public Book(int bookId, String name, String authorName, int yearPublished, List<Integer> isbn) {
+    public Book(int bookId, String name, String authorName, int yearPublished, Set<Integer> isbn) {
         this.bookId = bookId;
         this.name = name;
         this.authorName = authorName;
@@ -27,7 +27,7 @@ public class Book {
     }
 
     private int getFirstISBN() {
-        return isbn.get(0);
+        return isbn.iterator().next();
     }
 
     private boolean isAnyBookAvailable() {

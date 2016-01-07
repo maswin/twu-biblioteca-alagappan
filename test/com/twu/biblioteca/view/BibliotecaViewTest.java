@@ -43,7 +43,7 @@ public class BibliotecaViewTest {
         bibliotecaView.printBooks(books);
 
         verify(outputWriter).println("List Of Books Available");
-        verify(outputWriter).println(String.format("%10s %-25s %-20s %s", "ISBN", "Book Name", "Author Name", "Year"));
+        verify(outputWriter).println(String.format("%-6s %-12s %-25s %-20s %s", "BookID", "ISBN", "Book Name", "Author Name", "Year"));
         verify(outputWriter).println(book1);
         verify(outputWriter).println(book2);
     }
