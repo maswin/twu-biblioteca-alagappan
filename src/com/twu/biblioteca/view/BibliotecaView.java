@@ -42,4 +42,12 @@ public class BibliotecaView {
         outputWriter.println("That book is not available.");
     }
 
+    public void printSuccessfulBookCheckInMessage() {
+        outputWriter.println("Thank you for returning the book.");
+    }
+
+    public void printUnSuccessfulBookCheckInMessage() {
+        outputWriter.println("That is not a valid book to return.");
+    }
+
 }

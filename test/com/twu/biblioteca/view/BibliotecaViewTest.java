@@ -74,4 +74,18 @@ public class BibliotecaViewTest {
         bibliotecaView.printUnSuccessfulBookCheckoutMessage();
         verify(outputWriter).println("That book is not available.");
     }
+
+    @Test
+    public void shouldPrintSuccessBookCheckinMessage() throws Exception {
+        BibliotecaView bibliotecaView = new BibliotecaView("Welcome to com.twu.biblioteca.Biblioteca !!", outputWriter, inputReader);
+        bibliotecaView.printSuccessfulBookCheckInMessage();
+        verify(outputWriter).println("Thank you for returning the book.");
+    }
+
+    @Test
+    public void shouldPrintUnSuccessBookCheckinMessage() throws Exception {
+        BibliotecaView bibliotecaView = new BibliotecaView("Welcome to com.twu.biblioteca.Biblioteca !!", outputWriter, inputReader);
+        bibliotecaView.printUnSuccessfulBookCheckInMessage();
+        verify(outputWriter).println("That is not a valid book to return.");
+    }
 }
