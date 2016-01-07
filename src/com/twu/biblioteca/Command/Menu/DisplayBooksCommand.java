@@ -15,6 +15,6 @@ public class DisplayBooksCommand implements MenuCommand {
 
     @Override
     public void performCommand() {
-        bibliotecaView.printBooks(library.getListOfAvailableBooks());
+        bibliotecaView.printBooks(library.getListOfAvailableBookDTO());
     }
 }

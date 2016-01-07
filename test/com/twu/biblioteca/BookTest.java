@@ -75,4 +75,15 @@ public class BookTest {
         Set<Integer> unavailableIsbn = new HashSet<>();
         book.getFirstAvailableIsbn(unavailableIsbn);
     }
+
+    @Test
+    public void shouldReturnTrueIfAnyUnBorrowedBookIsAvailable() {
+        isbn.add(2345);
+        isbn.add(3456);
+        Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, isbn);
+        Set<Integer> unavailableIsbn = new HashSet<>();
+        unavailableIsbn.add(2345);
+        assertTrue(book.isAnyBookAvailableUnBorrowed(unavailableIsbn));
+
+    }
 }

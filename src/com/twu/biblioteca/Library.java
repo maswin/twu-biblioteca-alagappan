@@ -1,7 +1,8 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.DTO.BookDTO;
+
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Library {
     private List<Book> books;
@@ -43,15 +44,23 @@ public class Library {
         return numberOfCopiesBorrowedOfThisBook;
     }
 
-    public List<Book> getListOfAvailableBooks() {
-        return books.stream().filter(book -> !isAllBooksBorrowed(book)).collect(Collectors.toList());
+    public List<BookDTO> getListOfAvailableBookDTO() {
+        List<BookDTO> bookDTOs = new ArrayList<>();
+        for(Book book : books) {
+            if(book.isAnyBookAvailableUnBorrowed(borrowedIsbns)) {
+                BookDTO bookDTO = book.createBookDTO(borrowedIsbns);
+                bookDTOs.add(bookDTO);
+            }
+        }
+        return bookDTOs;
     }
 
     public boolean isBookAvailable(int isbn) {
-        Optional<Book> foundBook = books.stream().filter(book ->
-                book.isIsbnOfThisBookType(isbn) && !isAllBooksBorrowed(book)
-        ).findFirst();
-        return foundBook.isPresent();
+        for(Book book : books) {
+            if(book.isIsbnOfThisBookType(isbn) && !borrowedIsbns.contains(isbn))
+                return true;
+        }
+        return false;
     }
 
     public boolean isBorrowedBook(int isbn) {

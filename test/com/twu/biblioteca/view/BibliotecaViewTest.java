@@ -1,6 +1,7 @@
 package com.twu.biblioteca.view;
 
 import com.twu.biblioteca.Book;
+import com.twu.biblioteca.DTO.BookDTO;
 import com.twu.biblioteca.InputOutput.InputReader;
 import com.twu.biblioteca.InputOutput.OutputWriter;
 import org.junit.Before;
@@ -35,17 +36,19 @@ public class BibliotecaViewTest {
     public void shouldPrintListOfBooks() {
         OutputWriter outputWriter = Mockito.mock(OutputWriter.class);
         BibliotecaView bibliotecaView = new BibliotecaView("Welcome to com.twu.biblioteca.Biblioteca !!", outputWriter, inputReader);
-        List<Book> books = new ArrayList<>();
-        Book book1 = Mockito.mock(Book.class);
+        List<BookDTO> books = new ArrayList<>();
+        BookDTO book1 = Mockito.mock(BookDTO.class);
         books.add(book1);
-        Book book2 = Mockito.mock(Book.class);
+        BookDTO book2 = Mockito.mock(BookDTO.class);
         books.add(book2);
         bibliotecaView.printBooks(books);
 
         verify(outputWriter).println("List Of Books Available");
-        verify(outputWriter).println(String.format("%-6s %-12s %-25s %-20s %s", "BookID", "ISBN", "Book Name", "Author Name", "Year"));
-        verify(outputWriter).println(book1);
-        verify(outputWriter).println(book2);
+        verify(outputWriter).println(String.format("%-12s %-25s %-20s %s", "ISBN", "Book Name", "Author Name", "Year"));
+        verify(outputWriter).println(String.format("%-12d %-25s %-20s %d", book1.getIsbn(),
+                book1.getName(), book1.getAuthorName(), book1.getYearPublished()));
+        verify(outputWriter).println(String.format("%-12d %-25s %-20s %d", book2.getIsbn(),
+                book2.getName(), book2.getAuthorName(), book2.getYearPublished()));
     }
 
     @Test

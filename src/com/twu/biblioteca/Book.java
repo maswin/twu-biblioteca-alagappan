@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.DTO.BookDTO;
 import com.twu.biblioteca.Exception.DataUnavailableException;
 
 import java.util.Set;
@@ -28,6 +29,15 @@ public class Book {
         return !isbns.isEmpty();
     }
 
+    public boolean isAnyBookAvailableUnBorrowed(Set<Integer> unavailableIsbns) {
+        for(Integer isbn : isbns) {
+            if(!unavailableIsbns.contains(isbn)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public int getFirstAvailableIsbn(Set<Integer> unavailableIsbns) {
         for(Integer isbn : isbns) {
             if(!unavailableIsbns.contains(isbn)) {
@@ -35,6 +45,10 @@ public class Book {
             }
         }
         throw new DataUnavailableException("ISBN Not Available");
+    }
+
+    public BookDTO createBookDTO(Set<Integer> unAvailableIsbns) {
+        return new BookDTO(getFirstAvailableIsbn(unAvailableIsbns), name, authorName, yearPublished);
     }
 
     public boolean isIsbnOfThisBookType(int isbn) {

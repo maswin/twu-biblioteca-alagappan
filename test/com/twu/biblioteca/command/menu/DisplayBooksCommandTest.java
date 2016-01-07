@@ -1,6 +1,7 @@
 package com.twu.biblioteca.command.menu;
 
 import com.twu.biblioteca.Book;
+import com.twu.biblioteca.DTO.BookDTO;
 import com.twu.biblioteca.Library;
 import com.twu.biblioteca.view.BibliotecaView;
 import org.junit.Test;
@@ -18,8 +19,8 @@ public class DisplayBooksCommandTest {
     public void shouldDisplayBooks() {
         BibliotecaView bibliotecaView = Mockito.mock(BibliotecaView.class);
         Library library = Mockito.mock(Library.class);
-        List<Book> books = new ArrayList<>();
-        when(library.getListOfAvailableBooks()).thenReturn(books);
+        List<BookDTO> books = new ArrayList<>();
+        when(library.getListOfAvailableBookDTO()).thenReturn(books);
         MenuCommand menuCommand = new DisplayBooksCommand(bibliotecaView, library);
         menuCommand.performCommand();
 
