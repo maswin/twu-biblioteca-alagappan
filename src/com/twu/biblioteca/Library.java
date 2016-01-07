@@ -5,11 +5,11 @@ import java.util.stream.Collectors;
 
 public class Library {
     private List<Book> books;
-    private Map<Book, Set<Integer>> borrowedBooks;
+    private Set<Integer> borrowedIsbns;
 
-    public Library(List<Book> books, Map<Book, Set<Integer>> borrowedBooks) {
+    public Library(List<Book> books, Set<Integer> borrowedIsbns) {
         this.books = books;
-        this.borrowedBooks = borrowedBooks;
+        this.borrowedIsbns = borrowedIsbns;
     }
 
     private Book findBookByIsbn(int isbn) {
@@ -23,23 +23,24 @@ public class Library {
     public boolean checkOut(int isbn) {
         Book book = findBookByIsbn(isbn);
         if(book != null) {
-            if(borrowedBooks.containsKey(book)) {
-                borrowedBooks.get(book).add(isbn);
-            } else {
-                Set<Integer> isbns = new HashSet<>();
-                isbns.add(isbn);
-                borrowedBooks.put(book, isbns);
-            }
+            borrowedIsbns.add(isbn);
             return true;
         }
         return false;
     }
 
     private boolean isAllBooksBorrowed(Book book) {
-        if(borrowedBooks.containsKey(book)) {
-            return borrowedBooks.get(book).size() == book.numberOfBooksAvailable();
+        int numberOfCopiesBorrowedOfThisBook = findNumberOfCopiesBorrowedOfThisBook(book);
+        return book.numberOfBooksAvailable() == numberOfCopiesBorrowedOfThisBook;
+    }
+
+    private int findNumberOfCopiesBorrowedOfThisBook(Book book) {
+        int numberOfCopiesBorrowedOfThisBook = 0;
+        for(Integer isbn : borrowedIsbns) {
+            book.isIsbnOfThisBookType(isbn);
+            numberOfCopiesBorrowedOfThisBook++;
         }
-        return false;
+        return numberOfCopiesBorrowedOfThisBook;
     }
 
     public List<Book> getListOfAvailableBooks() {
@@ -54,34 +55,13 @@ public class Library {
     }
 
     public boolean isBorrowedBook(int isbn) {
-        for(Map.Entry<Book, Set<Integer>> bookSetEntry : borrowedBooks.entrySet()) {
-            Set<Integer> isbns = bookSetEntry.getValue();
-            if(isbns.contains(isbn)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private Book findBorrowedBookByIsbn(int isbn) {
-        if(isBorrowedBook(isbn)) {
-            for(Map.Entry<Book, Set<Integer>> bookSetEntry : borrowedBooks.entrySet()) {
-                Set<Integer> isbns = bookSetEntry.getValue();
-                if(isbns.contains(isbn)) {
-                    return bookSetEntry.getKey();
-                }
-            }
-        }
-        return null;
+        return borrowedIsbns.contains(isbn);
     }
 
     public boolean checkIn(int isbn) {
-        Book book = findBorrowedBookByIsbn(isbn);
-        if(book != null) {
-            borrowedBooks.get(book).remove(isbn);
-            if(borrowedBooks.get(book).size() == 0) {
-                borrowedBooks.remove(book);
-            }
+        if(isBorrowedBook(isbn)) {
+            borrowedIsbns.remove(isbn);
+            return true;
         }
         return false;
     }

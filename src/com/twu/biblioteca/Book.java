@@ -20,9 +20,9 @@ public class Book {
     @Override
     public String toString() {
         if(isAnyBookAvailable()) {
-            return String.format("%-25s %-20s %d", name, authorName, yearPublished);
+            return String.format("%-6d %-12d %-25s %-20s %d", bookId, getFirstISBN(), name, authorName, yearPublished);
         } else {
-            return String.format("%-25s %-20s %d", name, authorName, yearPublished);
+            return String.format("%-6d %-12s %-25s %-20s %d", bookId, "Unavailable", name, authorName, yearPublished);
         }
     }
 
@@ -33,7 +33,6 @@ public class Book {
     public boolean isAnyBookAvailable() {
         return !isbns.isEmpty();
     }
-
 
     public boolean isIsbnOfThisBookType(int isbn) {
         return isbns.contains(isbn);

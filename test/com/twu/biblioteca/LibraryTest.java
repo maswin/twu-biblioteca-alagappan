@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,7 +13,7 @@ import static org.junit.Assert.assertTrue;
 public class LibraryTest {
 
     private List<Book> books;
-    private Map<Book, Set<Integer>> borrowedBooks;
+    private Set<Integer> borrowedIsbns;
     private Set<Integer> isbns;
 
     @Before
@@ -22,35 +23,30 @@ public class LibraryTest {
         books.add(new Book(2,"book2", "author2", 2013, new HashSet<>()));
         books.add(new Book(3,"book3", "author3", 2014, new HashSet<>()));
 
-        borrowedBooks = new HashMap<>();
+        borrowedIsbns = new HashSet<>();
         isbns = new HashSet<>();
     }
 
     @Test
     public void shouldAddInBorrowedBooksWhenThatBookIsCheckedOut() {
-        Set isbns = new HashSet<>();
         isbns.add(1234);
         Book book = new Book(21,"book4", "author4", 2000, isbns);
         books.add(book);
-        Library library = new Library(books, borrowedBooks);
+        Library library = new Library(books, borrowedIsbns);
         library.checkOut(1234);
         assertEquals(4, books.size());
-        assertEquals(1, borrowedBooks.size());
+        assertEquals(1, borrowedIsbns.size());
     }
 
     @Test
-    public void shouldAddInBorrowedBooksAndNumberOfTimesThatBookIsBorrowedShouldBe2WhenThatTypeOfBookIsCheckedOutTwice() {
-        Set isbns = new HashSet<>();
+    public void shouldNotAddBookInBorrowedBookWhenBookIsUnAvailable() {
         isbns.add(1234);
-        isbns.add(2345);
         Book book = new Book(21,"book4", "author4", 2000, isbns);
         books.add(book);
-        Library library = new Library(books, borrowedBooks);
-        library.checkOut(1234);
+        Library library = new Library(books, borrowedIsbns);
         library.checkOut(2345);
         assertEquals(4, books.size());
-        assertEquals(1, borrowedBooks.size());
-        assertEquals(2, borrowedBooks.get(book).size());
+        assertEquals(0, borrowedIsbns.size());
     }
 
     @Test
@@ -59,7 +55,7 @@ public class LibraryTest {
         isbns.add(1234);
         Book book = new Book(bookId,"book4", "author4", 2000, isbns);
         books.add(book);
-        Library library = new Library(books, borrowedBooks);
+        Library library = new Library(books, borrowedIsbns);
         assertTrue(library.isBookAvailable(1234));
     }
 
@@ -69,44 +65,35 @@ public class LibraryTest {
         isbns.add(1234);
         Book book = new Book(bookId, "book4", "author4", 2000, isbns);
         books.add(book);
-        Set<Integer> thisBookBorrowedIsbn = new HashSet<>();
-        thisBookBorrowedIsbn.add(1234);
-        borrowedBooks.put(book, thisBookBorrowedIsbn);
-        Library library = new Library(books, borrowedBooks);
+        borrowedIsbns.add(1234);
+        Library library = new Library(books, borrowedIsbns);
         assertTrue(library.isBorrowedBook(1234));
     }
 
     @Test
-    public void shouldRemoveBookFromBorrowedBooksWhenThatBookIsCheckedInAndItIsOnlyCopyOfThatBookBorrowed() {
+    public void shouldRemoveBookFromBorrowedIsbnsWhenItIsCheckedIn() {
         int bookId = 21;
         isbns.add(1234);
         Book book = new Book(bookId, "book4", "author4", 2000, isbns);
         books.add(book);
-        Set<Integer> thisBookBorrowedIsbn = new HashSet<>();
-        thisBookBorrowedIsbn.add(1234);
-        borrowedBooks.put(book, thisBookBorrowedIsbn);
-        Library library = new Library(books, borrowedBooks);
+        borrowedIsbns.add(1234);
+        Library library = new Library(books, borrowedIsbns);
         library.checkIn(1234);
         assertEquals(4, books.size());
-        assertEquals(0, borrowedBooks.size());
+        assertEquals(0, borrowedIsbns.size());
     }
 
     @Test
-    public void shouldReduceNumberOfTimesThatBookIsBorrowedBy1WhenThatBookIsCheckedInAndItHasTwoCopiesOfThatBookBorrowed() {
+    public void shouldReturnFalseWhenBookNotBorrowedIsCheckedIn() {
         int bookId = 21;
         isbns.add(1234);
-        isbns.add(2345);
         Book book = new Book(bookId, "book4", "author4", 2000, isbns);
         books.add(book);
-        Set<Integer> thisBookBorrowedIsbn = new HashSet<>();
-        thisBookBorrowedIsbn.add(1234);
-        thisBookBorrowedIsbn.add(2345);
-        borrowedBooks.put(book, thisBookBorrowedIsbn);
-        Library library = new Library(books, borrowedBooks);
-        library.checkIn(1234);
+        borrowedIsbns.add(1234);
+        Library library = new Library(books, borrowedIsbns);
+        assertFalse(library.checkIn(1235));
         assertEquals(4, books.size());
-        assertEquals(1, borrowedBooks.size());
-        assertEquals(1, borrowedBooks.get(book).size());
+        assertEquals(1, borrowedIsbns.size());
     }
 
 }
