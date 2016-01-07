@@ -27,7 +27,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldRemoveBookFromBooksAndAddInBorrowedBooksWhenThatBookIsCheckedOut() {
+    public void shouldAddInBorrowedBooksWhenThatBookIsCheckedOut() {
         Set isbns = new HashSet<>();
         isbns.add(1234);
         Book book = new Book(21,"book4", "author4", 2000, isbns);
@@ -36,6 +36,21 @@ public class LibraryTest {
         library.checkOut(1234);
         assertEquals(4, books.size());
         assertEquals(1, borrowedBooks.size());
+    }
+
+    @Test
+    public void shouldAddInBorrowedBooksAndNumberOfTimesThatBookIsBorrowedShouldBe2WhenThatTypeOfBookIsCheckedOutTwice() {
+        Set isbns = new HashSet<>();
+        isbns.add(1234);
+        isbns.add(2345);
+        Book book = new Book(21,"book4", "author4", 2000, isbns);
+        books.add(book);
+        Library library = new Library(books, borrowedBooks);
+        library.checkOut(1234);
+        library.checkOut(2345);
+        assertEquals(4, books.size());
+        assertEquals(1, borrowedBooks.size());
+        assertEquals(2, borrowedBooks.get(book).size());
     }
 
     @Test
@@ -74,6 +89,24 @@ public class LibraryTest {
         library.checkIn(1234);
         assertEquals(4, books.size());
         assertEquals(0, borrowedBooks.size());
+    }
+
+    @Test
+    public void shouldReduceNumberOfTimesThatBookIsBorrowedBy1WhenThatBookIsCheckedInAndItHasTwoCopiesOfThatBookBorrowed() {
+        int bookId = 21;
+        isbns.add(1234);
+        isbns.add(2345);
+        Book book = new Book(bookId, "book4", "author4", 2000, isbns);
+        books.add(book);
+        Set<Integer> thisBookBorrowedIsbn = new HashSet<>();
+        thisBookBorrowedIsbn.add(1234);
+        thisBookBorrowedIsbn.add(2345);
+        borrowedBooks.put(book, thisBookBorrowedIsbn);
+        Library library = new Library(books, borrowedBooks);
+        library.checkIn(1234);
+        assertEquals(4, books.size());
+        assertEquals(1, borrowedBooks.size());
+        assertEquals(1, borrowedBooks.get(book).size());
     }
 
 }

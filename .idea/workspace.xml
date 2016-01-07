@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c8720c0c-a194-40dc-b26a-2f7a180202b3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/twu/biblioteca/BibliotecaApp.java" afterPath="$PROJECT_DIR$/src/com/twu/biblioteca/BibliotecaApp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/twu/biblioteca/Book.java" afterPath="$PROJECT_DIR$/src/com/twu/biblioteca/Book.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/twu/biblioteca/Library.java" afterPath="$PROJECT_DIR$/src/com/twu/biblioteca/Library.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/com/twu/biblioteca/LibraryTest.java" afterPath="$PROJECT_DIR$/test/com/twu/biblioteca/LibraryTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/com/twu/biblioteca/command/menu/DisplayBooksCommandTest.java" afterPath="$PROJECT_DIR$/test/com/twu/biblioteca/command/menu/DisplayBooksCommandTest.java" />
     </list>
     <ignored path="twu-biblioteca-alagappan.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -41,8 +37,8 @@
       <file leaf-file-name="LibraryTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/com/twu/biblioteca/LibraryTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7839506">
-              <caret line="78" column="1" selection-start-line="78" selection-start-column="1" selection-end-line="78" selection-end-column="1" />
+            <state vertical-scroll-proportion="0.8148148">
+              <caret line="112" column="0" selection-start-line="112" selection-start-column="0" selection-end-line="112" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -211,8 +207,8 @@
         <option value="$PROJECT_DIR$/src/com/twu/biblioteca/Book.java" />
         <option value="$PROJECT_DIR$/src/com/twu/biblioteca/command/menu/MenuCommand.java" />
         <option value="$PROJECT_DIR$/src/com/twu/biblioteca/BibliotecaApp.java" />
-        <option value="$PROJECT_DIR$/test/com/twu/biblioteca/LibraryTest.java" />
         <option value="$PROJECT_DIR$/src/com/twu/biblioteca/Library.java" />
+        <option value="$PROJECT_DIR$/test/com/twu/biblioteca/LibraryTest.java" />
       </list>
     </option>
   </component>
@@ -468,7 +464,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in twu-biblioteca-alagappan">
+  <component name="RunManager" selected="JUnit.LibraryTest">
     <configuration default="false" name="LibraryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -483,32 +479,6 @@
       <option name="MAIN_CLASS_NAME" value="com.twu.biblioteca.LibraryTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="false" name="LibraryTest.shouldReturnTrueIfBookIsAvailable" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.twu.biblioteca.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="twu-biblioteca-alagappan" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.twu.biblioteca" />
-      <option name="MAIN_CLASS_NAME" value="com.twu.biblioteca.LibraryTest" />
-      <option name="METHOD_NAME" value="shouldReturnTrueIfBookIsAvailable" />
-      <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -582,6 +552,32 @@
       <option name="MAIN_CLASS_NAME" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="package" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="LibraryTest.shouldAddInBorrowedBooksAndNumberOfTimesThatBookIsBorrowedShouldBe2WhenThatTypeOfBookIsCheckedOutTwice" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.twu.biblioteca.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="twu-biblioteca-alagappan" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.twu.biblioteca" />
+      <option name="MAIN_CLASS_NAME" value="com.twu.biblioteca.LibraryTest" />
+      <option name="METHOD_NAME" value="shouldAddInBorrowedBooksAndNumberOfTimesThatBookIsBorrowedShouldBe2WhenThatTypeOfBookIsCheckedOutTwice" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -840,18 +836,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="JUnit.LibraryTest" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.LibraryTest.shouldReturnTrueIfBookIsAvailable" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.LibraryTest.shouldReturnTrueIfBookIsBorrowed" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.LibraryTest.shouldRemoveBookFromBorrowedBooksWhenThatBookIsCheckedInAndItIsOnlyCopyOfThatBookBorrowed" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.All in twu-biblioteca-alagappan" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.LibraryTest.shouldReturnTrueIfBookIsBorrowed" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.LibraryTest.shouldRemoveBookFromBorrowedBooksWhenThatBookIsCheckedInAndItIsOnlyCopyOfThatBookBorrowed" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.All in twu-biblioteca-alagappan" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.LibraryTest.shouldAddInBorrowedBooksAndNumberOfTimesThatBookIsBorrowedShouldBe2WhenThatTypeOfBookIsCheckedOutTwice" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.All in twu-biblioteca-alagappan" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.LibraryTest.shouldRemoveBookFromBorrowedBooksWhenThatBookIsCheckedInAndItIsOnlyCopyOfThatBookBorrowed" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.LibraryTest" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.LibraryTest.shouldReturnTrueIfBookIsBorrowed" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.LibraryTest.shouldReturnTrueIfBookIsAvailable" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.LibraryTest" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.LibraryTest.shouldAddInBorrowedBooksAndNumberOfTimesThatBookIsBorrowedShouldBe2WhenThatTypeOfBookIsCheckedOutTwice" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.All in twu-biblioteca-alagappan" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.LibraryTest.shouldRemoveBookFromBorrowedBooksWhenThatBookIsCheckedInAndItIsOnlyCopyOfThatBookBorrowed" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.LibraryTest.shouldReturnTrueIfBookIsBorrowed" />
       </list>
     </recent_temporary>
   </component>
@@ -872,11 +868,11 @@
     <history-entry file="LibraryTest - 2016.01.07 at 11h 31m 38s.xml">
       <configuration name="LibraryTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="LibraryTest_shouldRemoveBookFromBooksAndAddInBorrowedBooksWhenThatBookIsCheckedOut - 2016.01.07 at 11h 23m 58s.xml">
-      <configuration name="LibraryTest.shouldRemoveBookFromBooksAndAddInBorrowedBooksWhenThatBookIsCheckedOut" configurationId="JUnit" />
+    <history-entry file="LibraryTest - 2016.01.07 at 11h 41m 20s.xml">
+      <configuration name="LibraryTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="LibraryTest_shouldRemoveBookFromBooksAndAddInBorrowedBooksWhenThatBookIsCheckedOut - 2016.01.07 at 11h 24m 36s.xml">
-      <configuration name="LibraryTest.shouldRemoveBookFromBooksAndAddInBorrowedBooksWhenThatBookIsCheckedOut" configurationId="JUnit" />
+    <history-entry file="LibraryTest_shouldAddInBorrowedBooksAndNumberOfTimesThatBookIsBorrowedShouldBe2WhenThatTypeOfBookIsCheckedOutTwice - 2016.01.07 at 11h 38m 21s.xml">
+      <configuration name="LibraryTest.shouldAddInBorrowedBooksAndNumberOfTimesThatBookIsBorrowedShouldBe2WhenThatTypeOfBookIsCheckedOutTwice" configurationId="JUnit" />
     </history-entry>
     <history-entry file="LibraryTest_shouldRemoveBookFromBorrowedBooksWhenThatBookIsCheckedInAndItIsOnlyCopyOfThatBookBorrowed - 2016.01.07 at 11h 30m 53s.xml">
       <configuration name="LibraryTest.shouldRemoveBookFromBorrowedBooksWhenThatBookIsCheckedInAndItIsOnlyCopyOfThatBookBorrowed" configurationId="JUnit" />
@@ -1403,8 +1399,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/com/twu/biblioteca/LibraryTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7839506">
-          <caret line="78" column="1" selection-start-line="78" selection-start-column="1" selection-end-line="78" selection-end-column="1" />
+        <state vertical-scroll-proportion="0.8148148">
+          <caret line="112" column="0" selection-start-line="112" selection-start-column="0" selection-end-line="112" selection-end-column="0" />
           <folding />
         </state>
       </provider>
