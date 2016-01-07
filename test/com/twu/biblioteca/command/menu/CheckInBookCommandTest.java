@@ -11,7 +11,7 @@ import static org.mockito.Mockito.when;
 public class CheckInBookCommandTest {
 
     @Test
-    public void checkInBookIfTheBookIsInBorrowedBooksList() {
+    public void checkInBookIfTheBookIsBorrowedAndPrintSuccessMessage() {
         int bookId = 22;
         Library library = Mockito.mock(Library.class);
         BibliotecaView bibliotecaView = Mockito.mock(BibliotecaView.class);
@@ -22,6 +22,21 @@ public class CheckInBookCommandTest {
         menuCommand.performCommand();
 
         verify(library).checkInBookCopy(bookId);
+        verify(bibliotecaView).printSuccessfulBookCheckInMessage();
+    }
+
+    @Test
+    public void shouldNotCheckInBookIfTheBookIsNotBorrowedAndPrintUnSuccessMessage() {
+        int bookId = 22;
+        Library library = Mockito.mock(Library.class);
+        BibliotecaView bibliotecaView = Mockito.mock(BibliotecaView.class);
+        when(bibliotecaView.getBookId()).thenReturn(bookId);
+        when(library.isBorrowedBookCopy(bookId)).thenReturn(false);
+        MenuCommand menuCommand = new CheckInBookCommand(bibliotecaView, library);
+
+        menuCommand.performCommand();
+
+        verify(bibliotecaView).printUnSuccessfulBookCheckInMessage();
     }
 
 }

@@ -15,6 +15,9 @@ public class CheckInBookCommand implements MenuCommand {
     private void checkInBook(int bookId) {
         if(library.isBorrowedBookCopy(bookId)) {
             library.checkInBookCopy(bookId);
+            bibliotecaView.printSuccessfulBookCheckInMessage();
+        } else {
+            bibliotecaView.printUnSuccessfulBookCheckInMessage();
         }
     }
 
