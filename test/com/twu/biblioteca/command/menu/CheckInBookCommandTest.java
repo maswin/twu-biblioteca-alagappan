@@ -6,44 +6,36 @@ import com.twu.biblioteca.view.BibliotecaView;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class CheckInBookCommandTest {
 
     @Test
-    public void checkInBookIfTheBookIsBorrowedAndPrintSuccessMessage() throws BookCopyProcessingException {
+    public void checkInBookIfTheBookIsBorrowedAndPrintSuccessMessage() throws Exception {
         int bookId = 22;
         Library library = Mockito.mock(Library.class);
         BibliotecaView bibliotecaView = Mockito.mock(BibliotecaView.class);
         when(bibliotecaView.getBookId()).thenReturn(bookId);
-        when(library.isBorrowedBookCopy(bookId)).thenReturn(true);
         MenuCommand menuCommand = new CheckInBookCommand(bibliotecaView, library);
 
-        try {
-            menuCommand.performCommand();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        menuCommand.performCommand();
 
         verify(library).checkInBookCopy(bookId);
         verify(bibliotecaView).printSuccessfulBookCheckInMessage();
     }
 
     @Test
-    public void shouldNotCheckInBookIfTheBookIsNotBorrowedAndPrintUnSuccessMessage() throws BookCopyProcessingException {
+    public void shouldNotCheckInBookIfTheBookIsNotBorrowedAndPrintUnSuccessMessage() throws Exception {
         int bookId = 22;
         Library library = Mockito.mock(Library.class);
         BibliotecaView bibliotecaView = Mockito.mock(BibliotecaView.class);
         when(bibliotecaView.getBookId()).thenReturn(bookId);
-        when(library.isBorrowedBookCopy(bookId)).thenReturn(false);
+        doThrow(new BookCopyProcessingException("Book Copy Unavailable")).when(library).checkInBookCopy(bookId);
         MenuCommand menuCommand = new CheckInBookCommand(bibliotecaView, library);
 
-        try {
-            menuCommand.performCommand();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        menuCommand.performCommand();
 
         verify(bibliotecaView).printUnSuccessfulBookCheckInMessage();
     }

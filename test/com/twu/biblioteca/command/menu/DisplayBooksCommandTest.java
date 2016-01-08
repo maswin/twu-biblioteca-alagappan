@@ -16,17 +16,14 @@ import static org.mockito.Mockito.when;
 public class DisplayBooksCommandTest {
 
     @Test
-    public void shouldDisplayBooks() throws BookCopyProcessingException {
+    public void shouldDisplayBooks() throws Exception {
         BibliotecaView bibliotecaView = Mockito.mock(BibliotecaView.class);
         Library library = Mockito.mock(Library.class);
         List<BookDTO> books = new ArrayList<>();
         when(library.getListOfAvailableBookDTO()).thenReturn(books);
         MenuCommand menuCommand = new DisplayBooksCommand(bibliotecaView, library);
-        try {
-            menuCommand.performCommand();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+        menuCommand.performCommand();
 
         verify(bibliotecaView).printBooks(books);
     }

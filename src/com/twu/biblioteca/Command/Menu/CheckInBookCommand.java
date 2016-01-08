@@ -14,10 +14,10 @@ public class CheckInBookCommand implements MenuCommand {
     }
 
     private void checkInBook(int bookId) throws BookCopyProcessingException {
-        if(library.isBorrowedBookCopy(bookId)) {
+        try {
             library.checkInBookCopy(bookId);
             bibliotecaView.printSuccessfulBookCheckInMessage();
-        } else {
+        } catch (BookCopyProcessingException exception) {
             bibliotecaView.printUnSuccessfulBookCheckInMessage();
         }
     }
