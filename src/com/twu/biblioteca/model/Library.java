@@ -31,7 +31,6 @@ public class Library {
         }
     }
 
-
     public List<BookDTO> getListOfAvailableBookDTO() throws BookCopyProcessingException {
         List<BookDTO> bookDTOs = new ArrayList<>();
         for(Book book : books) {
@@ -41,14 +40,6 @@ public class Library {
             }
         }
         return bookDTOs;
-    }
-
-    public boolean isBorrowedBookCopy(int isbn) throws BookCopyProcessingException {
-        for(Book book : books) {
-            if(book.isIsbnOfThisBookType(isbn) && book.isThisBookCopyBorrowed(isbn))
-                return true;
-        }
-        return false;
     }
 
     public void checkInBookCopy(int isbn) throws BookCopyProcessingException {

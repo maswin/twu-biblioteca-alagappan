@@ -16,13 +16,13 @@ public class CheckOutBookCommandTest {
     public void shouldCheckoutBookAndPrintSuccessMessageWhenBookIsAvailable() throws Exception {
         Library library = Mockito.mock(Library.class);
         BibliotecaView bibliotecaView = Mockito.mock(BibliotecaView.class);
-        int bookId = 12;
-        when(bibliotecaView.getBookId()).thenReturn(bookId);
+        int isbn = 12;
+        when(bibliotecaView.getBookId()).thenReturn(isbn);
         MenuCommand menuCommand = new CheckOutBookCommand(bibliotecaView, library);
 
         menuCommand.performCommand();
 
-        verify(library).checkOutBookCopy(bookId);
+        verify(library).checkOutBookCopy(isbn);
         verify(bibliotecaView).printSuccessfulBookCheckoutMessage();
     }
 
@@ -30,9 +30,9 @@ public class CheckOutBookCommandTest {
     public void shouldTryCheckingOutBookAndPrintUnSuccessMessageWhenBookIsUnAvailable() throws Exception {
         Library library = Mockito.mock(Library.class);
         BibliotecaView bibliotecaView = Mockito.mock(BibliotecaView.class);
-        int bookId = 12;
-        when(bibliotecaView.getBookId()).thenReturn(bookId);
-        doThrow(new BookCopyProcessingException("Book Copy Unavailable")).when(library).checkOutBookCopy(bookId);
+        int isbn = 12;
+        when(bibliotecaView.getBookId()).thenReturn(isbn);
+        doThrow(new BookCopyProcessingException("Book Copy Unavailable")).when(library).checkOutBookCopy(isbn);
         MenuCommand menuCommand = new CheckOutBookCommand(bibliotecaView, library);
 
         menuCommand.performCommand();

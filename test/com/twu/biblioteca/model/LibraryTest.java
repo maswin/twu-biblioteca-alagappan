@@ -77,14 +77,5 @@ public class LibraryTest {
         library.checkInBookCopy(isbn);
     }
 
-    @Test
-    public void shouldReturnTrueIfBookIsBorrowed() throws BookCopyProcessingException {
-        int bookId = 21;
-        copies.add(new Copy(1234, true));
-        Book book = new Book(bookId, "book4", "author4", 2000, copies);
-        books.add(book);
-        Library library = new Library(books);
-        assertTrue(library.isBorrowedBookCopy(1234));
-    }
 
 }

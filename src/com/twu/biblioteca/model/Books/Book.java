@@ -25,10 +25,6 @@ public class Book {
         return String.format("%-25s %-20s %d", name, authorName, yearPublished);
     }
 
-    public boolean isAnyCopyAvailable() {
-        return !copies.isEmpty();
-    }
-
     public boolean isAnyCopyAvailableUnBorrowed() {
         for(Copy copy : copies) {
             if(!copy.isBorrowed()) {
@@ -38,7 +34,7 @@ public class Book {
         return false;
     }
 
-    public Copy getAnyUnBorrowedCopy() throws BookCopyProcessingException {
+    private Copy getAnyUnBorrowedCopy() throws BookCopyProcessingException {
         for(Copy copy : copies) {
             if(!copy.isBorrowed()) {
                 return copy;
@@ -91,12 +87,5 @@ public class Book {
         copy.checkIn();
     }
 
-    public boolean isThisBookCopyBorrowed(int isbn) throws BookCopyProcessingException {
-        Copy copy = findBookCopyByIsbn(isbn);
-        if(copy == null) {
-            throw new BookCopyProcessingException("Requested Book Copy UnAvailable");
-        }
-        return copy.isBorrowed();
-    }
 
 }

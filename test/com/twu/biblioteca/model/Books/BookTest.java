@@ -37,31 +37,8 @@ public class BookTest {
         assertTrue(book.isIsbnOfThisBookType(2345));
     }
 
-    @Test
-    public void shouldReturnFalseIfNoBookIsAvailable() {
-        Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, copies);
-        assertFalse(book.isAnyCopyAvailable());
-    }
-
-    @Test
-    public void shouldReturnAnyAvailableIsbnNotBorrowed() throws BookCopyProcessingException {
-        Copy copy = new Copy(3456, false);
-        copies.add(new Copy(2345, true));
-        copies.add(copy);
-        Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, copies);
-        assertEquals(copy, book.getAnyUnBorrowedCopy());
-    }
-
     @Rule
     public ExpectedException expected = ExpectedException.none();
-
-    @Test
-    public void shouldThrowExceptionWhenNoUnBorrowedBookIsAvailable() throws BookCopyProcessingException {
-        expected.expect(BookCopyProcessingException.class);
-        expected.expectMessage("No Book Copy Available");
-        Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, copies);
-        book.getAnyUnBorrowedCopy();
-    }
 
     @Test
     public void shouldReturnTrueIfAnyUnBorrowedBookIsAvailable() {

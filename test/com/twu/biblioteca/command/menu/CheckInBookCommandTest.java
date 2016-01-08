@@ -14,25 +14,25 @@ public class CheckInBookCommandTest {
 
     @Test
     public void checkInBookIfTheBookIsBorrowedAndPrintSuccessMessage() throws Exception {
-        int bookId = 22;
+        int isbn = 22;
         Library library = Mockito.mock(Library.class);
         BibliotecaView bibliotecaView = Mockito.mock(BibliotecaView.class);
-        when(bibliotecaView.getBookId()).thenReturn(bookId);
+        when(bibliotecaView.getBookId()).thenReturn(isbn);
         MenuCommand menuCommand = new CheckInBookCommand(bibliotecaView, library);
 
         menuCommand.performCommand();
 
-        verify(library).checkInBookCopy(bookId);
+        verify(library).checkInBookCopy(isbn);
         verify(bibliotecaView).printSuccessfulBookCheckInMessage();
     }
 
     @Test
     public void shouldNotCheckInBookIfTheBookIsNotBorrowedAndPrintUnSuccessMessage() throws Exception {
-        int bookId = 22;
+        int isbn = 22;
         Library library = Mockito.mock(Library.class);
         BibliotecaView bibliotecaView = Mockito.mock(BibliotecaView.class);
-        when(bibliotecaView.getBookId()).thenReturn(bookId);
-        doThrow(new BookCopyProcessingException("Book Copy Unavailable")).when(library).checkInBookCopy(bookId);
+        when(bibliotecaView.getBookId()).thenReturn(isbn);
+        doThrow(new BookCopyProcessingException("Book Copy Unavailable")).when(library).checkInBookCopy(isbn);
         MenuCommand menuCommand = new CheckInBookCommand(bibliotecaView, library);
 
         menuCommand.performCommand();
