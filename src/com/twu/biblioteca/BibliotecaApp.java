@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.controller.Biblioteca;
 import com.twu.biblioteca.model.Books.Book;
 import com.twu.biblioteca.model.Books.Copy;
 import com.twu.biblioteca.InputOutput.InputReader;
@@ -44,7 +45,7 @@ public class BibliotecaApp {
 
         Menu menu = new Menu(menuOptions, menuCommands);
         MenuView menuView = new MenuView(menu, outputWriter, inputReader);
-        Biblioteca biblioteca = new Biblioteca(library, menuOptions, bookView, menuView, new ConsoleView("Welcome to Bibilioteca !!", outputWriter, inputReader));
+        Biblioteca biblioteca = new Biblioteca(menuOptions, menuView, new ConsoleView("Welcome to Bibilioteca !!", outputWriter, inputReader));
         biblioteca.start();
     }
 

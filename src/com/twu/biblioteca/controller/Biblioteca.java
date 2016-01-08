@@ -1,26 +1,20 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.controller;
 
 import com.twu.biblioteca.command.menu.MenuCommand;
 import com.twu.biblioteca.command.menu.QuitCommand;
-import com.twu.biblioteca.model.Library;
-import com.twu.biblioteca.view.BookView;
 import com.twu.biblioteca.view.ConsoleView;
 import com.twu.biblioteca.view.MenuView;
 
 import java.util.Map;
 
 public class Biblioteca {
-    private Library library;
     private Map<Integer, String> menuOptions;
     private ConsoleView consoleView;
-    private BookView bookView;
     private MenuView menuView;
 
-    public Biblioteca(Library library, Map<Integer, String> menuOptions, BookView bookView, MenuView menuView, ConsoleView consoleView) {
-        this.library = library;
+    public Biblioteca(Map<Integer, String> menuOptions, MenuView menuView, ConsoleView consoleView) {
         this.menuOptions = menuOptions;
         this.consoleView = consoleView;
-        this.bookView = bookView;
         this.menuView = menuView;
     }
 

@@ -21,9 +21,9 @@ public class ConsoleViewTest {
 
     @Test
     public void shouldPrintWelcomeMessage() {
-        ConsoleView bookView = new ConsoleView("Welcome to com.twu.biblioteca.Biblioteca !!", outputWriter, inputReader);
+        ConsoleView bookView = new ConsoleView("Welcome to com.twu.biblioteca.controller.Biblioteca !!", outputWriter, inputReader);
         bookView.printWelcomeMessage();
-        verify(outputWriter).println("Welcome to com.twu.biblioteca.Biblioteca !!");
+        verify(outputWriter).println("Welcome to com.twu.biblioteca.controller.Biblioteca !!");
     }
 
 }

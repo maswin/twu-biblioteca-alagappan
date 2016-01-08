@@ -1,6 +1,7 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.controller;
 
 import com.twu.biblioteca.command.menu.QuitCommand;
+import com.twu.biblioteca.controller.Biblioteca;
 import com.twu.biblioteca.model.Library;
 import com.twu.biblioteca.view.BookView;
 import com.twu.biblioteca.view.ConsoleView;
@@ -29,13 +30,12 @@ public class BibliotecaTest {
         menuView = Mockito.mock(MenuView.class);
         consoleView = Mockito.mock(ConsoleView.class);
         menuOptions = new HashMap<>();
-        //List<Book> bookList = new ArrayList<>();
         library = Mockito.mock(Library.class);
     }
 
     @Test
     public void shouldDisplayWelcomeMessageWhenApplicationIsStarted() {
-        Biblioteca biblioteca = new Biblioteca(library, menuOptions, bookView, menuView, consoleView);
+        Biblioteca biblioteca = new Biblioteca(menuOptions, menuView, consoleView);
         when(menuView.getMenuOption()).thenReturn(new QuitCommand());
         biblioteca.start();
         verify(consoleView).printWelcomeMessage();
@@ -44,7 +44,7 @@ public class BibliotecaTest {
     @Test
     public void shouldDisplayMenuAfterWelcomeMessage() {
         when(menuView.getMenuOption()).thenReturn(new QuitCommand());
-        Biblioteca biblioteca = new Biblioteca(library, menuOptions, bookView, menuView, consoleView);
+        Biblioteca biblioteca = new Biblioteca(menuOptions, menuView, consoleView);
         biblioteca.start();
         verify(consoleView).printWelcomeMessage();
         verify(menuView).displayMenu(menuOptions);
