@@ -2,7 +2,7 @@ package com.twu.biblioteca.model;
 
 import com.twu.biblioteca.model.Books.Book;
 import com.twu.biblioteca.model.Books.Copy;
-import com.twu.biblioteca.Exception.BookCopyPrcoeesingException;
+import com.twu.biblioteca.Exception.BookCopyProcessingException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -32,7 +32,7 @@ public class LibraryTest {
     public ExpectedException expected = ExpectedException.none();
 
     @Test
-    public void shouldCheckOutBookCopyWhenBookIsAvailable() {
+    public void shouldCheckOutBookCopyWhenBookIsAvailable() throws BookCopyProcessingException {
         int isbn = 2345;
         Book book = Mockito.mock(Book.class);
         when(book.isIsbnOfThisBookType(isbn)).thenReturn(true);
@@ -43,8 +43,8 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldThrowExceptionWhenCheckOutBookCopyIsUnAvailable() {
-        expected.expect(BookCopyPrcoeesingException.class);
+    public void shouldThrowExceptionWhenCheckOutBookCopyIsUnAvailable() throws BookCopyProcessingException {
+        expected.expect(BookCopyProcessingException.class);
         expected.expectMessage("Requested Book Copy UnAvailable");
         int isbn = 2345;
         Book book = Mockito.mock(Book.class);
@@ -55,7 +55,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldCheckInBookCopyWhenBookIsBorrowed() {
+    public void shouldCheckInBookCopyWhenBookIsBorrowed() throws BookCopyProcessingException {
         int isbn = 2345;
         Book book = Mockito.mock(Book.class);
         when(book.isIsbnOfThisBookType(isbn)).thenReturn(true);
@@ -66,8 +66,8 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldThrowExceptionWhenCheckInBookCopyIsUnAvailable() {
-        expected.expect(BookCopyPrcoeesingException.class);
+    public void shouldThrowExceptionWhenCheckInBookCopyIsUnAvailable() throws BookCopyProcessingException {
+        expected.expect(BookCopyProcessingException.class);
         expected.expectMessage("Requested Book Copy UnAvailable");
         int isbn = 2345;
         Book book = Mockito.mock(Book.class);
@@ -78,23 +78,13 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldReturnTrueIfBookIsBorrowed() {
+    public void shouldReturnTrueIfBookIsBorrowed() throws BookCopyProcessingException {
         int bookId = 21;
         copies.add(new Copy(1234, true));
         Book book = new Book(bookId, "book4", "author4", 2000, copies);
         books.add(book);
         Library library = new Library(books);
         assertTrue(library.isBorrowedBookCopy(1234));
-    }
-
-    @Test
-    public void shouldReturnTrueIfBookIsAvailable() {
-        int bookId = 21;
-        copies.add(new Copy(1234, false));
-        Book book = new Book(bookId,"book4", "author4", 2000, copies);
-        books.add(book);
-        Library library = new Library(books);
-        assertTrue(library.isBookCopyAvailable(1234));
     }
 
 }

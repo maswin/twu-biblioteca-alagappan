@@ -1,7 +1,7 @@
 package com.twu.biblioteca.model.Books;
 
 import com.twu.biblioteca.DTO.BookDTO;
-import com.twu.biblioteca.Exception.BookCopyPrcoeesingException;
+import com.twu.biblioteca.Exception.BookCopyProcessingException;
 
 import java.util.Set;
 
@@ -38,16 +38,16 @@ public class Book {
         return false;
     }
 
-    public Copy getAnyUnBorrowedCopy() {
+    public Copy getAnyUnBorrowedCopy() throws BookCopyProcessingException {
         for(Copy copy : copies) {
             if(!copy.isBorrowed()) {
                 return copy;
             }
         }
-        throw new BookCopyPrcoeesingException("No Book Copy Available");
+        throw new BookCopyProcessingException("No Book Copy Available");
     }
 
-    public BookDTO createBookDTO() {
+    public BookDTO createBookDTO() throws BookCopyProcessingException {
         return new BookDTO(getAnyUnBorrowedCopy().getIsbn(), name, authorName, yearPublished);
     }
 
@@ -69,32 +69,32 @@ public class Book {
         return null;
     }
 
-    public void checkOutACopyByIsbn(int isbn) {
+    public void checkOutACopyByIsbn(int isbn) throws BookCopyProcessingException {
         Copy copy = findBookCopyByIsbn(isbn);
         if(copy == null) {
-            throw new BookCopyPrcoeesingException("Requested Book Copy UnAvailable");
+            throw new BookCopyProcessingException("Requested Book Copy UnAvailable");
         }
         if(copy.isBorrowed()) {
-            throw new BookCopyPrcoeesingException("Requested Book Copy Already Borrowed");
+            throw new BookCopyProcessingException("Requested Book Copy Already Borrowed");
         }
         copy.checkOut();
     }
 
-    public void checkInACopyByIsbn(int isbn) {
+    public void checkInACopyByIsbn(int isbn) throws BookCopyProcessingException {
         Copy copy = findBookCopyByIsbn(isbn);
         if(copy == null) {
-            throw new BookCopyPrcoeesingException("Requested Book Copy UnAvailable");
+            throw new BookCopyProcessingException("Requested Book Copy UnAvailable");
         }
         if(!copy.isBorrowed()) {
-            throw new BookCopyPrcoeesingException("Requested Book Copy Was Not Borrowed");
+            throw new BookCopyProcessingException("Requested Book Copy Was Not Borrowed");
         }
         copy.checkIn();
     }
 
-    public boolean isThisBookCopyBorrowed(int isbn) {
+    public boolean isThisBookCopyBorrowed(int isbn) throws BookCopyProcessingException {
         Copy copy = findBookCopyByIsbn(isbn);
         if(copy == null) {
-            throw new BookCopyPrcoeesingException("Requested Book Copy UnAvailable");
+            throw new BookCopyProcessingException("Requested Book Copy UnAvailable");
         }
         return copy.isBorrowed();
     }

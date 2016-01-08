@@ -28,7 +28,11 @@ public class Biblioteca {
         do {
             menuView.displayMenu(menuOptions);
             command = menuView.getMenuOption();
-            command.performCommand();
+            try {
+                command.performCommand();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } while (!(command instanceof QuitCommand));
     }
 

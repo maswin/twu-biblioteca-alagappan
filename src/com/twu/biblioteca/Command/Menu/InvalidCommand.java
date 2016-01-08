@@ -15,7 +15,7 @@ public class InvalidCommand implements MenuCommand {
     }
 
     @Override
-    public void performCommand() {
+    public void performCommand() throws Exception {
         menuView.displayInvalidOption();
     }
 }

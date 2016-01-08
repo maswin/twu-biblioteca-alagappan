@@ -1,6 +1,6 @@
 package com.twu.biblioteca.model.Books;
 
-import com.twu.biblioteca.Exception.BookCopyPrcoeesingException;
+import com.twu.biblioteca.Exception.BookCopyProcessingException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -44,7 +44,7 @@ public class BookTest {
     }
 
     @Test
-    public void shouldReturnAnyAvailableIsbnNotBorrowed() {
+    public void shouldReturnAnyAvailableIsbnNotBorrowed() throws BookCopyProcessingException {
         Copy copy = new Copy(3456, false);
         copies.add(new Copy(2345, true));
         copies.add(copy);
@@ -56,8 +56,8 @@ public class BookTest {
     public ExpectedException expected = ExpectedException.none();
 
     @Test
-    public void shouldThrowExceptionWhenNoUnBorrowedBookIsAvailable() {
-        expected.expect(BookCopyPrcoeesingException.class);
+    public void shouldThrowExceptionWhenNoUnBorrowedBookIsAvailable() throws BookCopyProcessingException {
+        expected.expect(BookCopyProcessingException.class);
         expected.expectMessage("No Book Copy Available");
         Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, copies);
         book.getAnyUnBorrowedCopy();
@@ -80,7 +80,7 @@ public class BookTest {
     }
 
     @Test
-    public void shouldCheckOutABookCopyByIsbnWhenAvailable() {
+    public void shouldCheckOutABookCopyByIsbnWhenAvailable() throws BookCopyProcessingException {
         Copy copy = new Copy(2345, false);
         copies.add(copy);
         Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, copies);
@@ -89,8 +89,8 @@ public class BookTest {
     }
 
     @Test
-    public void shouldThrowExceptionWhenBookCopyIsAlreadyBorrowedWhileCheckingOut() {
-        expected.expect(BookCopyPrcoeesingException.class);
+    public void shouldThrowExceptionWhenBookCopyIsAlreadyBorrowedWhileCheckingOut() throws BookCopyProcessingException {
+        expected.expect(BookCopyProcessingException.class);
         expected.expectMessage("Requested Book Copy Already Borrowed");
         Copy copy = new Copy(2345, true);
         copies.add(copy);
@@ -99,15 +99,15 @@ public class BookTest {
     }
 
     @Test
-    public void shouldThrowExceptionWhenBookCopyIsNotAvailableWhileCheckingOut() {
-        expected.expect(BookCopyPrcoeesingException.class);
+    public void shouldThrowExceptionWhenBookCopyIsNotAvailableWhileCheckingOut() throws BookCopyProcessingException {
+        expected.expect(BookCopyProcessingException.class);
         expected.expectMessage("Requested Book Copy UnAvailable");
         Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, copies);
         book.checkOutACopyByIsbn(2345);
     }
 
     @Test
-    public void shouldCheckInABookCopyByIsbn() {
+    public void shouldCheckInABookCopyByIsbn() throws BookCopyProcessingException {
         Copy copy = new Copy(2345, true);
         copies.add(copy);
         Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, copies);
@@ -116,8 +116,8 @@ public class BookTest {
     }
 
     @Test
-    public void shouldThrowExceptionWhenBookCopyIsNotBorrowedWhileCheckingIn() {
-        expected.expect(BookCopyPrcoeesingException.class);
+    public void shouldThrowExceptionWhenBookCopyIsNotBorrowedWhileCheckingIn() throws BookCopyProcessingException {
+        expected.expect(BookCopyProcessingException.class);
         expected.expectMessage("Requested Book Copy Was Not Borrowed");
         Copy copy = new Copy(2345, false);
         copies.add(copy);
@@ -126,8 +126,8 @@ public class BookTest {
     }
 
     @Test
-    public void shouldThrowExceptionWhenBookCopyIsNotAvailableWhileCheckingIn() {
-        expected.expect(BookCopyPrcoeesingException.class);
+    public void shouldThrowExceptionWhenBookCopyIsNotAvailableWhileCheckingIn() throws BookCopyProcessingException {
+        expected.expect(BookCopyProcessingException.class);
         expected.expectMessage("Requested Book Copy UnAvailable");
         Book book = new Book(0, "Harry Potter", "J.K.Rowling", 2005, copies);
         book.checkOutACopyByIsbn(2345);
