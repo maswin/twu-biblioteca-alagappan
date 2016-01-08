@@ -26,4 +26,8 @@ public class Copy {
         return isbn;
     }
 
+    public boolean isSameIsbn(int isbn) {
+        return this.isbn == isbn;
+    }
+
 }

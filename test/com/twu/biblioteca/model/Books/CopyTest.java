@@ -22,4 +22,18 @@ public class CopyTest {
         copy.checkIn();
         assertFalse(copy.isBorrowed());
     }
+
+    @Test
+    public void shouldReturnTrueIfGivenIsbnMatchesThisBookIsbn() {
+        int isbn = 1234;
+        Copy copy = new Copy(isbn, true);
+        assertTrue(copy.isSameIsbn(isbn));
+    }
+
+    @Test
+    public void shouldReturnFalseIfGivenIsbnDoesNotMatchThisBookIsbn() {
+        int isbn = 1234;
+        Copy copy = new Copy(isbn, true);
+        assertFalse(copy.isSameIsbn(1235));
+    }
 }
