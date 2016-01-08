@@ -6,7 +6,8 @@ import com.twu.biblioteca.InputOutput.InputReader;
 import com.twu.biblioteca.InputOutput.OutputWriter;
 import com.twu.biblioteca.command.menu.*;
 import com.twu.biblioteca.model.Library;
-import com.twu.biblioteca.view.BibliotecaView;
+import com.twu.biblioteca.view.BookView;
+import com.twu.biblioteca.view.ConsoleView;
 import com.twu.biblioteca.view.MenuView;
 
 import java.util.*;
@@ -16,7 +17,7 @@ public class BibliotecaApp {
     public static void main(String[] args) {
         OutputWriter outputWriter = new OutputWriter(System.out);
         InputReader inputReader = new InputReader(System.in);
-        BibliotecaView bibliotecaView = new BibliotecaView("Welcome to Biblioteca !!",outputWriter, inputReader);
+        BookView bookView = new BookView(outputWriter, inputReader);
 
         Map<Integer, String> menuOptions = new HashMap<>();
         menuOptions.put(1, "List of Books");
@@ -35,15 +36,15 @@ public class BibliotecaApp {
 
 
         Map<Integer, MenuCommand> menuCommands = new HashMap<>();
-        menuCommands.put(1, new DisplayBooksCommand(bibliotecaView, library));
-        menuCommands.put(2, new CheckOutBookCommand(bibliotecaView, library));
-        menuCommands.put(3, new CheckInBookCommand(bibliotecaView, library));
+        menuCommands.put(1, new DisplayBooksCommand(bookView, library));
+        menuCommands.put(2, new CheckOutBookCommand(bookView, library));
+        menuCommands.put(3, new CheckInBookCommand(bookView, library));
         menuCommands.put(4, new QuitCommand());
 
 
         Menu menu = new Menu(menuOptions, menuCommands);
         MenuView menuView = new MenuView(menu, outputWriter, inputReader);
-        Biblioteca biblioteca = new Biblioteca(library, menuOptions, bibliotecaView, menuView);
+        Biblioteca biblioteca = new Biblioteca(library, menuOptions, bookView, menuView, new ConsoleView("Welcome to Bibilioteca !!", outputWriter, inputReader));
         biblioteca.start();
     }
 

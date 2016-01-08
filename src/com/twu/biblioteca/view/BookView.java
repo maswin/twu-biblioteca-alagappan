@@ -6,19 +6,13 @@ import com.twu.biblioteca.InputOutput.OutputWriter;
 
 import java.util.List;
 
-public class BibliotecaView {
-    private final String welcomeMessage;
+public class BookView {
     private final OutputWriter outputWriter;
     private InputReader inputReader;
 
-    public BibliotecaView(String welcomeMessage, OutputWriter outputWriter, InputReader inputReader) {
-        this.welcomeMessage = welcomeMessage;
+    public BookView(OutputWriter outputWriter, InputReader inputReader) {
         this.outputWriter = outputWriter;
         this.inputReader = inputReader;
-    }
-
-    public void printWelcomeMessage() {
-        outputWriter.println(welcomeMessage);
     }
 
     public void printBooks(List<BookDTO> books) {

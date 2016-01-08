@@ -3,7 +3,8 @@ package com.twu.biblioteca;
 import com.twu.biblioteca.command.menu.MenuCommand;
 import com.twu.biblioteca.command.menu.QuitCommand;
 import com.twu.biblioteca.model.Library;
-import com.twu.biblioteca.view.BibliotecaView;
+import com.twu.biblioteca.view.BookView;
+import com.twu.biblioteca.view.ConsoleView;
 import com.twu.biblioteca.view.MenuView;
 
 import java.util.Map;
@@ -11,13 +12,15 @@ import java.util.Map;
 public class Biblioteca {
     private Library library;
     private Map<Integer, String> menuOptions;
-    private BibliotecaView bibliotecaView;
+    private ConsoleView consoleView;
+    private BookView bookView;
     private MenuView menuView;
 
-    public Biblioteca(Library library, Map<Integer, String> menuOptions, BibliotecaView bibliotecaView, MenuView menuView) {
+    public Biblioteca(Library library, Map<Integer, String> menuOptions, BookView bookView, MenuView menuView, ConsoleView consoleView) {
         this.library = library;
         this.menuOptions = menuOptions;
-        this.bibliotecaView = bibliotecaView;
+        this.consoleView = consoleView;
+        this.bookView = bookView;
         this.menuView = menuView;
     }
 
@@ -37,6 +40,6 @@ public class Biblioteca {
     }
 
     private void printWelcomeMessage() {
-        bibliotecaView.printWelcomeMessage();
+        consoleView.printWelcomeMessage();
     }
 }

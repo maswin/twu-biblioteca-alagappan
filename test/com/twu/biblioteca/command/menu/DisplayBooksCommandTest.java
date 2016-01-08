@@ -1,9 +1,8 @@
 package com.twu.biblioteca.command.menu;
 
 import com.twu.biblioteca.DTO.BookDTO;
-import com.twu.biblioteca.Exception.BookCopyProcessingException;
 import com.twu.biblioteca.model.Library;
-import com.twu.biblioteca.view.BibliotecaView;
+import com.twu.biblioteca.view.BookView;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -17,14 +16,14 @@ public class DisplayBooksCommandTest {
 
     @Test
     public void shouldDisplayBooks() throws Exception {
-        BibliotecaView bibliotecaView = Mockito.mock(BibliotecaView.class);
+        BookView bookView = Mockito.mock(BookView.class);
         Library library = Mockito.mock(Library.class);
         List<BookDTO> books = new ArrayList<>();
         when(library.getListOfAvailableBookDTO()).thenReturn(books);
-        MenuCommand menuCommand = new DisplayBooksCommand(bibliotecaView, library);
+        MenuCommand menuCommand = new DisplayBooksCommand(bookView, library);
 
         menuCommand.performCommand();
 
-        verify(bibliotecaView).printBooks(books);
+        verify(bookView).printBooks(books);
     }
 }

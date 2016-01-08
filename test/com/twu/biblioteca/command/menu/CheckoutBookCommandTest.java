@@ -2,7 +2,7 @@ package com.twu.biblioteca.command.menu;
 
 import com.twu.biblioteca.Exception.BookCopyProcessingException;
 import com.twu.biblioteca.model.Library;
-import com.twu.biblioteca.view.BibliotecaView;
+import com.twu.biblioteca.view.BookView;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -15,29 +15,29 @@ public class CheckOutBookCommandTest {
     @Test
     public void shouldCheckoutBookAndPrintSuccessMessageWhenBookIsAvailable() throws Exception {
         Library library = Mockito.mock(Library.class);
-        BibliotecaView bibliotecaView = Mockito.mock(BibliotecaView.class);
+        BookView bookView = Mockito.mock(BookView.class);
         int isbn = 12;
-        when(bibliotecaView.getBookId()).thenReturn(isbn);
-        MenuCommand menuCommand = new CheckOutBookCommand(bibliotecaView, library);
+        when(bookView.getBookId()).thenReturn(isbn);
+        MenuCommand menuCommand = new CheckOutBookCommand(bookView, library);
 
         menuCommand.performCommand();
 
         verify(library).checkOutBookCopy(isbn);
-        verify(bibliotecaView).printSuccessfulBookCheckoutMessage();
+        verify(bookView).printSuccessfulBookCheckoutMessage();
     }
 
     @Test
     public void shouldTryCheckingOutBookAndPrintUnSuccessMessageWhenBookIsUnAvailable() throws Exception {
         Library library = Mockito.mock(Library.class);
-        BibliotecaView bibliotecaView = Mockito.mock(BibliotecaView.class);
+        BookView bookView = Mockito.mock(BookView.class);
         int isbn = 12;
-        when(bibliotecaView.getBookId()).thenReturn(isbn);
+        when(bookView.getBookId()).thenReturn(isbn);
         doThrow(new BookCopyProcessingException("Book Copy Unavailable")).when(library).checkOutBookCopy(isbn);
-        MenuCommand menuCommand = new CheckOutBookCommand(bibliotecaView, library);
+        MenuCommand menuCommand = new CheckOutBookCommand(bookView, library);
 
         menuCommand.performCommand();
 
-        verify(bibliotecaView).printUnSuccessfulBookCheckoutMessage();
+        verify(bookView).printUnSuccessfulBookCheckoutMessage();
     }
 
 }

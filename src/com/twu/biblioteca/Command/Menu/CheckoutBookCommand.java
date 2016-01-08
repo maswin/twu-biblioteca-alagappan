@@ -2,30 +2,30 @@ package com.twu.biblioteca.command.menu;
 
 import com.twu.biblioteca.Exception.BookCopyProcessingException;
 import com.twu.biblioteca.model.Library;
-import com.twu.biblioteca.view.BibliotecaView;
+import com.twu.biblioteca.view.BookView;
 
 public class CheckOutBookCommand implements MenuCommand {
 
-    private final BibliotecaView bibliotecaView;
+    private final BookView bookView;
     private final Library library;
 
-    public CheckOutBookCommand(BibliotecaView bibliotecaView, Library library) {
-        this.bibliotecaView = bibliotecaView;
+    public CheckOutBookCommand(BookView bookView, Library library) {
+        this.bookView = bookView;
         this.library = library;
     }
 
     private void checkOutBook(int bookId) {
         try {
             library.checkOutBookCopy(bookId);
-            bibliotecaView.printSuccessfulBookCheckoutMessage();
+            bookView.printSuccessfulBookCheckoutMessage();
         } catch (BookCopyProcessingException e) {
-            bibliotecaView.printUnSuccessfulBookCheckoutMessage();
+            bookView.printUnSuccessfulBookCheckoutMessage();
         }
     }
 
     @Override
     public void performCommand() throws Exception {
-        int bookId = bibliotecaView.getBookId();
+        int bookId = bookView.getBookId();
         checkOutBook(bookId);
     }
 }

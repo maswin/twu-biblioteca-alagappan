@@ -2,7 +2,8 @@ package com.twu.biblioteca;
 
 import com.twu.biblioteca.command.menu.QuitCommand;
 import com.twu.biblioteca.model.Library;
-import com.twu.biblioteca.view.BibliotecaView;
+import com.twu.biblioteca.view.BookView;
+import com.twu.biblioteca.view.ConsoleView;
 import com.twu.biblioteca.view.MenuView;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,15 +17,17 @@ import static org.mockito.Mockito.when;
 
 public class BibliotecaTest {
 
-    private BibliotecaView bibliotecaView;
+    private BookView bookView;
     private MenuView menuView;
+    private ConsoleView consoleView;
     private Library library;
     private Map<Integer, String> menuOptions;
 
     @Before
     public void setUp() throws Exception {
-        bibliotecaView = Mockito.mock(BibliotecaView.class);
+        bookView = Mockito.mock(BookView.class);
         menuView = Mockito.mock(MenuView.class);
+        consoleView = Mockito.mock(ConsoleView.class);
         menuOptions = new HashMap<>();
         //List<Book> bookList = new ArrayList<>();
         library = Mockito.mock(Library.class);
@@ -32,18 +35,18 @@ public class BibliotecaTest {
 
     @Test
     public void shouldDisplayWelcomeMessageWhenApplicationIsStarted() {
-        Biblioteca biblioteca = new Biblioteca(library, menuOptions, bibliotecaView, menuView);
+        Biblioteca biblioteca = new Biblioteca(library, menuOptions, bookView, menuView, consoleView);
         when(menuView.getMenuOption()).thenReturn(new QuitCommand());
         biblioteca.start();
-        verify(bibliotecaView).printWelcomeMessage();
+        verify(consoleView).printWelcomeMessage();
     }
 
     @Test
     public void shouldDisplayMenuAfterWelcomeMessage() {
         when(menuView.getMenuOption()).thenReturn(new QuitCommand());
-        Biblioteca biblioteca = new Biblioteca(library, menuOptions, bibliotecaView, menuView);
+        Biblioteca biblioteca = new Biblioteca(library, menuOptions, bookView, menuView, consoleView);
         biblioteca.start();
-        verify(bibliotecaView).printWelcomeMessage();
+        verify(consoleView).printWelcomeMessage();
         verify(menuView).displayMenu(menuOptions);
     }
 

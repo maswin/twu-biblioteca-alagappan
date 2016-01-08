@@ -1,20 +1,20 @@
 package com.twu.biblioteca.command.menu;
 
 import com.twu.biblioteca.model.Library;
-import com.twu.biblioteca.view.BibliotecaView;
+import com.twu.biblioteca.view.BookView;
 
 public class DisplayBooksCommand implements MenuCommand {
 
-    private final BibliotecaView bibliotecaView;
+    private final BookView bookView;
     private final Library library;
 
-    public DisplayBooksCommand(BibliotecaView bibliotecaView, Library library) {
-        this.bibliotecaView = bibliotecaView;
+    public DisplayBooksCommand(BookView bookView, Library library) {
+        this.bookView = bookView;
         this.library = library;
     }
 
     @Override
     public void performCommand() throws Exception {
-        bibliotecaView.printBooks(library.getListOfAvailableBookDTO());
+        bookView.printBooks(library.getListOfAvailableBookDTO());
     }
 }

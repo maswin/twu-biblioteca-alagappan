@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class BibliotecaViewTest {
+public class BookViewTest {
 
     private OutputWriter outputWriter;
     private InputReader inputReader;
@@ -25,22 +25,15 @@ public class BibliotecaViewTest {
     }
 
     @Test
-    public void shouldPrintWelcomeMessage() {
-        BibliotecaView bibliotecaView = new BibliotecaView("Welcome to com.twu.biblioteca.Biblioteca !!", outputWriter, inputReader);
-        bibliotecaView.printWelcomeMessage();
-        verify(outputWriter).println("Welcome to com.twu.biblioteca.Biblioteca !!");
-    }
-
-    @Test
     public void shouldPrintListOfBooks() {
         OutputWriter outputWriter = Mockito.mock(OutputWriter.class);
-        BibliotecaView bibliotecaView = new BibliotecaView("Welcome to com.twu.biblioteca.Biblioteca !!", outputWriter, inputReader);
+        BookView bookView = new BookView(outputWriter, inputReader);
         List<BookDTO> books = new ArrayList<>();
         BookDTO book1 = Mockito.mock(BookDTO.class);
         books.add(book1);
         BookDTO book2 = Mockito.mock(BookDTO.class);
         books.add(book2);
-        bibliotecaView.printBooks(books);
+        bookView.printBooks(books);
 
         verify(outputWriter).println("List Of Books Available");
         verify(outputWriter).println(String.format("%-12s %-25s %-20s %s", "ISBN", "Book Name", "Author Name", "Year"));
@@ -52,39 +45,39 @@ public class BibliotecaViewTest {
 
     @Test
     public void shouldGetBookIdFromUser() {
-        BibliotecaView bibliotecaView = new BibliotecaView("Welcome to com.twu.biblioteca.Biblioteca !!", outputWriter, inputReader);
+        BookView bookView = new BookView(outputWriter, inputReader);
 
         when(inputReader.readInt()).thenReturn(2);
-        assertEquals(2, bibliotecaView.getBookId());
+        assertEquals(2, bookView.getBookId());
         verify(outputWriter).println("Enter Book ISBN :");
 
     }
 
     @Test
     public void shouldPrintSuccessBookCheckoutMessage() throws Exception {
-        BibliotecaView bibliotecaView = new BibliotecaView("Welcome to com.twu.biblioteca.Biblioteca !!", outputWriter, inputReader);
-        bibliotecaView.printSuccessfulBookCheckoutMessage();
+        BookView bookView = new BookView(outputWriter, inputReader);
+        bookView.printSuccessfulBookCheckoutMessage();
         verify(outputWriter).println("Thank you! Enjoy the book");
     }
 
     @Test
     public void shouldPrintUnSuccessBookCheckoutMessage() throws Exception {
-        BibliotecaView bibliotecaView = new BibliotecaView("Welcome to com.twu.biblioteca.Biblioteca !!", outputWriter, inputReader);
-        bibliotecaView.printUnSuccessfulBookCheckoutMessage();
+        BookView bookView = new BookView(outputWriter, inputReader);
+        bookView.printUnSuccessfulBookCheckoutMessage();
         verify(outputWriter).println("That book is not available.");
     }
 
     @Test
     public void shouldPrintSuccessBookCheckinMessage() throws Exception {
-        BibliotecaView bibliotecaView = new BibliotecaView("Welcome to com.twu.biblioteca.Biblioteca !!", outputWriter, inputReader);
-        bibliotecaView.printSuccessfulBookCheckInMessage();
+        BookView bookView = new BookView(outputWriter, inputReader);
+        bookView.printSuccessfulBookCheckInMessage();
         verify(outputWriter).println("Thank you for returning the book.");
     }
 
     @Test
     public void shouldPrintUnSuccessBookCheckinMessage() throws Exception {
-        BibliotecaView bibliotecaView = new BibliotecaView("Welcome to com.twu.biblioteca.Biblioteca !!", outputWriter, inputReader);
-        bibliotecaView.printUnSuccessfulBookCheckInMessage();
+        BookView bookView = new BookView(outputWriter, inputReader);
+        bookView.printUnSuccessfulBookCheckInMessage();
         verify(outputWriter).println("That is not a valid book to return.");
     }
 }
