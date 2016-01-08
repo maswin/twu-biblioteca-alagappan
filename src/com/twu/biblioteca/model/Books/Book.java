@@ -49,7 +49,7 @@ public class Book {
 
     public boolean isIsbnOfThisBookType(int isbn) {
         for(Copy copy : copies) {
-            if(copy.getIsbn() == isbn) {
+            if(copy.isSameIsbn(isbn)) {
                 return true;
             }
         }
@@ -58,7 +58,7 @@ public class Book {
 
     private Copy findBookCopyByIsbn(int isbn) {
         for(Copy copy : copies) {
-            if(copy.getIsbn() == isbn) {
+            if(copy.isSameIsbn(isbn)) {
                 return copy;
             }
         }
