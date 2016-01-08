@@ -8,9 +8,11 @@ import java.util.*;
 
 public class Library {
     private List<Book> books;
+    private List<Movie> movies;
 
-    public Library(List<Book> books) {
+    public Library(List<Book> books, List<Movie> movies) {
         this.books = books;
+        this.movies = movies;
     }
 
     private Book findBookCopyByIsbn(int isbn) {
@@ -49,5 +51,9 @@ public class Library {
         } else {
             throw new BookCopyProcessingException("Requested Book Copy UnAvailable");
         }
+    }
+
+    public List<Movie> getListOfAvailableMovies() {
+        return movies;
     }
 }

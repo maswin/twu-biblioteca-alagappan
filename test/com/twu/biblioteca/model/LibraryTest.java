@@ -37,7 +37,7 @@ public class LibraryTest {
         Book book = Mockito.mock(Book.class);
         when(book.isIsbnOfThisBookType(isbn)).thenReturn(true);
         books.add(book);
-        Library library = new Library(books);
+        Library library = new Library(books, new ArrayList<>());
         library.checkOutBookCopy(isbn);
         verify(book).checkOutACopyByIsbn(isbn);
     }
@@ -50,7 +50,7 @@ public class LibraryTest {
         Book book = Mockito.mock(Book.class);
         when(book.isIsbnOfThisBookType(isbn)).thenReturn(false);
         books.add(book);
-        Library library = new Library(books);
+        Library library = new Library(books, new ArrayList<>());
         library.checkOutBookCopy(isbn);
     }
 
@@ -60,7 +60,7 @@ public class LibraryTest {
         Book book = Mockito.mock(Book.class);
         when(book.isIsbnOfThisBookType(isbn)).thenReturn(true);
         books.add(book);
-        Library library = new Library(books);
+        Library library = new Library(books, new ArrayList<>());
         library.checkInBookCopy(isbn);
         verify(book).checkInACopyByIsbn(isbn);
     }
@@ -73,7 +73,7 @@ public class LibraryTest {
         Book book = Mockito.mock(Book.class);
         when(book.isIsbnOfThisBookType(isbn)).thenReturn(false);
         books.add(book);
-        Library library = new Library(books);
+        Library library = new Library(books, new ArrayList<>());
         library.checkInBookCopy(isbn);
     }
 
