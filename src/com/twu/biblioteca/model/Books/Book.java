@@ -3,6 +3,7 @@ package com.twu.biblioteca.model.Books;
 import com.twu.biblioteca.DTO.BookDTO;
 import com.twu.biblioteca.Exception.BookCopyProcessingException;
 
+import java.util.Optional;
 import java.util.Set;
 
 public class Book {
@@ -26,20 +27,13 @@ public class Book {
     }
 
     public boolean isAnyCopyAvailableUnBorrowed() {
-        
-        for(Copy copy : copies) {
-            if(!copy.isBorrowed()) {
-                return true;
-            }
-        }
-        return false;
+        return copies.stream().anyMatch(copy -> !copy.isBorrowed());
     }
 
     private Copy getAnyUnBorrowedCopy() throws BookCopyProcessingException {
-        for(Copy copy : copies) {
-            if(!copy.isBorrowed()) {
-                return copy;
-            }
+        Optional<Copy> foundCopy = copies.stream().filter(copy -> !copy.isBorrowed()).findFirst();
+        if(foundCopy.isPresent()) {
+            return foundCopy.get();
         }
         throw new BookCopyProcessingException("No Book Copy Available");
     }
@@ -49,19 +43,13 @@ public class Book {
     }
 
     public boolean isIsbnOfThisBookType(int isbn) {
-        for(Copy copy : copies) {
-            if(copy.isSameIsbn(isbn)) {
-                return true;
-            }
-        }
-        return false;
+        return copies.stream().anyMatch(copy -> copy.isSameIsbn(isbn));
     }
 
     private Copy findBookCopyByIsbn(int isbn) {
-        for(Copy copy : copies) {
-            if(copy.isSameIsbn(isbn)) {
-                return copy;
-            }
+        Optional<Copy> foundCopy = copies.stream().filter(copy -> copy.isSameIsbn(isbn)).findFirst();
+        if(foundCopy.isPresent()) {
+            return foundCopy.get();
         }
         return null;
     }

@@ -14,10 +14,9 @@ public class Library {
     }
 
     private Book findBookCopyByIsbn(int isbn) {
-        for(Book book : books) {
-            if(book.isIsbnOfThisBookType(isbn)) {
-                return book;
-            }
+        Optional<Book> foundBook = books.stream().filter(book -> book.isIsbnOfThisBookType(isbn)).findFirst();
+        if(foundBook.isPresent()) {
+            return foundBook.get();
         }
         return null;
     }
@@ -33,12 +32,13 @@ public class Library {
 
     public List<BookDTO> getListOfAvailableBookDTO() throws BookCopyProcessingException {
         List<BookDTO> bookDTOs = new ArrayList<>();
-        for(Book book : books) {
-            if(book.isAnyCopyAvailableUnBorrowed()) {
-                BookDTO bookDTO = book.createBookDTO();
-                bookDTOs.add(bookDTO);
+        books.stream().filter(Book::isAnyCopyAvailableUnBorrowed).forEach(book -> {
+            try {
+                bookDTOs.add(book.createBookDTO());
+            } catch (BookCopyProcessingException e) {
+                e.printStackTrace();
             }
-        }
+        });
         return bookDTOs;
     }
 
