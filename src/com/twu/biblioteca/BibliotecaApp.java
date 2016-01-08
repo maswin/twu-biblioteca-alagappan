@@ -2,7 +2,7 @@ package com.twu.biblioteca;
 
 import com.twu.biblioteca.controller.Biblioteca;
 import com.twu.biblioteca.model.Books.Book;
-import com.twu.biblioteca.model.Books.Copy;
+import com.twu.biblioteca.model.Copy;
 import com.twu.biblioteca.InputOutput.InputReader;
 import com.twu.biblioteca.InputOutput.OutputWriter;
 import com.twu.biblioteca.command.menu.*;
@@ -33,7 +33,7 @@ public class BibliotecaApp {
                 new HashSet<>(Arrays.asList(new Copy(2345, false), new Copy(6789, false)))));
         bookList.add(new Book(3, "Half Girl Friend", "Chetan Bhagat", 2014,
                 new HashSet<>(Arrays.asList(new Copy(3457, false), new Copy(7890, false)))));
-        Library library = new Library(bookList, new ArrayList<>());
+        Library library = new Library(bookList);
 
 
         Map<Integer, MenuCommand> menuCommands = new HashMap<>();

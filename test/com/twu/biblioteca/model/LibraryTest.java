@@ -1,7 +1,6 @@
 package com.twu.biblioteca.model;
 
 import com.twu.biblioteca.model.Books.Book;
-import com.twu.biblioteca.model.Books.Copy;
 import com.twu.biblioteca.Exception.BookCopyProcessingException;
 import org.junit.Before;
 import org.junit.Rule;
@@ -35,9 +34,9 @@ public class LibraryTest {
     public void shouldCheckOutBookCopyWhenBookIsAvailable() throws BookCopyProcessingException {
         int isbn = 2345;
         Book book = Mockito.mock(Book.class);
-        when(book.isIsbnOfThisBookType(isbn)).thenReturn(true);
+        when(book.isIsbnOfThisItemType(isbn)).thenReturn(true);
         books.add(book);
-        Library library = new Library(books, new ArrayList<>());
+        Library library = new Library(books);
         library.checkOutBookCopy(isbn);
         verify(book).checkOutACopyByIsbn(isbn);
     }
@@ -48,9 +47,9 @@ public class LibraryTest {
         expected.expectMessage("Requested Book Copy UnAvailable");
         int isbn = 2345;
         Book book = Mockito.mock(Book.class);
-        when(book.isIsbnOfThisBookType(isbn)).thenReturn(false);
+        when(book.isIsbnOfThisItemType(isbn)).thenReturn(false);
         books.add(book);
-        Library library = new Library(books, new ArrayList<>());
+        Library library = new Library(books);
         library.checkOutBookCopy(isbn);
     }
 
@@ -58,9 +57,9 @@ public class LibraryTest {
     public void shouldCheckInBookCopyWhenBookIsBorrowed() throws BookCopyProcessingException {
         int isbn = 2345;
         Book book = Mockito.mock(Book.class);
-        when(book.isIsbnOfThisBookType(isbn)).thenReturn(true);
+        when(book.isIsbnOfThisItemType(isbn)).thenReturn(true);
         books.add(book);
-        Library library = new Library(books, new ArrayList<>());
+        Library library = new Library(books);
         library.checkInBookCopy(isbn);
         verify(book).checkInACopyByIsbn(isbn);
     }
@@ -71,9 +70,9 @@ public class LibraryTest {
         expected.expectMessage("Requested Book Copy UnAvailable");
         int isbn = 2345;
         Book book = Mockito.mock(Book.class);
-        when(book.isIsbnOfThisBookType(isbn)).thenReturn(false);
+        when(book.isIsbnOfThisItemType(isbn)).thenReturn(false);
         books.add(book);
-        Library library = new Library(books, new ArrayList<>());
+        Library library = new Library(books);
         library.checkInBookCopy(isbn);
     }
 

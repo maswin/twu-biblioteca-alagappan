@@ -1,5 +1,6 @@
 package com.twu.biblioteca.model.Books;
 
+import com.twu.biblioteca.model.Copy;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertFalse;

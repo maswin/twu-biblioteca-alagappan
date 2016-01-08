@@ -8,15 +8,13 @@ import java.util.*;
 
 public class Library {
     private List<Book> books;
-    private List<Movie> movies;
 
-    public Library(List<Book> books, List<Movie> movies) {
+    public Library(List<Book> books) {
         this.books = books;
-        this.movies = movies;
     }
 
     private Book findBookCopyByIsbn(int isbn) {
-        Optional<Book> foundBook = books.stream().filter(book -> book.isIsbnOfThisBookType(isbn)).findFirst();
+        Optional<Book> foundBook = books.stream().filter(book -> book.isIsbnOfThisItemType(isbn)).findFirst();
         if(foundBook.isPresent()) {
             return foundBook.get();
         }
@@ -53,7 +51,4 @@ public class Library {
         }
     }
 
-    public List<Movie> getListOfAvailableMovies() {
-        return movies;
-    }
 }

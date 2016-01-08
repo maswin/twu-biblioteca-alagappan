@@ -1,4 +1,4 @@
-package com.twu.biblioteca.model.Books;
+package com.twu.biblioteca.model;
 
 public class Copy {
 
