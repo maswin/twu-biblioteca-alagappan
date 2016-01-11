@@ -1,7 +1,7 @@
 package com.twu.biblioteca.model;
 
 import com.twu.biblioteca.model.Books.Book;
-import com.twu.biblioteca.Exception.BookCopyProcessingException;
+import com.twu.biblioteca.Exception.LibraryItemProcessingException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -31,7 +31,7 @@ public class LibraryTest {
     public ExpectedException expected = ExpectedException.none();
 
     @Test
-    public void shouldCheckOutBookCopyWhenBookIsAvailable() throws BookCopyProcessingException {
+    public void shouldCheckOutBookCopyWhenBookIsAvailable() throws LibraryItemProcessingException {
         int isbn = 2345;
         Book book = Mockito.mock(Book.class);
         when(book.isIsbnOfThisItemType(isbn)).thenReturn(true);
@@ -42,8 +42,8 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldThrowExceptionWhenCheckOutBookCopyIsUnAvailable() throws BookCopyProcessingException {
-        expected.expect(BookCopyProcessingException.class);
+    public void shouldThrowExceptionWhenCheckOutBookCopyIsUnAvailable() throws LibraryItemProcessingException {
+        expected.expect(LibraryItemProcessingException.class);
         expected.expectMessage("Requested Book Copy UnAvailable");
         int isbn = 2345;
         Book book = Mockito.mock(Book.class);
@@ -54,7 +54,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldCheckInBookCopyWhenBookIsBorrowed() throws BookCopyProcessingException {
+    public void shouldCheckInBookCopyWhenBookIsBorrowed() throws LibraryItemProcessingException {
         int isbn = 2345;
         Book book = Mockito.mock(Book.class);
         when(book.isIsbnOfThisItemType(isbn)).thenReturn(true);
@@ -65,8 +65,8 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldThrowExceptionWhenCheckInBookCopyIsUnAvailable() throws BookCopyProcessingException {
-        expected.expect(BookCopyProcessingException.class);
+    public void shouldThrowExceptionWhenCheckInBookCopyIsUnAvailable() throws LibraryItemProcessingException {
+        expected.expect(LibraryItemProcessingException.class);
         expected.expectMessage("Requested Book Copy UnAvailable");
         int isbn = 2345;
         Book book = Mockito.mock(Book.class);

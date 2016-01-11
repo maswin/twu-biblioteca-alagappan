@@ -1,7 +1,7 @@
 package com.twu.biblioteca.model.Books;
 
 import com.twu.biblioteca.DTO.BookDTO;
-import com.twu.biblioteca.Exception.BookCopyProcessingException;
+import com.twu.biblioteca.Exception.LibraryItemProcessingException;
 import com.twu.biblioteca.model.Copy;
 import com.twu.biblioteca.model.LibraryItem;
 
@@ -15,7 +15,7 @@ public class Book extends LibraryItem {
         this.authorName = authorName;
     }
 
-    public BookDTO createBookDTO() throws BookCopyProcessingException {
+    public BookDTO createBookDTO() throws LibraryItemProcessingException {
         return new BookDTO(getAnyUnBorrowedCopy().getIsbn(), name, authorName, year);
     }
 

@@ -1,6 +1,6 @@
 package com.twu.biblioteca.model;
 
-import com.twu.biblioteca.Exception.BookCopyProcessingException;
+import com.twu.biblioteca.Exception.LibraryItemProcessingException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -49,7 +49,7 @@ public class LibraryItemTest {
     }
 
     @Test
-    public void shouldCheckOutALibraryItemCopyByIsbnWhenAvailable() throws BookCopyProcessingException {
+    public void shouldCheckOutALibraryItemCopyByIsbnWhenAvailable() throws LibraryItemProcessingException {
         Copy copy = new Copy(2345, false);
         copies.add(copy);
         LibraryItem LibraryItem = new LibraryItem(0, "Harry Potter", 2005, copies){};
@@ -58,8 +58,8 @@ public class LibraryItemTest {
     }
 
     @Test
-    public void shouldThrowExceptionWhenLibraryItemCopyIsAlreadyBorrowedWhileCheckingOut() throws BookCopyProcessingException {
-        expected.expect(BookCopyProcessingException.class);
+    public void shouldThrowExceptionWhenLibraryItemCopyIsAlreadyBorrowedWhileCheckingOut() throws LibraryItemProcessingException {
+        expected.expect(LibraryItemProcessingException.class);
         expected.expectMessage("Requested LibraryItem Copy Already Borrowed");
         Copy copy = new Copy(2345, true);
         copies.add(copy);
@@ -68,15 +68,15 @@ public class LibraryItemTest {
     }
 
     @Test
-    public void shouldThrowExceptionWhenLibraryItemCopyIsNotAvailableWhileCheckingOut() throws BookCopyProcessingException {
-        expected.expect(BookCopyProcessingException.class);
+    public void shouldThrowExceptionWhenLibraryItemCopyIsNotAvailableWhileCheckingOut() throws LibraryItemProcessingException {
+        expected.expect(LibraryItemProcessingException.class);
         expected.expectMessage("Requested LibraryItem Copy UnAvailable");
         LibraryItem LibraryItem = new LibraryItem(0, "Harry Potter", 2005, copies){};
         LibraryItem.checkOutACopyByIsbn(2345);
     }
 
     @Test
-    public void shouldCheckInALibraryItemCopyByIsbn() throws BookCopyProcessingException {
+    public void shouldCheckInALibraryItemCopyByIsbn() throws LibraryItemProcessingException {
         Copy copy = new Copy(2345, true);
         copies.add(copy);
         LibraryItem LibraryItem = new LibraryItem(0, "Harry Potter", 2005, copies){};
@@ -85,8 +85,8 @@ public class LibraryItemTest {
     }
 
     @Test
-    public void shouldThrowExceptionWhenLibraryItemCopyIsNotBorrowedWhileCheckingIn() throws BookCopyProcessingException {
-        expected.expect(BookCopyProcessingException.class);
+    public void shouldThrowExceptionWhenLibraryItemCopyIsNotBorrowedWhileCheckingIn() throws LibraryItemProcessingException {
+        expected.expect(LibraryItemProcessingException.class);
         expected.expectMessage("Requested LibraryItem Copy Was Not Borrowed");
         Copy copy = new Copy(2345, false);
         copies.add(copy);
@@ -95,8 +95,8 @@ public class LibraryItemTest {
     }
 
     @Test
-    public void shouldThrowExceptionWhenLibraryItemCopyIsNotAvailableWhileCheckingIn() throws BookCopyProcessingException {
-        expected.expect(BookCopyProcessingException.class);
+    public void shouldThrowExceptionWhenLibraryItemCopyIsNotAvailableWhileCheckingIn() throws LibraryItemProcessingException {
+        expected.expect(LibraryItemProcessingException.class);
         expected.expectMessage("Requested LibraryItem Copy UnAvailable");
         LibraryItem LibraryItem = new LibraryItem(0, "Harry Potter", 2005, copies){};
         LibraryItem.checkOutACopyByIsbn(2345);

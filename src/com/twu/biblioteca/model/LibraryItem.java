@@ -1,6 +1,6 @@
 package com.twu.biblioteca.model;
 
-import com.twu.biblioteca.Exception.BookCopyProcessingException;
+import com.twu.biblioteca.Exception.LibraryItemProcessingException;
 
 import java.util.Optional;
 import java.util.Set;
@@ -18,12 +18,12 @@ public abstract class LibraryItem {
         this.copies = copies;
     }
 
-    protected Copy getAnyUnBorrowedCopy() throws BookCopyProcessingException {
+    protected Copy getAnyUnBorrowedCopy() throws LibraryItemProcessingException {
         Optional<Copy> foundCopy = copies.stream().filter(copy -> !copy.isBorrowed()).findFirst();
         if(foundCopy.isPresent()) {
             return foundCopy.get();
         }
-        throw new BookCopyProcessingException("No LibraryItem Copy Available");
+        throw new LibraryItemProcessingException("No LibraryItem Copy Available");
     }
 
     public boolean isAnyCopyAvailableUnBorrowed() {
@@ -42,24 +42,24 @@ public abstract class LibraryItem {
         return null;
     }
 
-    public void checkOutACopyByIsbn(int isbn) throws BookCopyProcessingException {
+    public void checkOutACopyByIsbn(int isbn) throws LibraryItemProcessingException {
         Copy copy = findCopyByIsbn(isbn);
         if(copy == null) {
-            throw new BookCopyProcessingException("Requested LibraryItem Copy UnAvailable");
+            throw new LibraryItemProcessingException("Requested LibraryItem Copy UnAvailable");
         }
         if(copy.isBorrowed()) {
-            throw new BookCopyProcessingException("Requested LibraryItem Copy Already Borrowed");
+            throw new LibraryItemProcessingException("Requested LibraryItem Copy Already Borrowed");
         }
         copy.checkOut();
     }
 
-    public void checkInACopyByIsbn(int isbn) throws BookCopyProcessingException {
+    public void checkInACopyByIsbn(int isbn) throws LibraryItemProcessingException {
         Copy copy = findCopyByIsbn(isbn);
         if(copy == null) {
-            throw new BookCopyProcessingException("Requested LibraryItem Copy UnAvailable");
+            throw new LibraryItemProcessingException("Requested LibraryItem Copy UnAvailable");
         }
         if(!copy.isBorrowed()) {
-            throw new BookCopyProcessingException("Requested LibraryItem Copy Was Not Borrowed");
+            throw new LibraryItemProcessingException("Requested LibraryItem Copy Was Not Borrowed");
         }
         copy.checkIn();
     }

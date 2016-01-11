@@ -1,11 +1,10 @@
-package com.twu.biblioteca.model.Books;
+package com.twu.biblioteca.model.Movies;
 
-import com.twu.biblioteca.DTO.BookDTO;
+import com.twu.biblioteca.DTO.MovieDTO;
 import com.twu.biblioteca.Exception.LibraryItemProcessingException;
 import com.twu.biblioteca.model.Copy;
 import org.junit.Test;
 import org.mockito.Mockito;
-
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,24 +12,23 @@ import java.util.Set;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
-public class BookTest {
+public class MovieTest {
 
     @Test
-    public void shouldGenerateBookDTO() throws LibraryItemProcessingException {
+    public void shouldGenerateMovieDTO() throws LibraryItemProcessingException {
         Copy copy = Mockito.mock(Copy.class);
         when(copy.isBorrowed()).thenReturn(false);
         when(copy.getIsbn()).thenReturn(1234);
         Set<Copy> copies = new HashSet<>();
         copies.add(copy);
 
-        Book book = new Book(21, "book1", "author1", 2012, copies);
+        Movie movie = new Movie(21, "movie1", "director1", 2010, 5, copies);
 
-        BookDTO bookDTO = book.createBookDTO();
+        MovieDTO movieDTO = movie.createMovieDTO();
 
-        assertEquals("book1", bookDTO.getName());
-        assertEquals("author1", bookDTO.getAuthorName());
-        assertEquals(2012, bookDTO.getYearPublished());
-        assertEquals(1234, bookDTO.getIsbn());
+        assertEquals("movie1", movieDTO.getName());
+        assertEquals("director1", movieDTO.getDirectorName());
+        assertEquals(2010, movieDTO.getYear());
+        assertEquals(1234, movieDTO.getIsbn());
     }
-
 }

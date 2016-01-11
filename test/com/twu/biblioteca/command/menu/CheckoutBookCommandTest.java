@@ -1,6 +1,6 @@
 package com.twu.biblioteca.command.menu;
 
-import com.twu.biblioteca.Exception.BookCopyProcessingException;
+import com.twu.biblioteca.Exception.LibraryItemProcessingException;
 import com.twu.biblioteca.model.Library;
 import com.twu.biblioteca.view.BookView;
 import org.junit.Test;
@@ -32,7 +32,7 @@ public class CheckOutBookCommandTest {
         BookView bookView = Mockito.mock(BookView.class);
         int isbn = 12;
         when(bookView.getBookId()).thenReturn(isbn);
-        doThrow(new BookCopyProcessingException("Book Copy Unavailable")).when(library).checkOutBookCopy(isbn);
+        doThrow(new LibraryItemProcessingException("Book Copy Unavailable")).when(library).checkOutBookCopy(isbn);
         MenuCommand menuCommand = new CheckOutBookCommand(bookView, library);
 
         menuCommand.performCommand();

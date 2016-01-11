@@ -1,6 +1,6 @@
 package com.twu.biblioteca.command.menu;
 
-import com.twu.biblioteca.Exception.BookCopyProcessingException;
+import com.twu.biblioteca.Exception.LibraryItemProcessingException;
 import com.twu.biblioteca.model.Library;
 import com.twu.biblioteca.view.BookView;
 
@@ -18,7 +18,7 @@ public class CheckOutBookCommand implements MenuCommand {
         try {
             library.checkOutBookCopy(bookId);
             bookView.printSuccessfulBookCheckoutMessage();
-        } catch (BookCopyProcessingException e) {
+        } catch (LibraryItemProcessingException e) {
             bookView.printUnSuccessfulBookCheckoutMessage();
         }
     }
