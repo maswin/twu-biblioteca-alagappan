@@ -17,18 +17,27 @@ public class Library {
         this.movies = movies;
     }
 
-    private Book findBookCopyByIsbn(int isbn) {
-        Optional<Book> foundBook = books.stream().filter(book -> book.isIsbnOfThisItemType(isbn)).findFirst();
-        if(foundBook.isPresent()) {
-            return foundBook.get();
+    private LibraryItem findItemCopyByIsbn(int isbn, List<? extends LibraryItem> items) {
+        Optional<? extends LibraryItem> foundItem = items.stream().filter(item -> item.isIsbnOfThisItemType(isbn)).findFirst();
+        if(foundItem.isPresent()) {
+            return foundItem.get();
         }
         return null;
     }
 
-    public void checkOutBookCopy(int isbn) throws LibraryItemProcessingException {
-        Book book = findBookCopyByIsbn(isbn);
-        if(book != null) {
-            book.checkOutACopyByIsbn(isbn);
+    private void checkOutItemCopy(int isbn, List<? extends LibraryItem> items) throws LibraryItemProcessingException {
+        LibraryItem item = findItemCopyByIsbn(isbn, items);
+        if(item != null) {
+            item.checkOutACopyByIsbn(isbn);
+        } else {
+            throw new LibraryItemProcessingException("Requested Book Copy UnAvailable");
+        }
+    }
+
+    private void checkInItemCopy(int isbn, List<? extends LibraryItem> items) throws LibraryItemProcessingException {
+        LibraryItem item = findItemCopyByIsbn(isbn, items);
+        if(item != null) {
+            item.checkInACopyByIsbn(isbn);
         } else {
             throw new LibraryItemProcessingException("Requested Book Copy UnAvailable");
         }
@@ -46,13 +55,12 @@ public class Library {
         return bookDTOs;
     }
 
+    public void checkOutBookCopy(int isbn) throws LibraryItemProcessingException {
+        checkOutItemCopy(isbn, books);
+    }
+
     public void checkInBookCopy(int isbn) throws LibraryItemProcessingException {
-        Book book = findBookCopyByIsbn(isbn);
-        if(book != null) {
-            book.checkInACopyByIsbn(isbn);
-        } else {
-            throw new LibraryItemProcessingException("Requested Book Copy UnAvailable");
-        }
+        checkInItemCopy(isbn, books);
     }
 
     public List<MovieDTO> getListOfAvailableMovieDTO() {
@@ -66,4 +74,6 @@ public class Library {
         });
         return movieDTOs;
     }
+
+
 }

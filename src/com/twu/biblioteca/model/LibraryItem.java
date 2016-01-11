@@ -63,4 +63,5 @@ public abstract class LibraryItem {
         }
         copy.checkIn();
     }
+
 }
