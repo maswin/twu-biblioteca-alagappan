@@ -39,5 +39,4 @@ public class CheckOutBookCommandTest {
 
         verify(bookView).printUnSuccessfulBookCheckoutMessage();
     }
-
 }

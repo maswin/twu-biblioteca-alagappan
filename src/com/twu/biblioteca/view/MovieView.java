@@ -35,4 +35,19 @@ public class MovieView {
         }
         return rating;
     }
+
+    //TO DO
+    public int getMovieId() {
+        return 0;
+    }
+
+    //TO DO
+    public void printSuccessfulMovieCheckoutMessage() {
+
+    }
+
+    //TO DO
+    public void printUnSuccessfulMovieCheckoutMessage() {
+
+    }
 }
