@@ -36,18 +36,16 @@ public class MovieView {
         return rating;
     }
 
-    //TO DO
     public int getMovieId() {
-        return 0;
+        outputWriter.println("Enter Movie ISBN :");
+        return inputReader.readInt();
     }
 
-    //TO DO
     public void printSuccessfulMovieCheckoutMessage() {
-
+        outputWriter.println("Thank you! Enjoy the movie");
     }
 
-    //TO DO
     public void printUnSuccessfulMovieCheckoutMessage() {
-
+        outputWriter.println("That movie is not available.");
     }
 }

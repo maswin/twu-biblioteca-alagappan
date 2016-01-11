@@ -10,6 +10,7 @@ import org.mockito.Mockito;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -43,5 +44,29 @@ public class MovieViewTest {
                 movie1.getName(), movie1.getDirectorName(), movie1.getYear(), "Unrated"));
         verify(outputWriter).println(String.format("%-12d %-25s %-20s %d", movie2.getIsbn(),
                 movie2.getName(), movie2.getDirectorName(), movie2.getYear(), "5"));
+    }
+
+    @Test
+    public void shouldGetMovieIdFromUser() {
+        MovieView movieView = new MovieView(outputWriter, inputReader);
+
+        when(inputReader.readInt()).thenReturn(2);
+        assertEquals(2, movieView.getMovieId());
+        verify(outputWriter).println("Enter Movie ISBN :");
+
+    }
+
+    @Test
+    public void shouldPrintSuccessMoveCheckoutMessage() throws Exception {
+        MovieView movieView = new MovieView(outputWriter, inputReader);
+        movieView.printSuccessfulMovieCheckoutMessage();
+        verify(outputWriter).println("Thank you! Enjoy the movie");
+    }
+
+    @Test
+    public void shouldPrintUnSuccessMovieCheckoutMessage() throws Exception {
+        MovieView movieView = new MovieView(outputWriter, inputReader);
+        movieView.printUnSuccessfulMovieCheckoutMessage();
+        verify(outputWriter).println("That movie is not available.");
     }
 }
