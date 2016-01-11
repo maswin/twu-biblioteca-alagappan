@@ -25,10 +25,11 @@ public class BibliotecaApp {
 
         Map<Integer, String> menuOptions = new HashMap<>();
         menuOptions.put(1, "List of Books");
-        menuOptions.put(2, "Checkout Book");
+        menuOptions.put(2, "CheckOut Book");
         menuOptions.put(3, "CheckIn Book");
         menuOptions.put(4, "List of Movies");
-        menuOptions.put(5, "Quit");
+        menuOptions.put(5, "CheckOut Movie");
+        menuOptions.put(6, "Quit");
 
         List<Book> books = new ArrayList<>();
         books.add(new Book(1, "Harry Potter", "J.K.Rowling", 2005,
@@ -41,11 +42,11 @@ public class BibliotecaApp {
 
         List<Movie> movies = new ArrayList<>();
         movies.add(new Movie(11, "Jurassic park", "Steven Speilberg", 1994, 7,
-                new HashSet<>(Arrays.asList(new Copy(5234, false)))));
+                new HashSet<>(Arrays.asList(new Copy(5234, false))), "genre"));
         movies.add(new Movie(12, "Prestige", "Nolan", 2008, null,
-                new HashSet<>(Arrays.asList(new Copy(5345, false), new Copy(5789, false)))));
+                new HashSet<>(Arrays.asList(new Copy(5345, false), new Copy(5789, false))), "genre"));
         movies.add(new Movie(13, "Endhiran", "Shankar", 2012, 10,
-                new HashSet<>(Arrays.asList(new Copy(5457, false), new Copy(5890, false)))));
+                new HashSet<>(Arrays.asList(new Copy(5457, false), new Copy(5890, false))), "genre"));
 
         Library library = new Library(books, movies);
 
@@ -55,7 +56,8 @@ public class BibliotecaApp {
         menuCommands.put(2, new CheckOutBookCommand(bookView, library));
         menuCommands.put(3, new CheckInBookCommand(bookView, library));
         menuCommands.put(4, new DisplayMoviesCommand(movieView, library));
-        menuCommands.put(5, new QuitCommand());
+        menuCommands.put(5, new CheckOutMovieCommand(movieView, library));
+        menuCommands.put(6, new QuitCommand());
 
 
         Menu menu = new Menu(menuOptions, menuCommands);

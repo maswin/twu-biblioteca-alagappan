@@ -11,7 +11,7 @@ public class Movie extends LibraryItem{
     private final String directorName;
     private final Integer rating;
 
-    public Movie(int movieId, String name, String directorName, int year, Integer rating, Set<Copy> copies) {
+    public Movie(int movieId, String name, String directorName, int year, Integer rating, Set<Copy> copies, String genre) {
         super(movieId, name, year, copies);
         this.directorName = directorName;
         this.rating = rating;

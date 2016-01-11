@@ -22,7 +22,7 @@ public class MovieTest {
         Set<Copy> copies = new HashSet<>();
         copies.add(copy);
 
-        Movie movie = new Movie(21, "movie1", "director1", 2010, 5, copies);
+        Movie movie = new Movie(21, "movie1", "director1", 2010, 5, copies, "genre");
 
         MovieDTO movieDTO = movie.createMovieDTO();
 
@@ -30,5 +30,11 @@ public class MovieTest {
         assertEquals("director1", movieDTO.getDirectorName());
         assertEquals(2010, movieDTO.getYear());
         assertEquals(1234, movieDTO.getIsbn());
+    }
+
+    @Test
+    public void testblah() throws Exception {
+        Movie movie = new Movie(123, "blah", "Alagappan", 2015, 4, new HashSet<>(), "Genre");
+
     }
 }

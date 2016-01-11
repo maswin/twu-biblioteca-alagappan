@@ -18,7 +18,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class LibraryTest {
+public class  LibraryTest {
 
     private List<Book> books;
     private List<Movie> movies;

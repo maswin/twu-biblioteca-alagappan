@@ -18,5 +18,4 @@ public class Book extends LibraryItem {
     public BookDTO createBookDTO() throws LibraryItemProcessingException {
         return new BookDTO(getAnyUnBorrowedCopy().getIsbn(), name, authorName, year);
     }
-
 }
