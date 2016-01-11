@@ -2,6 +2,8 @@ package com.twu.biblioteca.model;
 
 import com.twu.biblioteca.model.Books.Book;
 import com.twu.biblioteca.Exception.LibraryItemProcessingException;
+import com.twu.biblioteca.model.Movies.Movie;
+import com.twu.biblioteca.view.MovieView;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -19,11 +21,13 @@ import static org.mockito.Mockito.when;
 public class LibraryTest {
 
     private List<Book> books;
+    private List<Movie> movies;
     private Set<Copy> copies;
 
     @Before
     public void setUp() throws Exception {
         books = new ArrayList<>();
+        movies = new ArrayList<>();
         copies = new HashSet<>();
     }
 
@@ -44,7 +48,7 @@ public class LibraryTest {
     @Test
     public void shouldThrowExceptionWhenCheckOutBookCopyIsUnAvailable() throws LibraryItemProcessingException {
         expected.expect(LibraryItemProcessingException.class);
-        expected.expectMessage("Requested Book Copy UnAvailable");
+        expected.expectMessage("Requested Item Copy UnAvailable");
         int isbn = 2345;
         Book book = Mockito.mock(Book.class);
         when(book.isIsbnOfThisItemType(isbn)).thenReturn(false);
@@ -67,7 +71,7 @@ public class LibraryTest {
     @Test
     public void shouldThrowExceptionWhenCheckInBookCopyIsUnAvailable() throws LibraryItemProcessingException {
         expected.expect(LibraryItemProcessingException.class);
-        expected.expectMessage("Requested Book Copy UnAvailable");
+        expected.expectMessage("Requested Item Copy UnAvailable");
         int isbn = 2345;
         Book book = Mockito.mock(Book.class);
         when(book.isIsbnOfThisItemType(isbn)).thenReturn(false);
@@ -76,5 +80,27 @@ public class LibraryTest {
         library.checkInBookCopy(isbn);
     }
 
+    @Test
+    public void shouldCheckOutMovieCopyWhenMovieIsAvailable() throws LibraryItemProcessingException {
+        int isbn = 2345;
+        Movie movie = Mockito.mock(Movie.class);
+        when(movie.isIsbnOfThisItemType(isbn)).thenReturn(true);
+        movies.add(movie);
+        Library library = new Library(books, movies);
+        library.checkOutMovieCopy(isbn);
+        verify(movie).checkOutACopyByIsbn(isbn);
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenCheckOutMovieCopyIsUnAvailable() throws LibraryItemProcessingException {
+        expected.expect(LibraryItemProcessingException.class);
+        expected.expectMessage("Requested Item Copy UnAvailable");
+        int isbn = 2345;
+        Movie movie = Mockito.mock(Movie.class);
+        when(movie.isIsbnOfThisItemType(isbn)).thenReturn(false);
+        movies.add(movie);
+        Library library = new Library(books, movies);
+        library.checkOutBookCopy(isbn);
+    }
 
 }

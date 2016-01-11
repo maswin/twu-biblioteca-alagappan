@@ -30,7 +30,7 @@ public class Library {
         if(item != null) {
             item.checkOutACopyByIsbn(isbn);
         } else {
-            throw new LibraryItemProcessingException("Requested Book Copy UnAvailable");
+            throw new LibraryItemProcessingException("Requested Item Copy UnAvailable");
         }
     }
 
@@ -39,7 +39,7 @@ public class Library {
         if(item != null) {
             item.checkInACopyByIsbn(isbn);
         } else {
-            throw new LibraryItemProcessingException("Requested Book Copy UnAvailable");
+            throw new LibraryItemProcessingException("Requested Item Copy UnAvailable");
         }
     }
 
@@ -75,5 +75,7 @@ public class Library {
         return movieDTOs;
     }
 
-
+    public void checkOutMovieCopy(int isbn) throws LibraryItemProcessingException {
+        checkOutItemCopy(isbn, movies);
+    }
 }
