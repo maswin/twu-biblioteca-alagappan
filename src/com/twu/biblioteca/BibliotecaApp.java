@@ -33,7 +33,7 @@ public class BibliotecaApp {
                 new HashSet<>(Arrays.asList(new Copy(2345, false), new Copy(6789, false)))));
         bookList.add(new Book(3, "Half Girl Friend", "Chetan Bhagat", 2014,
                 new HashSet<>(Arrays.asList(new Copy(3457, false), new Copy(7890, false)))));
-        Library library = new Library(bookList);
+        Library library = new Library(bookList, new ArrayList<>());
 
 
         Map<Integer, MenuCommand> menuCommands = new HashMap<>();

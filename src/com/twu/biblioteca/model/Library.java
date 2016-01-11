@@ -1,16 +1,20 @@
 package com.twu.biblioteca.model;
 
+import com.twu.biblioteca.DTO.MovieDTO;
 import com.twu.biblioteca.model.Books.Book;
 import com.twu.biblioteca.DTO.BookDTO;
 import com.twu.biblioteca.Exception.LibraryItemProcessingException;
+import com.twu.biblioteca.model.Movies.Movie;
 
 import java.util.*;
 
 public class Library {
     private List<Book> books;
+    private List<Movie> movies;
 
-    public Library(List<Book> books) {
+    public Library(List<Book> books, List<Movie> movies) {
         this.books = books;
+        this.movies = movies;
     }
 
     private Book findBookCopyByIsbn(int isbn) {
@@ -51,4 +55,15 @@ public class Library {
         }
     }
 
+    public List<MovieDTO> getListOfAvailableMovieDTO() {
+        List<MovieDTO> movieDTOs = new ArrayList<>();
+        movies.stream().filter(Movie::isAnyCopyAvailableUnBorrowed).forEach(movie -> {
+            try {
+                movieDTOs.add(movie.createMovieDTO());
+            } catch (LibraryItemProcessingException e) {
+                e.printStackTrace();
+            }
+        });
+        return movieDTOs;
+    }
 }
