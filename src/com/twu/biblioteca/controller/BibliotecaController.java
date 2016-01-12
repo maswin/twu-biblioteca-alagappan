@@ -7,12 +7,12 @@ import com.twu.biblioteca.view.MenuView;
 
 import java.util.Map;
 
-public class Biblioteca {
+public class BibliotecaController {
     private Map<Integer, String> menuOptions;
     private ConsoleView consoleView;
     private MenuView menuView;
 
-    public Biblioteca(Map<Integer, String> menuOptions, MenuView menuView, ConsoleView consoleView) {
+    public BibliotecaController(Map<Integer, String> menuOptions, MenuView menuView, ConsoleView consoleView) {
         this.menuOptions = menuOptions;
         this.consoleView = consoleView;
         this.menuView = menuView;
