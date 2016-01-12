@@ -3,7 +3,6 @@ package com.twu.biblioteca.model;
 import com.twu.biblioteca.model.Books.Book;
 import com.twu.biblioteca.Exception.LibraryItemProcessingException;
 import com.twu.biblioteca.model.Movies.Movie;
-import com.twu.biblioteca.view.MovieView;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -41,8 +40,8 @@ public class  LibraryTest {
         when(book.isIsbnOfThisItemType(isbn)).thenReturn(true);
         books.add(book);
         Library library = new Library(books, new ArrayList<>());
-        library.checkOutBookCopy(isbn);
-        verify(book).checkOutACopyByIsbn(isbn);
+        library.checkOutBookCopy(isbn, null);
+        verify(book).checkOutACopyByIsbn(isbn, null);
     }
 
     @Test
@@ -54,7 +53,7 @@ public class  LibraryTest {
         when(book.isIsbnOfThisItemType(isbn)).thenReturn(false);
         books.add(book);
         Library library = new Library(books, new ArrayList<>());
-        library.checkOutBookCopy(isbn);
+        library.checkOutBookCopy(isbn, null);
     }
 
     @Test
@@ -88,7 +87,7 @@ public class  LibraryTest {
         movies.add(movie);
         Library library = new Library(books, movies);
         library.checkOutMovieCopy(isbn);
-        verify(movie).checkOutACopyByIsbn(isbn);
+        verify(movie).checkOutACopyByIsbn(isbn, null);
     }
 
     @Test
@@ -100,7 +99,7 @@ public class  LibraryTest {
         when(movie.isIsbnOfThisItemType(isbn)).thenReturn(false);
         movies.add(movie);
         Library library = new Library(books, movies);
-        library.checkOutBookCopy(isbn);
+        library.checkOutBookCopy(isbn, null);
     }
 
 }

@@ -6,16 +6,17 @@ public class Copy {
 
     private final int isbn;
     private boolean isBorrowed;
-    private User user;
+    private User borrowedUser;
 
-    public Copy(int isbn, boolean isBorrowed, User user) {
+    public Copy(int isbn, boolean isBorrowed, User borrowedUser) {
         this.isbn = isbn;
         this.isBorrowed = isBorrowed;
-        this.user = user;
+        this.borrowedUser = borrowedUser;
     }
 
-    public void checkOut() {
+    public void checkOut(User user) {
         isBorrowed = true;
+        this.borrowedUser = user;
     }
 
     public boolean isBorrowed() {
@@ -32,6 +33,10 @@ public class Copy {
 
     public boolean isSameIsbn(int isbn) {
         return this.isbn == isbn;
+    }
+
+    public boolean isThisTheBorrowedUser(User user) {
+        return this.borrowedUser.equals(user);
     }
 
 }

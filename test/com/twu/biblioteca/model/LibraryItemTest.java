@@ -62,7 +62,7 @@ public class LibraryItemTest {
         Copy copy = new Copy(2345, false, null);
         copies.add(copy);
         LibraryItem LibraryItem = getLibraryItem(0, "Harry Potter", 2005, copies);
-        LibraryItem.checkOutACopyByIsbn(2345);
+        LibraryItem.checkOutACopyByIsbn(2345, null);
         assertTrue(copy.isBorrowed());
     }
 
@@ -73,7 +73,7 @@ public class LibraryItemTest {
         Copy copy = new Copy(2345, true, null);
         copies.add(copy);
         LibraryItem LibraryItem = getLibraryItem(0, "Harry Potter", 2005, copies);
-        LibraryItem.checkOutACopyByIsbn(2345);
+        LibraryItem.checkOutACopyByIsbn(2345, null);
     }
 
     @Test
@@ -81,7 +81,7 @@ public class LibraryItemTest {
         expected.expect(LibraryItemProcessingException.class);
         expected.expectMessage("Requested LibraryItem Copy UnAvailable");
         LibraryItem LibraryItem = getLibraryItem(0, "Harry Potter", 2005, copies);
-        LibraryItem.checkOutACopyByIsbn(2345);
+        LibraryItem.checkOutACopyByIsbn(2345, null);
     }
 
     @Test
@@ -108,6 +108,6 @@ public class LibraryItemTest {
         expected.expect(LibraryItemProcessingException.class);
         expected.expectMessage("Requested LibraryItem Copy UnAvailable");
         LibraryItem LibraryItem = getLibraryItem(0, "Harry Potter", 2005, copies);
-        LibraryItem.checkOutACopyByIsbn(2345);
+        LibraryItem.checkOutACopyByIsbn(2345, null);
     }
 }

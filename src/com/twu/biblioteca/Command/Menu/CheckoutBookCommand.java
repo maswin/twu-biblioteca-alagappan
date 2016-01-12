@@ -15,9 +15,9 @@ public class CheckOutBookCommand implements MenuCommand {
         this.library = library;
     }
 
-    private void checkOutBook(int bookId) {
+    private void checkOutBook(int bookId, User user) {
         try {
-            library.checkOutBookCopy(bookId);
+            library.checkOutBookCopy(bookId, user);
             bookView.printSuccessfulBookCheckoutMessage();
         } catch (LibraryItemProcessingException e) {
             bookView.printUnSuccessfulBookCheckoutMessage();
@@ -27,6 +27,6 @@ public class CheckOutBookCommand implements MenuCommand {
     @Override
     public void performCommand(User user) throws Exception {
         int bookId = bookView.getBookId();
-        checkOutBook(bookId);
+        checkOutBook(bookId, user);
     }
 }

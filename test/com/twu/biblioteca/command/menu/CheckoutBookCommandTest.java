@@ -22,7 +22,7 @@ public class CheckOutBookCommandTest {
 
         menuCommand.performCommand(null);
 
-        verify(library).checkOutBookCopy(isbn);
+        verify(library).checkOutBookCopy(isbn, null);
         verify(bookView).printSuccessfulBookCheckoutMessage();
     }
 
@@ -32,7 +32,7 @@ public class CheckOutBookCommandTest {
         BookView bookView = Mockito.mock(BookView.class);
         int isbn = 12;
         when(bookView.getBookId()).thenReturn(isbn);
-        doThrow(new LibraryItemProcessingException("Book Copy Unavailable")).when(library).checkOutBookCopy(isbn);
+        doThrow(new LibraryItemProcessingException("Book Copy Unavailable")).when(library).checkOutBookCopy(isbn, null);
         MenuCommand menuCommand = new CheckOutBookCommand(bookView, library);
 
         menuCommand.performCommand(null);

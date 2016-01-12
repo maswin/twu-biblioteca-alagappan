@@ -2,6 +2,7 @@ package com.twu.biblioteca.model;
 
 import com.twu.biblioteca.DTO.LibraryItemDTO;
 import com.twu.biblioteca.Exception.LibraryItemProcessingException;
+import com.twu.biblioteca.model.Users.User;
 
 import java.util.Optional;
 import java.util.Set;
@@ -44,7 +45,7 @@ public abstract class LibraryItem {
         return null;
     }
 
-    public void checkOutACopyByIsbn(int isbn) throws LibraryItemProcessingException {
+    public void checkOutACopyByIsbn(int isbn, User user) throws LibraryItemProcessingException {
         Copy copy = findCopyByIsbn(isbn);
         if(copy == null) {
             throw new LibraryItemProcessingException("Requested LibraryItem Copy UnAvailable");
@@ -52,7 +53,7 @@ public abstract class LibraryItem {
         if(copy.isBorrowed()) {
             throw new LibraryItemProcessingException("Requested LibraryItem Copy Already Borrowed");
         }
-        copy.checkOut();
+        copy.checkOut(user);
     }
 
     public void checkInACopyByIsbn(int isbn) throws LibraryItemProcessingException {

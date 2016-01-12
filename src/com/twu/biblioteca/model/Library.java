@@ -6,6 +6,7 @@ import com.twu.biblioteca.model.Books.Book;
 import com.twu.biblioteca.DTO.BookDTO;
 import com.twu.biblioteca.Exception.LibraryItemProcessingException;
 import com.twu.biblioteca.model.Movies.Movie;
+import com.twu.biblioteca.model.Users.User;
 
 import java.util.*;
 
@@ -26,21 +27,21 @@ public class Library {
         return null;
     }
 
-    private void checkOutItemCopy(int isbn, List<? extends LibraryItem> items) throws LibraryItemProcessingException {
+    private void checkOutItemCopy(int isbn, List<? extends LibraryItem> items, User user) throws LibraryItemProcessingException {
         LibraryItem item = findItemCopyByIsbn(isbn, items);
         if(item != null) {
-            item.checkOutACopyByIsbn(isbn);
+            item.checkOutACopyByIsbn(isbn, user);
         } else {
             throw new LibraryItemProcessingException("Requested Item Copy UnAvailable");
         }
     }
 
-    public void checkOutBookCopy(int isbn) throws LibraryItemProcessingException {
-        checkOutItemCopy(isbn, books);
+    public void checkOutBookCopy(int isbn, User user) throws LibraryItemProcessingException {
+        checkOutItemCopy(isbn, books, user);
     }
 
     public void checkOutMovieCopy(int isbn) throws LibraryItemProcessingException {
-        checkOutItemCopy(isbn, movies);
+        checkOutItemCopy(isbn, movies, null);
     }
 
     private void checkInItemCopy(int isbn, List<? extends LibraryItem> items) throws LibraryItemProcessingException {
