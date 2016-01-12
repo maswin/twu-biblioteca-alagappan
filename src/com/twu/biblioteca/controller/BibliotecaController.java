@@ -1,20 +1,18 @@
 package com.twu.biblioteca.controller;
 
+import com.twu.biblioteca.Menu;
 import com.twu.biblioteca.command.menu.MenuCommand;
 import com.twu.biblioteca.command.menu.QuitCommand;
 import com.twu.biblioteca.view.ConsoleView;
 import com.twu.biblioteca.view.MenuView;
 
-import java.util.Map;
-import java.util.Optional;
-
 public class BibliotecaController {
-    private Map<Integer, String> menuOptions;
+    private Menu menu;
     private ConsoleView consoleView;
     private MenuView menuView;
 
-    public BibliotecaController(Map<Integer, String> menuOptions, MenuView menuView, ConsoleView consoleView) {
-        this.menuOptions = menuOptions;
+    public BibliotecaController(Menu menu, MenuView menuView, ConsoleView consoleView) {
+        this.menu = menu;
         this.consoleView = consoleView;
         this.menuView = menuView;
     }
@@ -23,7 +21,7 @@ public class BibliotecaController {
         printWelcomeMessage();
         MenuCommand command;
         do {
-            menuView.displayMenu(menuOptions);
+            menuView.displayMenu(menu.getMenuOptions());
             command = menuView.getMenuOption();
             try {
                 command.performCommand();

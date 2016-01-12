@@ -23,14 +23,14 @@ public class ConsoleViewTest {
 
     @Test
     public void shouldPrintWelcomeMessage() {
-        ConsoleView bookView = new ConsoleView("Welcome to com.twu.biblioteca.controller.Biblioteca !!", outputWriter, inputReader);
+        ConsoleView bookView = new ConsoleView(outputWriter, inputReader);
         bookView.printWelcomeMessage();
-        verify(outputWriter).println("Welcome to com.twu.biblioteca.controller.Biblioteca !!");
+        verify(outputWriter).println("Welcome to Bibilioteca App !!");
     }
 
     @Test
     public void shouldGetLibraryNumber() {
-        ConsoleView bookView = new ConsoleView("Welcome to com.twu.biblioteca.controller.Biblioteca !!", outputWriter, inputReader);
+        ConsoleView bookView = new ConsoleView(outputWriter, inputReader);
         String libraryNumber = "123-4567";
         when(inputReader.read()).thenReturn(libraryNumber);
 
@@ -41,7 +41,7 @@ public class ConsoleViewTest {
 
     @Test
     public void shouldGetPassword() {
-        ConsoleView bookView = new ConsoleView("Welcome to com.twu.biblioteca.controller.Biblioteca !!", outputWriter, inputReader);
+        ConsoleView bookView = new ConsoleView(outputWriter, inputReader);
         String password = "password";
         when(inputReader.read()).thenReturn(password);
 
@@ -52,7 +52,7 @@ public class ConsoleViewTest {
 
     @Test
     public void shouldPrintInvalidLoginMessage() {
-        ConsoleView bookView = new ConsoleView("Welcome to com.twu.biblioteca.controller.Biblioteca !!", outputWriter, inputReader);
+        ConsoleView bookView = new ConsoleView(outputWriter, inputReader);
         bookView.printInvalidLoginMessage();
         verify(outputWriter).println("Invalid Login Credentials !!");
     }

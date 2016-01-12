@@ -4,18 +4,16 @@ import com.twu.biblioteca.InputOutput.InputReader;
 import com.twu.biblioteca.InputOutput.OutputWriter;
 
 public class ConsoleView {
-    private final String welcomeMessage;
     private final OutputWriter outputWriter;
     private InputReader inputReader;
 
-    public ConsoleView(String welcomeMessage, OutputWriter outputWriter, InputReader inputReader) {
-        this.welcomeMessage = welcomeMessage;
+    public ConsoleView(OutputWriter outputWriter, InputReader inputReader) {
         this.outputWriter = outputWriter;
         this.inputReader = inputReader;
     }
 
     public void printWelcomeMessage() {
-        outputWriter.println(welcomeMessage);
+        outputWriter.println("Welcome to Bibilioteca App !!");
     }
 
     public String getLibraryNumber() {

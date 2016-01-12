@@ -62,7 +62,7 @@ public class BibliotecaApp {
 
         Menu menu = new Menu(menuOptions, menuCommands);
         MenuView menuView = new MenuView(menu, outputWriter, inputReader);
-        BibliotecaController bibliotecaController = new BibliotecaController(menuOptions, menuView, new ConsoleView("Welcome to Bibilioteca !!", outputWriter, inputReader));
+        BibliotecaController bibliotecaController = new BibliotecaController(menu, menuView, new ConsoleView(outputWriter, inputReader));
         bibliotecaController.start();
     }
 
