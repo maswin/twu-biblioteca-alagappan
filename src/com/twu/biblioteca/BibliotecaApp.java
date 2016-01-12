@@ -9,7 +9,7 @@ import com.twu.biblioteca.command.menu.*;
 import com.twu.biblioteca.model.Library;
 import com.twu.biblioteca.model.Movies.Movie;
 import com.twu.biblioteca.model.Users.User;
-import com.twu.biblioteca.model.Users.Users;
+import com.twu.biblioteca.controller.Authenticator;
 import com.twu.biblioteca.view.BookView;
 import com.twu.biblioteca.view.ConsoleView;
 import com.twu.biblioteca.view.MenuView;
@@ -24,6 +24,7 @@ public class BibliotecaApp {
         InputReader inputReader = new InputReader(System.in);
         BookView bookView = new BookView(outputWriter, inputReader);
         MovieView movieView = new MovieView(outputWriter, inputReader);
+        ConsoleView consoleView = new ConsoleView(outputWriter, inputReader);
 
         Map<Integer, String> menuOptions = new HashMap<>();
         menuOptions.put(1, "List of Books");
@@ -61,10 +62,14 @@ public class BibliotecaApp {
         menuCommands.put(5, new CheckOutMovieCommand(movieView, library));
         menuCommands.put(6, new QuitCommand());
 
+        List<User> users = new ArrayList<>();
+        users.add(new User("123-4567", "password"));
+
+        Authenticator authenticator = new Authenticator(users);
 
         Menu menu = new Menu(menuOptions, menuCommands);
         MenuView menuView = new MenuView(menu, outputWriter, inputReader);
-        BibliotecaController bibliotecaController = new BibliotecaController(menu, new Users(new ArrayList<User>()), menuView, new ConsoleView(outputWriter, inputReader));
+        BibliotecaController bibliotecaController = new BibliotecaController(menu, authenticator, menuView, consoleView);
         bibliotecaController.start();
     }
 

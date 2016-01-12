@@ -1,6 +1,7 @@
-package com.twu.biblioteca.model.Users;
+package com.twu.biblioteca.controller;
 
 import com.twu.biblioteca.Exception.UserOperationException;
+import com.twu.biblioteca.model.Users.User;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -14,7 +15,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class UsersTest {
+public class AuthenticatorTest {
 
     @Test
     public void shouldReturnUserIfLibraryNumberAndPasswordMatches() throws UserOperationException {
@@ -26,8 +27,8 @@ public class UsersTest {
         List<User> userList = new ArrayList<>();
         userList.add(user);
 
-        Users users = new Users(userList);
-        assertEquals(user, users.findUserByLibraryNumberAndPassword(libraryNumber, password));
+        Authenticator authenticator = new Authenticator(userList);
+        assertEquals(user, authenticator.authenticate(libraryNumber, password));
     }
 
     @Rule
@@ -46,36 +47,8 @@ public class UsersTest {
         List<User> userList = new ArrayList<>();
         userList.add(user);
 
-        Users users = new Users(userList);
-        users.findUserByLibraryNumberAndPassword(libraryNumber, password);
-    }
-
-    @Test
-    public void shouldReturnTrueIfLibraryNumberAndPasswordMatches() throws UserOperationException {
-        String libraryNumber = "123-4567";
-        String password = "password";
-        User user = mock(User.class);
-        when(user.checkPassword(password)).thenReturn(true);
-        when(user.isSameLibraryNumber(libraryNumber)).thenReturn(true);
-        List<User> userList = new ArrayList<>();
-        userList.add(user);
-
-        Users users = new Users(userList);
-        assertTrue(users.isUserAvailable(libraryNumber, password));
-    }
-
-    @Test
-    public void shouldReturnFalseIfLibraryNumberAndPasswordDoesNotMatch() throws UserOperationException {
-        String libraryNumber = "123-4567";
-        String password = "password";
-        User user = mock(User.class);
-        when(user.checkPassword(password)).thenReturn(true);
-        when(user.isSameLibraryNumber(libraryNumber)).thenReturn(true);
-        List<User> userList = new ArrayList<>();
-        userList.add(user);
-
-        Users users = new Users(userList);
-        assertFalse(users.isUserAvailable(libraryNumber, "password1"));
+        Authenticator authenticator = new Authenticator(userList);
+        authenticator.authenticate(libraryNumber, password);
     }
 
 }

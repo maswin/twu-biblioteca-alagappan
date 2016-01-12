@@ -5,29 +5,28 @@ import com.twu.biblioteca.Menu;
 import com.twu.biblioteca.command.menu.MenuCommand;
 import com.twu.biblioteca.command.menu.QuitCommand;
 import com.twu.biblioteca.model.Users.User;
-import com.twu.biblioteca.model.Users.Users;
 import com.twu.biblioteca.view.ConsoleView;
 import com.twu.biblioteca.view.MenuView;
 
 public class BibliotecaController {
     private Menu menu;
-    private Users users;
+    private Authenticator authenticator;
     private ConsoleView consoleView;
     private MenuView menuView;
 
-    public BibliotecaController(Menu menu, Users users, MenuView menuView, ConsoleView consoleView) {
+    public BibliotecaController(Menu menu, Authenticator authenticator, MenuView menuView, ConsoleView consoleView) {
         this.menu = menu;
-        this.users = users;
+        this.authenticator = authenticator;
         this.consoleView = consoleView;
         this.menuView = menuView;
     }
 
     public void start() {
         printWelcomeMessage();
-        User loggedInUser = performLoginOperation();
-        if(loggedInUser != null) {
+        try {
+            User loggedInUser = performLoginOperation();
             startUserInteraction(loggedInUser);
-        } else {
+        } catch (UserOperationException e) {
             consoleView.printInvalidLoginMessage();
         }
     }
@@ -35,11 +34,7 @@ public class BibliotecaController {
     private User performLoginOperation() {
         String libraryNumber = consoleView.getLibraryNumber();
         String password = consoleView.getPassword();
-        try {
-            return users.findUserByLibraryNumberAndPassword(libraryNumber, password);
-        } catch (UserOperationException e) {
-            return null;
-        }
+        return authenticator.authenticate(libraryNumber, password);
     }
 
     private void startUserInteraction(User user) {
@@ -48,7 +43,7 @@ public class BibliotecaController {
             menuView.displayMenu(menu.getMenuOptions());
             command = menuView.getMenuOption();
             try {
-                command.performCommand(null);
+                command.performCommand(user);
             } catch (Exception e) {
                 e.printStackTrace();
             }
