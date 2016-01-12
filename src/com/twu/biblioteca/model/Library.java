@@ -40,8 +40,8 @@ public class Library {
         checkOutItemCopy(isbn, books, user);
     }
 
-    public void checkOutMovieCopy(int isbn) throws LibraryItemProcessingException {
-        checkOutItemCopy(isbn, movies, null);
+    public void checkOutMovieCopy(int isbn, User user) throws LibraryItemProcessingException {
+        checkOutItemCopy(isbn, movies, user);
     }
 
     private void checkInItemCopy(int isbn, List<? extends LibraryItem> items) throws LibraryItemProcessingException {

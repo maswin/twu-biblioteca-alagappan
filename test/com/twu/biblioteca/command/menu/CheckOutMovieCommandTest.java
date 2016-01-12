@@ -22,7 +22,7 @@ public class CheckOutMovieCommandTest {
 
         menuCommand.performCommand(null);
 
-        verify(library).checkOutMovieCopy(isbn);
+        verify(library).checkOutMovieCopy(isbn, null);
         verify(movieView).printSuccessfulMovieCheckoutMessage();
     }
 
@@ -32,7 +32,7 @@ public class CheckOutMovieCommandTest {
         MovieView movieView = Mockito.mock(MovieView.class);
         int isbn = 12;
         when(movieView.getMovieId()).thenReturn(isbn);
-        doThrow(new LibraryItemProcessingException("Movie Copy Unavailable")).when(library).checkOutMovieCopy(isbn);
+        doThrow(new LibraryItemProcessingException("Movie Copy Unavailable")).when(library).checkOutMovieCopy(isbn, null);
         MenuCommand menuCommand = new CheckOutMovieCommand(movieView, library);
 
         menuCommand.performCommand(null);

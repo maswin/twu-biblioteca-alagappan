@@ -86,7 +86,7 @@ public class  LibraryTest {
         when(movie.isIsbnOfThisItemType(isbn)).thenReturn(true);
         movies.add(movie);
         Library library = new Library(books, movies);
-        library.checkOutMovieCopy(isbn);
+        library.checkOutMovieCopy(isbn, null);
         verify(movie).checkOutACopyByIsbn(isbn, null);
     }
 

@@ -14,9 +14,9 @@ public class CheckOutMovieCommand implements MenuCommand {
         this.library = library;
     }
 
-    private void checkOutMovie(int movieId) {
+    private void checkOutMovie(int movieId, User user) {
         try {
-            library.checkOutMovieCopy(movieId);
+            library.checkOutMovieCopy(movieId, user);
             movieView.printSuccessfulMovieCheckoutMessage();
         } catch (LibraryItemProcessingException e) {
             movieView.printUnSuccessfulMovieCheckoutMessage();
@@ -26,6 +26,6 @@ public class CheckOutMovieCommand implements MenuCommand {
     @Override
     public void performCommand(User user) throws Exception {
         int movieId = movieView.getMovieId();
-        checkOutMovie(movieId);
+        checkOutMovie(movieId, user);
     }
 }
