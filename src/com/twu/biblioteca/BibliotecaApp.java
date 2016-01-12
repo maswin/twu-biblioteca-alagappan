@@ -8,6 +8,8 @@ import com.twu.biblioteca.InputOutput.OutputWriter;
 import com.twu.biblioteca.command.menu.*;
 import com.twu.biblioteca.model.Library;
 import com.twu.biblioteca.model.Movies.Movie;
+import com.twu.biblioteca.model.Users.User;
+import com.twu.biblioteca.model.Users.Users;
 import com.twu.biblioteca.view.BookView;
 import com.twu.biblioteca.view.ConsoleView;
 import com.twu.biblioteca.view.MenuView;
@@ -62,7 +64,7 @@ public class BibliotecaApp {
 
         Menu menu = new Menu(menuOptions, menuCommands);
         MenuView menuView = new MenuView(menu, outputWriter, inputReader);
-        BibliotecaController bibliotecaController = new BibliotecaController(menu, menuView, new ConsoleView(outputWriter, inputReader));
+        BibliotecaController bibliotecaController = new BibliotecaController(menu, new Users(new ArrayList<User>()), menuView, new ConsoleView(outputWriter, inputReader));
         bibliotecaController.start();
     }
 
