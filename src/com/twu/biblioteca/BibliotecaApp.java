@@ -32,7 +32,8 @@ public class BibliotecaApp {
         menuOptions.put(3, "CheckIn Book");
         menuOptions.put(4, "List of Movies");
         menuOptions.put(5, "CheckOut Movie");
-        menuOptions.put(6, "Quit");
+        menuOptions.put(6, "User Information");
+        menuOptions.put(7, "Quit");
 
         List<Book> books = new ArrayList<>();
         books.add(new Book(1, "Harry Potter", "J.K.Rowling", 2005,
@@ -60,10 +61,11 @@ public class BibliotecaApp {
         menuCommands.put(3, new CheckInBookCommand(bookView, library));
         menuCommands.put(4, new DisplayMoviesCommand(movieView, library));
         menuCommands.put(5, new CheckOutMovieCommand(movieView, library));
-        menuCommands.put(6, new QuitCommand());
+        menuCommands.put(6, new PrintUserInformationCommand(consoleView));
+        menuCommands.put(7, new QuitCommand());
 
         List<User> users = new ArrayList<>();
-        users.add(new User("123-4567", "password"));
+        users.add(new User("123-4567", "password", "name", "abc@xyz.com", "12345678"));
 
         Authenticator authenticator = new Authenticator(users);
 

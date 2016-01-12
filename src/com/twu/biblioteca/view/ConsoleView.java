@@ -2,6 +2,7 @@ package com.twu.biblioteca.view;
 
 import com.twu.biblioteca.InputOutput.InputReader;
 import com.twu.biblioteca.InputOutput.OutputWriter;
+import com.twu.biblioteca.model.Users.User;
 
 public class ConsoleView {
     private final OutputWriter outputWriter;
@@ -28,5 +29,9 @@ public class ConsoleView {
 
     public void printInvalidLoginMessage() {
         outputWriter.println("Invalid Login Credentials !!");
+    }
+
+    public void printUserInformation(User user) {
+        outputWriter.println(user);
     }
 }
