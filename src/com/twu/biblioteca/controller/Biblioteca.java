@@ -18,7 +18,6 @@ public class Biblioteca {
         this.menuView = menuView;
     }
 
-
     public void start() {
         printWelcomeMessage();
         MenuCommand command;

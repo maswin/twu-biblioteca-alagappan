@@ -1,6 +1,5 @@
 package com.twu.biblioteca.model;
 
-import com.twu.biblioteca.DTO.BookDTO;
 import com.twu.biblioteca.DTO.LibraryItemDTO;
 import com.twu.biblioteca.Exception.LibraryItemProcessingException;
 
