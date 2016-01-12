@@ -12,7 +12,6 @@ public class Users {
         this.users = users;
     }
 
-
     public User findUserByLibraryNumberAndPassword(String libraryNumber, String password) throws UserOperationException {
         Optional<User> foundUser = users.stream().filter(user -> user.isSameLibraryNumber(libraryNumber)
                 && user.checkPassword(password)).findFirst();
@@ -20,5 +19,10 @@ public class Users {
             return foundUser.get();
         }
         throw new UserOperationException("User not found");
+    }
+
+    public boolean isUserAvailable(String libraryNumber, String password) {
+        return users.stream().anyMatch(user -> user.isSameLibraryNumber(libraryNumber)
+                && user.checkPassword(password));
     }
 }
