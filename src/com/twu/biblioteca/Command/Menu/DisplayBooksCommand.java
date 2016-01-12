@@ -1,6 +1,7 @@
 package com.twu.biblioteca.command.menu;
 
 import com.twu.biblioteca.model.Library;
+import com.twu.biblioteca.model.Users.User;
 import com.twu.biblioteca.view.BookView;
 
 public class DisplayBooksCommand implements MenuCommand {
@@ -14,7 +15,7 @@ public class DisplayBooksCommand implements MenuCommand {
     }
 
     @Override
-    public void performCommand() throws Exception {
+    public void performCommand(User user) throws Exception {
         bookView.printBooks(library.getListOfAvailableBookDTO());
     }
 }

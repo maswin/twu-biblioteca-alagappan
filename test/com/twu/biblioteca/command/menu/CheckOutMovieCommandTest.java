@@ -20,7 +20,7 @@ public class CheckOutMovieCommandTest {
         when(movieView.getMovieId()).thenReturn(isbn);
         MenuCommand menuCommand = new CheckOutMovieCommand(movieView, library);
 
-        menuCommand.performCommand();
+        menuCommand.performCommand(null);
 
         verify(library).checkOutMovieCopy(isbn);
         verify(movieView).printSuccessfulMovieCheckoutMessage();
@@ -35,7 +35,7 @@ public class CheckOutMovieCommandTest {
         doThrow(new LibraryItemProcessingException("Movie Copy Unavailable")).when(library).checkOutMovieCopy(isbn);
         MenuCommand menuCommand = new CheckOutMovieCommand(movieView, library);
 
-        menuCommand.performCommand();
+        menuCommand.performCommand(null);
 
         verify(movieView).printUnSuccessfulMovieCheckoutMessage();
     }

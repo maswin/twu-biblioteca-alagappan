@@ -22,7 +22,7 @@ public class DisplayBooksCommandTest {
         when(library.getListOfAvailableBookDTO()).thenReturn(books);
         MenuCommand menuCommand = new DisplayBooksCommand(bookView, library);
 
-        menuCommand.performCommand();
+        menuCommand.performCommand(null);
 
         verify(bookView).printBooks(books);
     }

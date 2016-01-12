@@ -12,7 +12,7 @@ public class InvalidCommandTest {
     public void shouldCallInvalidInput() throws Exception {
         MenuView menuView = Mockito.mock(MenuView.class);
         MenuCommand menuCommand = new InvalidCommand(menuView);
-        menuCommand.performCommand();
+        menuCommand.performCommand(null);
         verify(menuView).displayInvalidOption();
     }
 }

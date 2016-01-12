@@ -1,5 +1,6 @@
 package com.twu.biblioteca.command.menu;
 
+import com.twu.biblioteca.model.Users.User;
 import com.twu.biblioteca.view.MenuView;
 
 public class InvalidCommand implements MenuCommand {
@@ -11,7 +12,7 @@ public class InvalidCommand implements MenuCommand {
     }
 
     @Override
-    public void performCommand() throws Exception {
+    public void performCommand(User user) throws Exception {
         menuView.displayInvalidOption();
     }
 }

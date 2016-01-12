@@ -73,5 +73,6 @@ public class BibliotecaControllerTest {
 
         verify(consoleView).printWelcomeMessage();
         verify(menuView, never()).displayMenu(menuOptions);
+        verify(consoleView).printInvalidLoginMessage();
     }
 }

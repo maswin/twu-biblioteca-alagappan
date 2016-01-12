@@ -20,7 +20,7 @@ public class CheckInBookCommandTest {
         when(bookView.getBookId()).thenReturn(isbn);
         MenuCommand menuCommand = new CheckInBookCommand(bookView, library);
 
-        menuCommand.performCommand();
+        menuCommand.performCommand(null);
 
         verify(library).checkInBookCopy(isbn);
         verify(bookView).printSuccessfulBookCheckInMessage();
@@ -35,7 +35,7 @@ public class CheckInBookCommandTest {
         doThrow(new LibraryItemProcessingException("Book Copy Unavailable")).when(library).checkInBookCopy(isbn);
         MenuCommand menuCommand = new CheckInBookCommand(bookView, library);
 
-        menuCommand.performCommand();
+        menuCommand.performCommand(null);
 
         verify(bookView).printUnSuccessfulBookCheckInMessage();
     }

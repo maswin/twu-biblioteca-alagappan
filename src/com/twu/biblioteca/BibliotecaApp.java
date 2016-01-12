@@ -35,20 +35,20 @@ public class BibliotecaApp {
 
         List<Book> books = new ArrayList<>();
         books.add(new Book(1, "Harry Potter", "J.K.Rowling", 2005,
-                new HashSet<>(Arrays.asList(new Copy(1234, false)))));
+                new HashSet<>(Arrays.asList(new Copy(1234, false, null)))));
         books.add(new Book(2, "2 States", "Chetan Bhagat", 2010,
-                new HashSet<>(Arrays.asList(new Copy(2345, false), new Copy(6789, false)))));
+                new HashSet<>(Arrays.asList(new Copy(2345, false, null), new Copy(6789, false, null)))));
         books.add(new Book(3, "Half Girl Friend", "Chetan Bhagat", 2014,
-                new HashSet<>(Arrays.asList(new Copy(3457, false), new Copy(7890, false)))));
+                new HashSet<>(Arrays.asList(new Copy(3457, false, null), new Copy(7890, false, null)))));
 
 
         List<Movie> movies = new ArrayList<>();
         movies.add(new Movie(11, "Jurassic park", "Steven Speilberg", 1994, 7,
-                new HashSet<>(Arrays.asList(new Copy(5234, false))), "genre"));
+                new HashSet<>(Arrays.asList(new Copy(5234, false, null))), "genre"));
         movies.add(new Movie(12, "Prestige", "Nolan", 2008, null,
-                new HashSet<>(Arrays.asList(new Copy(5345, false), new Copy(5789, false))), "genre"));
+                new HashSet<>(Arrays.asList(new Copy(5345, false, null), new Copy(5789, false, null))), "genre"));
         movies.add(new Movie(13, "Endhiran", "Shankar", 2012, 10,
-                new HashSet<>(Arrays.asList(new Copy(5457, false), new Copy(5890, false))), "genre"));
+                new HashSet<>(Arrays.asList(new Copy(5457, false, null), new Copy(5890, false, null))), "genre"));
 
         Library library = new Library(books, movies);
 

@@ -22,7 +22,7 @@ public class DisplayMoviesCommandTest {
         when(library.getListOfAvailableMovieDTO()).thenReturn(movies);
         MenuCommand menuCommand = new DisplayMoviesCommand(movieView, library);
 
-        menuCommand.performCommand();
+        menuCommand.performCommand(null);
 
         verify(movieView).printMovies(movies);
     }

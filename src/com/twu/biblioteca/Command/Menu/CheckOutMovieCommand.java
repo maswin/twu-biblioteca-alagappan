@@ -2,6 +2,7 @@ package com.twu.biblioteca.command.menu;
 
 import com.twu.biblioteca.Exception.LibraryItemProcessingException;
 import com.twu.biblioteca.model.Library;
+import com.twu.biblioteca.model.Users.User;
 import com.twu.biblioteca.view.MovieView;
 
 public class CheckOutMovieCommand implements MenuCommand {
@@ -23,7 +24,7 @@ public class CheckOutMovieCommand implements MenuCommand {
     }
 
     @Override
-    public void performCommand() throws Exception {
+    public void performCommand(User user) throws Exception {
         int movieId = movieView.getMovieId();
         checkOutMovie(movieId);
     }
