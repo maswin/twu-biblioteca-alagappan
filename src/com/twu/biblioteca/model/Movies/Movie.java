@@ -17,7 +17,9 @@ public class Movie extends LibraryItem{
         this.rating = rating;
     }
 
-    public MovieDTO createMovieDTO() throws LibraryItemProcessingException {
+    @Override
+    public MovieDTO createDTO() throws LibraryItemProcessingException {
         return new MovieDTO(getAnyUnBorrowedCopy().getIsbn(), name, directorName, year, rating);
     }
+
 }

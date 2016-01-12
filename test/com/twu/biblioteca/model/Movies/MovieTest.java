@@ -24,7 +24,7 @@ public class MovieTest {
 
         Movie movie = new Movie(21, "movie1", "director1", 2010, 5, copies, "genre");
 
-        MovieDTO movieDTO = movie.createMovieDTO();
+        MovieDTO movieDTO = movie.createDTO();
 
         assertEquals("movie1", movieDTO.getName());
         assertEquals("director1", movieDTO.getDirectorName());

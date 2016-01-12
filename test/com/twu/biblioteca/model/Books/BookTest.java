@@ -25,7 +25,7 @@ public class BookTest {
 
         Book book = new Book(21, "book1", "author1", 2012, copies);
 
-        BookDTO bookDTO = book.createBookDTO();
+        BookDTO bookDTO = book.createDTO();
 
         assertEquals("book1", bookDTO.getName());
         assertEquals("author1", bookDTO.getAuthorName());

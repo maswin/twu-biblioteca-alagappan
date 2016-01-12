@@ -1,5 +1,7 @@
 package com.twu.biblioteca.model;
 
+import com.twu.biblioteca.DTO.BookDTO;
+import com.twu.biblioteca.DTO.LibraryItemDTO;
 import com.twu.biblioteca.Exception.LibraryItemProcessingException;
 
 import java.util.Optional;
@@ -25,6 +27,7 @@ public abstract class LibraryItem {
         }
         throw new LibraryItemProcessingException("No LibraryItem Copy Available");
     }
+
 
     public boolean isAnyCopyAvailableUnBorrowed() {
         return copies.stream().anyMatch(copy -> !copy.isBorrowed());
@@ -63,5 +66,6 @@ public abstract class LibraryItem {
         }
         copy.checkIn();
     }
-    
+
+    public abstract <T extends LibraryItemDTO> T createDTO() throws LibraryItemProcessingException;
 }

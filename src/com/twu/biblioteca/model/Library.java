@@ -1,5 +1,6 @@
 package com.twu.biblioteca.model;
 
+import com.twu.biblioteca.DTO.LibraryItemDTO;
 import com.twu.biblioteca.DTO.MovieDTO;
 import com.twu.biblioteca.model.Books.Book;
 import com.twu.biblioteca.DTO.BookDTO;
@@ -34,6 +35,14 @@ public class Library {
         }
     }
 
+    public void checkOutBookCopy(int isbn) throws LibraryItemProcessingException {
+        checkOutItemCopy(isbn, books);
+    }
+
+    public void checkOutMovieCopy(int isbn) throws LibraryItemProcessingException {
+        checkOutItemCopy(isbn, movies);
+    }
+
     private void checkInItemCopy(int isbn, List<? extends LibraryItem> items) throws LibraryItemProcessingException {
         LibraryItem item = findItemCopyByIsbn(isbn, items);
         if(item != null) {
@@ -43,39 +52,28 @@ public class Library {
         }
     }
 
-    public List<BookDTO> getListOfAvailableBookDTO() throws LibraryItemProcessingException {
-        List<BookDTO> bookDTOs = new ArrayList<>();
-        books.stream().filter(Book::isAnyCopyAvailableUnBorrowed).forEach(book -> {
-            try {
-                bookDTOs.add(book.createBookDTO());
-            } catch (LibraryItemProcessingException e) {
-                e.printStackTrace();
-            }
-        });
-        return bookDTOs;
-    }
-
-    public void checkOutBookCopy(int isbn) throws LibraryItemProcessingException {
-        checkOutItemCopy(isbn, books);
-    }
-
     public void checkInBookCopy(int isbn) throws LibraryItemProcessingException {
         checkInItemCopy(isbn, books);
     }
 
-    public List<MovieDTO> getListOfAvailableMovieDTO() {
-        List<MovieDTO> movieDTOs = new ArrayList<>();
-        movies.stream().filter(Movie::isAnyCopyAvailableUnBorrowed).forEach(movie -> {
+    private <T extends LibraryItemDTO> List<T> getAvailableItems(List<? extends LibraryItem> items) {
+        List<T> result = new ArrayList<>();
+        items.stream().filter(LibraryItem::isAnyCopyAvailableUnBorrowed).forEach(item -> {
             try {
-                movieDTOs.add(movie.createMovieDTO());
+                T itemDTO = item.createDTO();
+                result.add(itemDTO);
             } catch (LibraryItemProcessingException e) {
                 e.printStackTrace();
             }
         });
-        return movieDTOs;
+        return result;
     }
 
-    public void checkOutMovieCopy(int isbn) throws LibraryItemProcessingException {
-        checkOutItemCopy(isbn, movies);
+    public List<BookDTO> getListOfAvailableBookDTO() throws LibraryItemProcessingException {
+        return getAvailableItems(books);
+    }
+
+    public List<MovieDTO> getListOfAvailableMovieDTO() {
+        return getAvailableItems(movies);
     }
 }

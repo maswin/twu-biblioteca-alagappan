@@ -1,6 +1,6 @@
 package com.twu.biblioteca.DTO;
 
-public class MovieDTO {
+public class MovieDTO implements LibraryItemDTO {
     private final int isbn;
     private final String name;
     private final String directorName;

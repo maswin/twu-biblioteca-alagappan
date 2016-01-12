@@ -15,7 +15,8 @@ public class Book extends LibraryItem {
         this.authorName = authorName;
     }
 
-    public BookDTO createBookDTO() throws LibraryItemProcessingException {
+    public BookDTO createDTO() throws LibraryItemProcessingException {
         return new BookDTO(getAnyUnBorrowedCopy().getIsbn(), name, authorName, year);
     }
+
 }

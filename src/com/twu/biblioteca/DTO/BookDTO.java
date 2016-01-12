@@ -1,6 +1,6 @@
 package com.twu.biblioteca.DTO;
 
-public class BookDTO {
+public class BookDTO implements LibraryItemDTO{
     private final int isbn;
     private final String name;
     private final String authorName;
