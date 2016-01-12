@@ -14,6 +14,7 @@ import java.util.Set;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 
 public class LibraryItemTest {
 
@@ -35,7 +36,7 @@ public class LibraryItemTest {
 
     @Test
     public void checkIfTheISBNBelongsToThisLibraryItem() {
-        copies.add(new Copy(2345, false, null));
+        copies.add(new Copy(2345, null));
         LibraryItem LibraryItem = getLibraryItem(0, "Harry Potter", 2005, copies);
         assertTrue(LibraryItem.isIsbnOfThisItemType(2345));
     }
@@ -45,26 +46,26 @@ public class LibraryItemTest {
 
     @Test
     public void shouldReturnTrueIfAnyUnBorrowedLibraryItemIsAvailable() {
-        copies.add(new Copy(2345, true, null));
-        copies.add(new Copy(3456, false, null));
+        copies.add(new Copy(2345, null));
+        copies.add(new Copy(3456, null));
         LibraryItem LibraryItem = getLibraryItem(0, "Harry Potter", 2005, copies);
         assertTrue(LibraryItem.isAnyCopyAvailableUnBorrowed());
     }
 
     @Test
     public void shouldReturnFalseIfNoUnBorrowedLibraryItemIsAvailable() {
-        copies.add(new Copy(2345, true, null));
-        copies.add(new Copy(3456, true, null));
+        copies.add(new Copy(2345, mock(User.class)));
+        copies.add(new Copy(3456, mock(User.class)));
         LibraryItem LibraryItem = getLibraryItem(0, "Harry Potter", 2005, copies);
         assertFalse(LibraryItem.isAnyCopyAvailableUnBorrowed());
     }
 
     @Test
     public void shouldCheckOutALibraryItemCopyByIsbnWhenAvailable() throws LibraryItemProcessingException {
-        Copy copy = new Copy(2345, false, null);
+        Copy copy = new Copy(2345, null);
         copies.add(copy);
         LibraryItem LibraryItem = getLibraryItem(0, "Harry Potter", 2005, copies);
-        LibraryItem.checkOutACopyByIsbn(2345, null);
+        LibraryItem.checkOutACopyByIsbn(2345, mock(User.class));
         assertTrue(copy.isBorrowed());
     }
 
@@ -72,7 +73,7 @@ public class LibraryItemTest {
     public void shouldThrowExceptionWhenLibraryItemCopyIsAlreadyBorrowedWhileCheckingOut() throws LibraryItemProcessingException {
         expected.expect(LibraryItemProcessingException.class);
         expected.expectMessage("Requested LibraryItem Copy Already Borrowed");
-        Copy copy = new Copy(2345, true, null);
+        Copy copy = new Copy(2345, mock(User.class));
         copies.add(copy);
         LibraryItem LibraryItem = getLibraryItem(0, "Harry Potter", 2005, copies);
         LibraryItem.checkOutACopyByIsbn(2345, null);
@@ -88,8 +89,8 @@ public class LibraryItemTest {
 
     @Test
     public void shouldCheckInALibraryItemCopyByIsbn() throws LibraryItemProcessingException {
-        User user = Mockito.mock(User.class);
-        Copy copy = new Copy(2345, true, user);
+        User user = mock(User.class);
+        Copy copy = new Copy(2345, user);
         copies.add(copy);
         LibraryItem LibraryItem = getLibraryItem(0, "Harry Potter", 2005, copies);
         LibraryItem.checkInACopyByIsbn(2345, user);
@@ -100,7 +101,7 @@ public class LibraryItemTest {
     public void shouldThrowExceptionWhenLibraryItemCopyIsNotBorrowedWhileCheckingIn() throws LibraryItemProcessingException {
         expected.expect(LibraryItemProcessingException.class);
         expected.expectMessage("Requested LibraryItem Copy Was Not Borrowed");
-        Copy copy = new Copy(2345, false, null);
+        Copy copy = new Copy(2345, null);
         copies.add(copy);
         LibraryItem LibraryItem = getLibraryItem(0, "Harry Potter", 2005, copies);
         LibraryItem.checkInACopyByIsbn(2345, null);
@@ -118,8 +119,8 @@ public class LibraryItemTest {
     public void shouldThrowExceptionWhenLibraryItemCopyIsNotBorrowedByGivenUser() throws LibraryItemProcessingException {
         expected.expect(LibraryItemProcessingException.class);
         expected.expectMessage("Requested LibraryItem Not Borrowed By This User");
-        User user = Mockito.mock(User.class);
-        copies.add(new Copy(5678, true, user));
+        User user = mock(User.class);
+        copies.add(new Copy(5678, user));
         LibraryItem LibraryItem = getLibraryItem(0, "Harry Potter", 2005, copies);
         LibraryItem.checkInACopyByIsbn(5678, null);
     }

@@ -5,26 +5,22 @@ import com.twu.biblioteca.model.Users.User;
 public class Copy {
 
     private final int isbn;
-    private boolean isBorrowed;
     private User borrowedUser;
 
-    public Copy(int isbn, boolean isBorrowed, User borrowedUser) {
+    public Copy(int isbn, User borrowedUser) {
         this.isbn = isbn;
-        this.isBorrowed = isBorrowed;
         this.borrowedUser = borrowedUser;
     }
 
     public void checkOut(User user) {
-        isBorrowed = true;
         this.borrowedUser = user;
     }
 
     public boolean isBorrowed() {
-        return isBorrowed;
+        return borrowedUser!=null;
     }
 
     public void checkIn() {
-        isBorrowed = false;
         borrowedUser = null;
     }
 

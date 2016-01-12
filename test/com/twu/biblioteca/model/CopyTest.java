@@ -12,15 +12,15 @@ public class CopyTest {
     @Test
     public void shouldReturnTrueIfTheBookIsCheckedOut() {
         int isbn = 1234;
-        Copy copy = new Copy(isbn, false, null);
-        copy.checkOut(null);
+        Copy copy = new Copy(isbn, null);
+        copy.checkOut(mock(User.class));
         assertTrue(copy.isBorrowed());
     }
 
     @Test
     public void shouldReturnFalseIfTheBookIsCheckedIn() {
         int isbn = 1234;
-        Copy copy = new Copy(isbn, true, null);
+        Copy copy = new Copy(isbn, null);
         copy.checkIn();
         assertFalse(copy.isBorrowed());
     }
@@ -28,14 +28,14 @@ public class CopyTest {
     @Test
     public void shouldReturnTrueIfGivenIsbnMatchesThisBookIsbn() {
         int isbn = 1234;
-        Copy copy = new Copy(isbn, true, null);
+        Copy copy = new Copy(isbn, null);
         assertTrue(copy.isSameIsbn(isbn));
     }
 
     @Test
     public void shouldReturnFalseIfGivenIsbnDoesNotMatchThisBookIsbn() {
         int isbn = 1234;
-        Copy copy = new Copy(isbn, true, null);
+        Copy copy = new Copy(isbn, null);
         assertFalse(copy.isSameIsbn(1235));
     }
 
@@ -43,7 +43,7 @@ public class CopyTest {
     public void shouldReturnTrueIfTheBookIsBorrowedByGivenUser() {
         int isbn = 1234;
         User user = mock(User.class);
-        Copy copy = new Copy(isbn, true, user);
+        Copy copy = new Copy(isbn, user);
         assertTrue(copy.isThisTheBorrowedUser(user));
     }
 
@@ -51,7 +51,7 @@ public class CopyTest {
     public void shouldReturnFalseIfTheBookIsNotBorrowedByGivenUser() {
         int isbn = 1234;
         User user = mock(User.class);
-        Copy copy = new Copy(isbn, true, user);
+        Copy copy = new Copy(isbn, user);
         assertFalse(copy.isThisTheBorrowedUser(null));
     }
 
@@ -59,7 +59,7 @@ public class CopyTest {
     public void checkIfTheUserMatchesTheCheckedOutUser() {
         int isbn = 1234;
         User user = mock(User.class);
-        Copy copy = new Copy(isbn, true, null);
+        Copy copy = new Copy(isbn, null);
         copy.checkOut(user);
         assertTrue(copy.isThisTheBorrowedUser(user));
     }
