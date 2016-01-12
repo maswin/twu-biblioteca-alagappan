@@ -25,6 +25,7 @@ public class Copy {
 
     public void checkIn() {
         isBorrowed = false;
+        borrowedUser = null;
     }
 
     public int getIsbn() {

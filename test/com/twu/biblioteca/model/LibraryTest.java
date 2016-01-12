@@ -63,8 +63,8 @@ public class  LibraryTest {
         when(book.isIsbnOfThisItemType(isbn)).thenReturn(true);
         books.add(book);
         Library library = new Library(books, new ArrayList<>());
-        library.checkInBookCopy(isbn);
-        verify(book).checkInACopyByIsbn(isbn);
+        library.checkInBookCopy(isbn, null);
+        verify(book).checkInACopyByIsbn(isbn, null);
     }
 
     @Test
@@ -76,7 +76,7 @@ public class  LibraryTest {
         when(book.isIsbnOfThisItemType(isbn)).thenReturn(false);
         books.add(book);
         Library library = new Library(books, new ArrayList<>());
-        library.checkInBookCopy(isbn);
+        library.checkInBookCopy(isbn, null);
     }
 
     @Test

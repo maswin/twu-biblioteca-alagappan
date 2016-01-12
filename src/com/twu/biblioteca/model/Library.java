@@ -44,17 +44,17 @@ public class Library {
         checkOutItemCopy(isbn, movies, user);
     }
 
-    private void checkInItemCopy(int isbn, List<? extends LibraryItem> items) throws LibraryItemProcessingException {
+    private void checkInItemCopy(int isbn, List<? extends LibraryItem> items, User user) throws LibraryItemProcessingException {
         LibraryItem item = findItemCopyByIsbn(isbn, items);
         if(item != null) {
-            item.checkInACopyByIsbn(isbn);
+            item.checkInACopyByIsbn(isbn, user);
         } else {
             throw new LibraryItemProcessingException("Requested Item Copy UnAvailable");
         }
     }
 
-    public void checkInBookCopy(int isbn) throws LibraryItemProcessingException {
-        checkInItemCopy(isbn, books);
+    public void checkInBookCopy(int isbn, User user) throws LibraryItemProcessingException {
+        checkInItemCopy(isbn, books, user);
     }
 
     private <T extends LibraryItemDTO> List<T> getAvailableItems(List<? extends LibraryItem> items) {

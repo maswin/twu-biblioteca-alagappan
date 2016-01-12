@@ -14,9 +14,9 @@ public class CheckInBookCommand implements MenuCommand {
         this.library = library;
     }
 
-    private void checkInBook(int bookId) throws LibraryItemProcessingException {
+    private void checkInBook(int bookId, User user) throws LibraryItemProcessingException {
         try {
-            library.checkInBookCopy(bookId);
+            library.checkInBookCopy(bookId, user);
             bookView.printSuccessfulBookCheckInMessage();
         } catch (LibraryItemProcessingException exception) {
             bookView.printUnSuccessfulBookCheckInMessage();
@@ -26,6 +26,6 @@ public class CheckInBookCommand implements MenuCommand {
     @Override
     public void performCommand(User user) throws Exception {
         int bookId = bookView.getBookId();
-        checkInBook(bookId);
+        checkInBook(bookId, user);
     }
 }

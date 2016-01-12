@@ -56,13 +56,16 @@ public abstract class LibraryItem {
         copy.checkOut(user);
     }
 
-    public void checkInACopyByIsbn(int isbn) throws LibraryItemProcessingException {
+    public void checkInACopyByIsbn(int isbn, User user) throws LibraryItemProcessingException {
         Copy copy = findCopyByIsbn(isbn);
         if(copy == null) {
             throw new LibraryItemProcessingException("Requested LibraryItem Copy UnAvailable");
         }
         if(!copy.isBorrowed()) {
             throw new LibraryItemProcessingException("Requested LibraryItem Copy Was Not Borrowed");
+        }
+        if(!copy.isThisTheBorrowedUser(user)) {
+            throw new LibraryItemProcessingException("Requested LibraryItem Not Borrowed By This User");
         }
         copy.checkIn();
     }

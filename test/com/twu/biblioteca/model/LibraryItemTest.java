@@ -2,10 +2,12 @@ package com.twu.biblioteca.model;
 
 import com.twu.biblioteca.DTO.LibraryItemDTO;
 import com.twu.biblioteca.Exception.LibraryItemProcessingException;
+import com.twu.biblioteca.model.Users.User;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.mockito.Mockito;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -86,10 +88,11 @@ public class LibraryItemTest {
 
     @Test
     public void shouldCheckInALibraryItemCopyByIsbn() throws LibraryItemProcessingException {
-        Copy copy = new Copy(2345, true, null);
+        User user = Mockito.mock(User.class);
+        Copy copy = new Copy(2345, true, user);
         copies.add(copy);
         LibraryItem LibraryItem = getLibraryItem(0, "Harry Potter", 2005, copies);
-        LibraryItem.checkInACopyByIsbn(2345);
+        LibraryItem.checkInACopyByIsbn(2345, user);
         assertFalse(copy.isBorrowed());
     }
 
@@ -100,7 +103,7 @@ public class LibraryItemTest {
         Copy copy = new Copy(2345, false, null);
         copies.add(copy);
         LibraryItem LibraryItem = getLibraryItem(0, "Harry Potter", 2005, copies);
-        LibraryItem.checkInACopyByIsbn(2345);
+        LibraryItem.checkInACopyByIsbn(2345, null);
     }
 
     @Test
@@ -109,5 +112,15 @@ public class LibraryItemTest {
         expected.expectMessage("Requested LibraryItem Copy UnAvailable");
         LibraryItem LibraryItem = getLibraryItem(0, "Harry Potter", 2005, copies);
         LibraryItem.checkOutACopyByIsbn(2345, null);
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenLibraryItemCopyIsNotBorrowedByGivenUser() throws LibraryItemProcessingException {
+        expected.expect(LibraryItemProcessingException.class);
+        expected.expectMessage("Requested LibraryItem Not Borrowed By This User");
+        User user = Mockito.mock(User.class);
+        copies.add(new Copy(5678, true, user));
+        LibraryItem LibraryItem = getLibraryItem(0, "Harry Potter", 2005, copies);
+        LibraryItem.checkInACopyByIsbn(5678, null);
     }
 }
