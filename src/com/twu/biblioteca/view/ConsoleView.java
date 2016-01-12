@@ -17,4 +17,18 @@ public class ConsoleView {
     public void printWelcomeMessage() {
         outputWriter.println(welcomeMessage);
     }
+
+    public String getLibraryNumber() {
+        outputWriter.println("Enter Your Library Number");
+        return inputReader.read();
+    }
+
+    public String getPassword() {
+        outputWriter.println("Enter Your Password");
+        return inputReader.read();
+    }
+
+    public void printInvalidLoginMessage() {
+        outputWriter.println("Invalid Login Credentials !!");
+    }
 }

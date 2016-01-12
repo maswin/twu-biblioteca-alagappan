@@ -6,7 +6,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class ConsoleViewTest {
 
@@ -24,6 +26,35 @@ public class ConsoleViewTest {
         ConsoleView bookView = new ConsoleView("Welcome to com.twu.biblioteca.controller.Biblioteca !!", outputWriter, inputReader);
         bookView.printWelcomeMessage();
         verify(outputWriter).println("Welcome to com.twu.biblioteca.controller.Biblioteca !!");
+    }
+
+    @Test
+    public void shouldGetLibraryNumber() {
+        ConsoleView bookView = new ConsoleView("Welcome to com.twu.biblioteca.controller.Biblioteca !!", outputWriter, inputReader);
+        String libraryNumber = "123-4567";
+        when(inputReader.read()).thenReturn(libraryNumber);
+
+        assertEquals(libraryNumber, bookView.getLibraryNumber());
+        verify(outputWriter).println("Enter Your Library Number");
+        verify(inputReader).read();
+    }
+
+    @Test
+    public void shouldGetPassword() {
+        ConsoleView bookView = new ConsoleView("Welcome to com.twu.biblioteca.controller.Biblioteca !!", outputWriter, inputReader);
+        String password = "password";
+        when(inputReader.read()).thenReturn(password);
+
+        assertEquals(password, bookView.getPassword());
+        verify(outputWriter).println("Enter Your Password");
+        verify(inputReader).read();
+    }
+
+    @Test
+    public void shouldPrintInvalidLoginMessage() {
+        ConsoleView bookView = new ConsoleView("Welcome to com.twu.biblioteca.controller.Biblioteca !!", outputWriter, inputReader);
+        bookView.printInvalidLoginMessage();
+        verify(outputWriter).println("Invalid Login Credentials !!");
     }
 
 }
