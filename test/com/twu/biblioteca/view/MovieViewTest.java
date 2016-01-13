@@ -3,6 +3,7 @@ package com.twu.biblioteca.view;
 import com.twu.biblioteca.DTO.MovieDTO;
 import com.twu.biblioteca.InputOutput.InputReader;
 import com.twu.biblioteca.InputOutput.OutputWriter;
+import com.twu.biblioteca.model.Copy;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -68,5 +70,22 @@ public class MovieViewTest {
         MovieView movieView = new MovieView(outputWriter, inputReader);
         movieView.printUnSuccessfulMovieCheckoutMessage();
         verify(outputWriter).println("That movie is not available.");
+    }
+
+    @Test
+    public void shouldPrintBookCopy() throws Exception {
+        MovieView movieView = new MovieView(outputWriter, inputReader);
+        Copy copy = mock(Copy.class);
+        movieView.printMovieCopy(copy);
+        verify(outputWriter).println("Status of the Movie : ");
+        verify(outputWriter).println(copy);
+
+    }
+
+    @Test
+    public void shouldPrintBookNotFoundMessage() throws Exception {
+        MovieView movieView = new MovieView(outputWriter, inputReader);
+        movieView.printMovieCopyNotFound();
+        verify(outputWriter).println("Movie Copy Not Found !!");
     }
 }

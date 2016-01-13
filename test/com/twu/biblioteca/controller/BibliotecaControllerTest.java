@@ -1,7 +1,7 @@
 package com.twu.biblioteca.controller;
 
 import com.twu.biblioteca.Exception.UserOperationException;
-import com.twu.biblioteca.Menu;
+import com.twu.biblioteca.Menu.Menu;
 import com.twu.biblioteca.command.menu.QuitCommand;
 import com.twu.biblioteca.model.Users.User;
 import com.twu.biblioteca.model.Users.Users;

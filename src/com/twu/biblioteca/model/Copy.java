@@ -39,9 +39,9 @@ public class Copy {
     @Override
     public String toString() {
         if(isBorrowed())
-            return String.format("ISBN : %d\nUser Details:\n%s", isbn, borrowedUser);
+            return String.format("ISBN : %d\nBorrowed User Details:\n%s", isbn, borrowedUser);
         else
-            return String.format("ISBN : %d\nUser Details:\n%s", isbn, "This Copy is Not Borrowed");
+            return String.format("ISBN : %d\nBorrowed User Details:\n%s", isbn, "This Copy is Not Borrowed");
     }
 
 }

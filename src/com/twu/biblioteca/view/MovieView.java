@@ -3,6 +3,7 @@ package com.twu.biblioteca.view;
 import com.twu.biblioteca.DTO.MovieDTO;
 import com.twu.biblioteca.InputOutput.InputReader;
 import com.twu.biblioteca.InputOutput.OutputWriter;
+import com.twu.biblioteca.model.Copy;
 
 import java.util.List;
 
@@ -26,6 +27,11 @@ public class MovieView {
         });
     }
 
+    public void printMovieCopy(Copy copy) {
+        outputWriter.println("Status of the Movie : ");
+        outputWriter.println(copy);
+    }
+
     private String getRatingString(MovieDTO movieDTO) {
         String rating;
         if(movieDTO.getRating() == null) {
@@ -47,5 +53,9 @@ public class MovieView {
 
     public void printUnSuccessfulMovieCheckoutMessage() {
         outputWriter.println("That movie is not available.");
+    }
+
+    public void printMovieCopyNotFound() {
+        outputWriter.println("Movie Copy Not Found !!");
     }
 }

@@ -2,7 +2,7 @@ package com.twu.biblioteca.view;
 
 import com.twu.biblioteca.InputOutput.InputReader;
 import com.twu.biblioteca.InputOutput.OutputWriter;
-import com.twu.biblioteca.Menu;
+import com.twu.biblioteca.Menu.Menu;
 import com.twu.biblioteca.command.menu.MenuCommand;
 import org.junit.Before;
 import org.junit.Test;
