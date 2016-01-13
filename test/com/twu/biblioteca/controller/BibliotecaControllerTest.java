@@ -66,22 +66,25 @@ public class BibliotecaControllerTest {
     }
 
     @Test
-    public void shouldNotDisplayMenuAfterUnSuccessfulLogin() {
+    public void shouldPromptLoginUntilCorrectCredentialsAreObtained() {
         String libraryNumber = "123-4567";
         String password = "password";
 
-        doThrow(new UserOperationException("User not found")).when(users).findUserByLibraryNumberAndPassword(libraryNumber, password);
+        doThrow(new UserOperationException("User not found")).when(users).findUserByLibraryNumberAndPassword("123", "xyz");
+        User user = mock(User.class);
+        when(user.getRole()).thenReturn(Role.MEMBER);
+        
+        when(users.findUserByLibraryNumberAndPassword(libraryNumber, password)).thenReturn(user);
         when(menuView.getMenuOption()).thenReturn(new QuitCommand(new HashSet<Role>(){{
             add(Role.MEMBER);
         }}));
-        when(consoleView.getLibraryNumber()).thenReturn(libraryNumber);
-        when(consoleView.getPassword()).thenReturn(password);
+        when(consoleView.getLibraryNumber()).thenReturn("123", libraryNumber);
+        when(consoleView.getPassword()).thenReturn("xyz", password);
 
         BibliotecaController bibliotecaController = new BibliotecaController(menu, users, menuView, consoleView);
         bibliotecaController.start();
 
         verify(consoleView).printWelcomeMessage();
-        verify(menuView, never()).displayMenu(menuOptions);
         verify(consoleView).printInvalidLoginMessage();
     }
 }

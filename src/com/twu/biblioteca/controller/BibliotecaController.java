@@ -24,11 +24,14 @@ public class BibliotecaController {
 
     public void start() {
         printWelcomeMessage();
-        try {
-            User loggedInUser = performLoginOperation();
-            startUserInteraction(loggedInUser);
-        } catch (UserOperationException e) {
-            consoleView.printInvalidLoginMessage();
+        while(true) {
+            try {
+                User loggedInUser = performLoginOperation();
+                startUserInteraction(loggedInUser);
+                break;
+            } catch (UserOperationException e) {
+                consoleView.printInvalidLoginMessage();
+            }
         }
     }
 
