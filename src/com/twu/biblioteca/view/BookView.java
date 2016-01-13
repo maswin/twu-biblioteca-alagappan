@@ -3,6 +3,7 @@ package com.twu.biblioteca.view;
 import com.twu.biblioteca.DTO.BookDTO;
 import com.twu.biblioteca.InputOutput.InputReader;
 import com.twu.biblioteca.InputOutput.OutputWriter;
+import com.twu.biblioteca.model.Copy;
 
 import java.util.List;
 
@@ -20,6 +21,11 @@ public class BookView {
         outputWriter.println(String.format("%-12s %-25s %-20s %s", "ISBN", "Book Name", "Author Name", "Year"));
         books.forEach(bookDTO ->  outputWriter.println(String.format("%-12d %-25s %-20s %d", bookDTO.getIsbn(),
                 bookDTO.getName(), bookDTO.getAuthorName(), bookDTO.getYearPublished())));
+    }
+
+    public void printBookCopy(Copy copy) {
+        outputWriter.println("Status of the book : ");
+        outputWriter.println(copy);
     }
 
     public int getBookId() {
@@ -41,6 +47,10 @@ public class BookView {
 
     public void printUnSuccessfulBookCheckInMessage() {
         outputWriter.println("That is not a valid book to return.");
+    }
+
+    public void printBookCopyNotFound() {
+        outputWriter.println("Book Copy Not Found !!");
     }
 
 }

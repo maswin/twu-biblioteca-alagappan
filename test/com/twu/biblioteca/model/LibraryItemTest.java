@@ -12,6 +12,7 @@ import org.mockito.Mockito;
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
@@ -123,5 +124,13 @@ public class LibraryItemTest {
         copies.add(new Copy(5678, user));
         LibraryItem LibraryItem = getLibraryItem(0, "Harry Potter", 2005, copies);
         LibraryItem.checkInACopyByIsbn(5678, null);
+    }
+
+    @Test
+    public void shouldFindACopyByIsbn() throws LibraryItemProcessingException {
+        Copy copy = new Copy(2345, null);
+        copies.add(copy);
+        LibraryItem LibraryItem = getLibraryItem(0, "Harry Potter", 2005, copies);
+        assertEquals(copy, LibraryItem.findCopyByIsbn(2345));
     }
 }

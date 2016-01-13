@@ -19,7 +19,7 @@ public class Library {
         this.movies = movies;
     }
 
-    private LibraryItem findItemCopyByIsbn(int isbn, List<? extends LibraryItem> items) {
+    private LibraryItem findItemByIsbn(int isbn, List<? extends LibraryItem> items) {
         Optional<? extends LibraryItem> foundItem = items.stream().filter(item -> item.isIsbnOfThisItemType(isbn)).findFirst();
         if(foundItem.isPresent()) {
             return foundItem.get();
@@ -28,7 +28,7 @@ public class Library {
     }
 
     private void checkOutItemCopy(int isbn, List<? extends LibraryItem> items, User user) throws LibraryItemProcessingException {
-        LibraryItem item = findItemCopyByIsbn(isbn, items);
+        LibraryItem item = findItemByIsbn(isbn, items);
         if(item != null) {
             item.checkOutACopyByIsbn(isbn, user);
         } else {
@@ -45,7 +45,7 @@ public class Library {
     }
 
     private void checkInItemCopy(int isbn, List<? extends LibraryItem> items, User user) throws LibraryItemProcessingException {
-        LibraryItem item = findItemCopyByIsbn(isbn, items);
+        LibraryItem item = findItemByIsbn(isbn, items);
         if(item != null) {
             item.checkInACopyByIsbn(isbn, user);
         } else {
@@ -76,5 +76,21 @@ public class Library {
 
     public List<MovieDTO> getListOfAvailableMovieDTO() {
         return getAvailableItems(movies);
+    }
+
+    private Copy findItemCopyByIsbn(int isbn, List<? extends LibraryItem> items) throws LibraryItemProcessingException {
+        LibraryItem item = findItemByIsbn(isbn, items);
+        if(item == null) {
+            throw new LibraryItemProcessingException("Requested Item Copy UnAvailable");
+        }
+        return item.findCopyByIsbn(isbn);
+    }
+
+    public Copy findBookCopyByIsbn(int isbn) throws LibraryItemProcessingException {
+        return findItemCopyByIsbn(isbn, books);
+    }
+
+    public Copy findMovieCopyByIsbn(int isbn) throws LibraryItemProcessingException {
+        return findItemCopyByIsbn(isbn, movies);
     }
 }

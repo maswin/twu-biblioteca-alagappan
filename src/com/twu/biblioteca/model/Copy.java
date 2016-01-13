@@ -36,4 +36,12 @@ public class Copy {
         return this.borrowedUser.equals(user);
     }
 
+    @Override
+    public String toString() {
+        if(isBorrowed())
+            return String.format("ISBN : %d\nUser Details:\n%s", isbn, borrowedUser);
+        else
+            return String.format("ISBN : %d\nUser Details:\n%s", isbn, "This Copy is Not Borrowed");
+    }
+
 }

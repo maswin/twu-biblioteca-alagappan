@@ -37,19 +37,16 @@ public abstract class LibraryItem {
         return copies.stream().anyMatch(copy -> copy.isSameIsbn(isbn));
     }
 
-    private Copy findCopyByIsbn(int isbn) {
+    public Copy findCopyByIsbn(int isbn) throws LibraryItemProcessingException {
         Optional<Copy> foundCopy = copies.stream().filter(copy -> copy.isSameIsbn(isbn)).findFirst();
         if(foundCopy.isPresent()) {
             return foundCopy.get();
         }
-        return null;
+        throw new LibraryItemProcessingException("Requested LibraryItem Copy UnAvailable");
     }
 
     public void checkOutACopyByIsbn(int isbn, User user) throws LibraryItemProcessingException {
         Copy copy = findCopyByIsbn(isbn);
-        if(copy == null) {
-            throw new LibraryItemProcessingException("Requested LibraryItem Copy UnAvailable");
-        }
         if(copy.isBorrowed()) {
             throw new LibraryItemProcessingException("Requested LibraryItem Copy Already Borrowed");
         }
