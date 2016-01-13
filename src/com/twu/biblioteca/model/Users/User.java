@@ -1,18 +1,22 @@
 package com.twu.biblioteca.model.Users;
 
+import com.twu.biblioteca.model.Role;
+
 public class User {
     private final String libraryNumber;
     private final String password;
     private final String name;
     private final String email;
     private final String phoneNumber;
+    private final Role role;
 
-    public User(String libraryNumber, String password, String name, String email, String phoneNumber) {
+    public User(String libraryNumber, String password, String name, String email, String phoneNumber, Role role) {
         this.libraryNumber = libraryNumber;
         this.password = password;
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.role = role;
     }
 
     public boolean checkPassword(String password) {
@@ -28,4 +32,7 @@ public class User {
                 libraryNumber, name, email, phoneNumber);
     }
 
+    public Role getRole() {
+        return role;
+    }
 }

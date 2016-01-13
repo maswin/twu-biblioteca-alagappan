@@ -5,7 +5,9 @@ import com.twu.biblioteca.InputOutput.OutputWriter;
 import com.twu.biblioteca.Menu.Menu;
 import com.twu.biblioteca.command.menu.InvalidCommand;
 import com.twu.biblioteca.command.menu.MenuCommand;
+import com.twu.biblioteca.model.Role;
 
+import java.util.HashSet;
 import java.util.Map;
 
 public class MenuView {
@@ -31,7 +33,7 @@ public class MenuView {
         if(menu.containsCommand(menuOptionId)) {
             return menu.getCommand(menuOptionId);
         } else {
-            return new InvalidCommand(this);
+            return new InvalidCommand(this, new HashSet<Role>());
         }
     }
 

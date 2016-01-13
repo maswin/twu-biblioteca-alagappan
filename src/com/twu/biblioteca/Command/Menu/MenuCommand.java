@@ -1,8 +1,30 @@
 package com.twu.biblioteca.command.menu;
 
+import com.twu.biblioteca.Exception.InvaliOperationException;
+import com.twu.biblioteca.model.Role;
 import com.twu.biblioteca.model.Users.User;
 
-public interface MenuCommand {
+import java.util.Set;
 
-    void performCommand(User user) throws Exception;
+public abstract class MenuCommand {
+
+    private Set<Role> authorizedRoles;
+
+    MenuCommand(Set<Role> authorizedRoles) {
+        this.authorizedRoles = authorizedRoles;
+    }
+
+    public void execute(User user) throws Exception {
+        if(!isAuthorized(user))
+            throw new InvaliOperationException("Not Authorized to Perform this command!!");
+        performCommand(user);
+    }
+
+    protected abstract void performCommand(User user) throws Exception;
+
+    public boolean isAuthorized(User user){
+        if(authorizedRoles.contains(user.getRole()))
+            return true;
+        return false;
+    }
 }

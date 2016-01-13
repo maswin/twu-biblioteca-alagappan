@@ -2,14 +2,18 @@ package com.twu.biblioteca.command.menu;
 
 import com.twu.biblioteca.Exception.LibraryItemProcessingException;
 import com.twu.biblioteca.model.Library;
+import com.twu.biblioteca.model.Role;
 import com.twu.biblioteca.model.Users.User;
 import com.twu.biblioteca.view.BookView;
 
-public class CheckInBookCommand implements MenuCommand {
+import java.util.Set;
+
+public class CheckInBookCommand extends MenuCommand {
     private final BookView bookView;
     private Library library;
 
-    public CheckInBookCommand(BookView bookView, Library library) {
+    public CheckInBookCommand(BookView bookView, Library library, Set<Role> authorizedRoles) {
+        super(authorizedRoles);
         this.bookView = bookView;
         this.library = library;
     }

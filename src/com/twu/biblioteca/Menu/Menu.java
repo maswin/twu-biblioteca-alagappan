@@ -20,6 +20,7 @@ public class Menu {
     public MenuCommand getCommand(int menuOptionId) {
         return menuCommands.get(menuOptionId);
     }
+
     public boolean containsCommand(int menuOptionId) {
         return menuCommands.containsKey(menuOptionId);
     }

@@ -44,7 +44,7 @@ public class BibliotecaController {
             menuView.displayMenu(menu.getMenuOptions());
             command = menuView.getMenuOption();
             try {
-                command.performCommand(user);
+                command.execute(user);
             } catch (Exception e) {
                 e.printStackTrace();
             }

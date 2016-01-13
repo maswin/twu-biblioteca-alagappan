@@ -1,5 +1,6 @@
 package com.twu.biblioteca.model.Users;
 
+import com.twu.biblioteca.model.Role;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -12,7 +13,7 @@ public class UserTest {
     public void shouldReturnTrueIfGivenLibraryNumberMatchesUserLibraryNumber() {
         String libraryNumber = "123-4567";
         String password = "password";
-        User user = new User(libraryNumber, password, "name", "abc@xyz.com", "12345678"){};
+        User user = new User(libraryNumber, password, "name", "abc@xyz.com", "12345678", Role.MEMBER){};
         assertTrue(user.isSameLibraryNumber(libraryNumber));
     }
 
@@ -20,7 +21,7 @@ public class UserTest {
     public void shouldReturnFalseIfGivenLibraryNumberDoesNotMatchUserLibraryNumber() {
         String libraryNumber = "123-4567";
         String password = "password";
-        User user = new User(libraryNumber, password, "name", "abc@xyz.com", "12345678"){};
+        User user = new User(libraryNumber, password, "name", "abc@xyz.com", "12345678", Role.MEMBER){};
         assertFalse(user.isSameLibraryNumber("1234"));
     }
 
@@ -28,7 +29,7 @@ public class UserTest {
     public void shouldReturnTrueIfGivenPasswordMatchesUserPassword() {
         String libraryNumber = "123-4567";
         String password = "password";
-        User user = new User(libraryNumber, password, "name", "abc@xyz.com", "12345678"){};
+        User user = new User(libraryNumber, password, "name", "abc@xyz.com", "12345678", Role.MEMBER){};
         assertTrue(user.checkPassword(password));
     }
 
@@ -36,7 +37,7 @@ public class UserTest {
     public void shouldReturnFalseIfGivenPasswordDoesNotMatchUserPassword() {
         String libraryNumber = "123-4567";
         String password = "password";
-        User user = new User(libraryNumber, password, "name", "abc@xyz.com", "12345678"){};
+        User user = new User(libraryNumber, password, "name", "abc@xyz.com", "12345678", Role.MEMBER){};
         assertFalse(user.checkPassword("password1"));
     }
 

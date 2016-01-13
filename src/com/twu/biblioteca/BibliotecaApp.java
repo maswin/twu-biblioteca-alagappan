@@ -9,6 +9,7 @@ import com.twu.biblioteca.InputOutput.OutputWriter;
 import com.twu.biblioteca.command.menu.*;
 import com.twu.biblioteca.model.Library;
 import com.twu.biblioteca.model.Movies.Movie;
+import com.twu.biblioteca.model.Role;
 import com.twu.biblioteca.model.Users.User;
 import com.twu.biblioteca.model.Users.Users;
 import com.twu.biblioteca.view.BookView;
@@ -59,18 +60,36 @@ public class BibliotecaApp {
 
 
         Map<Integer, MenuCommand> menuCommands = new HashMap<>();
-        menuCommands.put(1, new DisplayBooksCommand(bookView, library));
-        menuCommands.put(2, new CheckOutBookCommand(bookView, library));
-        menuCommands.put(3, new CheckInBookCommand(bookView, library));
-        menuCommands.put(4, new DisplayMoviesCommand(movieView, library));
-        menuCommands.put(5, new CheckOutMovieCommand(movieView, library));
-        menuCommands.put(6, new PrintUserInformationCommand(consoleView));
-        menuCommands.put(7, new CheckBookStatusCommand(library, bookView));
-        menuCommands.put(8, new CheckMovieStatusCommand(library, movieView));
-        menuCommands.put(9, new QuitCommand());
+        menuCommands.put(1, new DisplayBooksCommand(bookView, library, new HashSet<Role>() {{
+            add(Role.MEMBER);
+        }}));
+        menuCommands.put(2, new CheckOutBookCommand(bookView, library, new HashSet<Role>() {{
+            add(Role.MEMBER);
+        }}));
+        menuCommands.put(3, new CheckInBookCommand(bookView, library, new HashSet<Role>() {{
+            add(Role.MEMBER);
+        }}));
+        menuCommands.put(4, new DisplayMoviesCommand(movieView, library, new HashSet<Role>() {{
+            add(Role.MEMBER);
+        }}));
+        menuCommands.put(5, new CheckOutMovieCommand(movieView, library, new HashSet<Role>() {{
+            add(Role.MEMBER);
+        }}));
+        menuCommands.put(6, new PrintUserInformationCommand(consoleView, new HashSet<Role>() {{
+            add(Role.MEMBER);
+        }}));
+        menuCommands.put(7, new CheckBookStatusCommand(library, bookView, new HashSet<Role>() {{
+            add(Role.MEMBER);
+        }}));
+        menuCommands.put(8, new CheckMovieStatusCommand(library, movieView, new HashSet<Role>() {{
+            add(Role.MEMBER);
+        }}));
+        menuCommands.put(9, new QuitCommand(new HashSet<Role>() {{
+            add(Role.MEMBER);
+        }}));
 
         List<User> users = new ArrayList<>();
-        users.add(new User("123-4567", "password", "name", "abc@xyz.com", "12345678"));
+        users.add(new User("123-4567", "password", "name", "abc@xyz.com", "12345678", Role.MEMBER));
 
         Users authenticator = new Users(users);
 

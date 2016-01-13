@@ -2,14 +2,18 @@ package com.twu.biblioteca.command.menu;
 
 import com.twu.biblioteca.Exception.LibraryItemProcessingException;
 import com.twu.biblioteca.model.Library;
+import com.twu.biblioteca.model.Role;
 import com.twu.biblioteca.model.Users.User;
 import com.twu.biblioteca.view.MovieView;
 
-public class CheckOutMovieCommand implements MenuCommand {
+import java.util.Set;
+
+public class CheckOutMovieCommand extends MenuCommand {
     private final MovieView movieView;
     private final Library library;
 
-    public CheckOutMovieCommand(MovieView movieView, Library library) {
+    public CheckOutMovieCommand(MovieView movieView, Library library, Set<Role> authorizedRoles) {
+        super(authorizedRoles);
         this.movieView = movieView;
         this.library = library;
     }
