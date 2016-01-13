@@ -8,6 +8,7 @@ import com.twu.biblioteca.InputOutput.OutputWriter;
 import com.twu.biblioteca.command.menu.*;
 import com.twu.biblioteca.model.Library;
 import com.twu.biblioteca.model.Movies.Movie;
+import com.twu.biblioteca.model.Users.Member;
 import com.twu.biblioteca.model.Users.User;
 import com.twu.biblioteca.model.Users.Users;
 import com.twu.biblioteca.view.BookView;
@@ -65,7 +66,7 @@ public class BibliotecaApp {
         menuCommands.put(7, new QuitCommand());
 
         List<User> users = new ArrayList<>();
-        users.add(new User("123-4567", "password", "name", "abc@xyz.com", "12345678"));
+        users.add(new Member("123-4567", "password", "name", "abc@xyz.com", "12345678"));
 
         Users authenticator = new Users(users);
 
