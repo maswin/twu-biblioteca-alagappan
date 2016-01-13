@@ -5,18 +5,19 @@ import com.twu.biblioteca.Menu;
 import com.twu.biblioteca.command.menu.MenuCommand;
 import com.twu.biblioteca.command.menu.QuitCommand;
 import com.twu.biblioteca.model.Users.User;
+import com.twu.biblioteca.model.Users.Users;
 import com.twu.biblioteca.view.ConsoleView;
 import com.twu.biblioteca.view.MenuView;
 
 public class BibliotecaController {
     private Menu menu;
-    private Authenticator authenticator;
+    private Users users;
     private ConsoleView consoleView;
     private MenuView menuView;
 
-    public BibliotecaController(Menu menu, Authenticator authenticator, MenuView menuView, ConsoleView consoleView) {
+    public BibliotecaController(Menu menu, Users users, MenuView menuView, ConsoleView consoleView) {
         this.menu = menu;
-        this.authenticator = authenticator;
+        this.users = users;
         this.consoleView = consoleView;
         this.menuView = menuView;
     }
@@ -34,7 +35,7 @@ public class BibliotecaController {
     private User performLoginOperation() {
         String libraryNumber = consoleView.getLibraryNumber();
         String password = consoleView.getPassword();
-        return authenticator.authenticate(libraryNumber, password);
+        return users.findUserByLibraryNumberAndPassword(libraryNumber, password);
     }
 
     private void startUserInteraction(User user) {
