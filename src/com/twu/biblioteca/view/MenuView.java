@@ -21,15 +21,16 @@ public class MenuView {
         this.inputReader = inputReader;
     }
 
-    public void displayMenu(Map<Integer, String> menuOptions) {
+    public void displayMenu(Map<String, String> menuOptions) {
         outputWriter.println("Menu Options :");
-        for(Map.Entry<Integer, String> menuOption : menuOptions.entrySet()){
-            outputWriter.println(menuOption.getKey()+" "+menuOption.getValue());
+        outputWriter.println(String.format("%-10s %s", "Command","Description"));
+        for(Map.Entry<String, String> menuOption : menuOptions.entrySet()){
+            outputWriter.println(String.format("%-10s %s", menuOption.getKey(), menuOption.getValue()));
         }
     }
 
     public MenuCommand getMenuOption() {
-        int menuOptionId = inputReader.readInt();
+        String menuOptionId = inputReader.read();
         if(menu.containsCommand(menuOptionId)) {
             return menu.getCommand(menuOptionId);
         } else {

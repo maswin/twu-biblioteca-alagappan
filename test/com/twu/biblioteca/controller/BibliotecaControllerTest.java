@@ -23,7 +23,7 @@ public class BibliotecaControllerTest {
     private MenuView menuView;
     private Menu menu;
     private ConsoleView consoleView;
-    private Map<Integer, String> menuOptions;
+    private Map<String, String> menuOptions;
     private Users users;
 
     @Before

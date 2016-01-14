@@ -19,16 +19,16 @@ public class MenuViewTest {
     private Menu menu;
     private OutputWriter outputWriter;
     private InputReader inputReader;
-    private Map<Integer, String> menuOptions;
-    private Map<Integer, MenuCommand> menuCommands;
+    private Map<String, String> menuOptions;
+    private Map<String, MenuCommand> menuCommands;
 
     @Before
     public void setUp() {
         outputWriter = Mockito.mock(OutputWriter.class);
         inputReader = Mockito.mock(InputReader.class);
         menuOptions = new HashMap<>();
-        menuOptions.put(1, "option 1");
-        menuOptions.put(2, "option 2");
+        menuOptions.put("1", "option 1");
+        menuOptions.put("2", "option 2");
         menuCommands = new HashMap<>();
         menu = new Menu(menuOptions, menuCommands);
     }
@@ -38,16 +38,17 @@ public class MenuViewTest {
         MenuView menuView = new MenuView(menu, outputWriter, inputReader);
         menuView.displayMenu(menuOptions);
         verify(outputWriter).println("Menu Options :");
-        verify(outputWriter).println("1 option 1");
-        verify(outputWriter).println("2 option 2");
+        verify(outputWriter).println(String.format("%-10s %s", "Command","Description"));
+        verify(outputWriter).println(String.format("%-10s %s", "1","option 1"));
+        verify(outputWriter).println(String.format("%-10s %s", "2","option 2"));
     }
 
     @Test
     public void shouldReadMenuOption() throws Exception {
         MenuView menuView = new MenuView(menu, outputWriter, inputReader);
-        when(inputReader.readInt()).thenReturn(1);
+        when(inputReader.read()).thenReturn("1");
         menuView.getMenuOption();
-        verify(inputReader).readInt();
+        verify(inputReader).read();
     }
 
     @Test

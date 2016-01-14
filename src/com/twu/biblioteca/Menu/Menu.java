@@ -7,27 +7,28 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Menu {
-    private Map<Integer, String> menuOptions;
-    private Map<Integer, MenuCommand> menuCommands;
+    private Map<String, String> menuOptions;
+    private Map<String, MenuCommand> menuCommands;
 
-    public Menu(Map<Integer, String> menuOptions, Map<Integer, MenuCommand> menuCommands) {
+    public Menu(Map<String, String> menuOptions, Map<String, MenuCommand> menuCommands) {
         this.menuOptions = menuOptions;
         this.menuCommands = menuCommands;
     }
 
-    public Map<Integer, String> getMenuOptions(User user) {
-        Map<Integer, String> menuOptionsAvailableToThisUser = new HashMap<>();
-        menuCommands.entrySet().stream().filter(commandEntry -> commandEntry.getValue().isAuthorized(user)).forEach(commandEntry -> {
+    public Map<String, String> getMenuOptions(User user) {
+        Map<String, String> menuOptionsAvailableToThisUser = new HashMap<>();
+        menuCommands.entrySet().stream().filter(commandEntry -> commandEntry.getValue().isAuthorized(user)).
+                forEach(commandEntry -> {
             menuOptionsAvailableToThisUser.put(commandEntry.getKey(), menuOptions.get(commandEntry.getKey()));
         });
         return menuOptionsAvailableToThisUser;
     }
 
-    public MenuCommand getCommand(int menuOptionId) {
+    public MenuCommand getCommand(String menuOptionId) {
         return menuCommands.get(menuOptionId);
     }
 
-    public boolean containsCommand(int menuOptionId) {
+    public boolean containsCommand(String menuOptionId) {
         return menuCommands.containsKey(menuOptionId);
     }
 }

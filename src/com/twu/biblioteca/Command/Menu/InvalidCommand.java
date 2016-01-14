@@ -19,4 +19,9 @@ public class InvalidCommand extends MenuCommand {
     public void performCommand(User user) throws Exception {
         menuView.displayInvalidOption();
     }
+
+    @Override
+    public boolean isAuthorized(User user) {
+        return true;
+    }
 }

@@ -28,16 +28,16 @@ public class BibliotecaApp {
         MovieView movieView = new MovieView(outputWriter, inputReader);
         ConsoleView consoleView = new ConsoleView(outputWriter, inputReader);
 
-        Map<Integer, String> menuOptions = new HashMap<>();
-        menuOptions.put(1, "List of Books");
-        menuOptions.put(2, "CheckOut Book");
-        menuOptions.put(3, "CheckIn Book");
-        menuOptions.put(4, "List of Movies");
-        menuOptions.put(5, "CheckOut Movie");
-        menuOptions.put(6, "User Information");
-        menuOptions.put(7, "Check Book Status");
-        menuOptions.put(8, "Check Movie Status");
-        menuOptions.put(9, "Quit");
+        Map<String, String> menuOptions = new HashMap<>();
+        menuOptions.put("1", "List of Books");
+        menuOptions.put("2", "CheckOut Book");
+        menuOptions.put("3", "CheckIn Book");
+        menuOptions.put("4", "List of Movies");
+        menuOptions.put("5", "CheckOut Movie");
+        menuOptions.put("6", "User Information");
+        menuOptions.put("7", "Check Book Status");
+        menuOptions.put("8", "Check Movie Status");
+        menuOptions.put("Q", "Quit");
 
         List<Book> books = new ArrayList<>();
         books.add(new Book(1, "Harry Potter", "J.K.Rowling", 2005,
@@ -59,38 +59,38 @@ public class BibliotecaApp {
         Library library = new Library(books, movies);
 
 
-        Map<Integer, MenuCommand> menuCommands = new HashMap<>();
-        menuCommands.put(1, new DisplayBooksCommand(bookView, library, new HashSet<Role>() {{
+        Map<String, MenuCommand> menuCommands = new HashMap<>();
+        menuCommands.put("1", new DisplayBooksCommand(bookView, library, new HashSet<Role>() {{
             add(Role.MEMBER);
             add(Role.ADMIN);
         }}));
-        menuCommands.put(2, new CheckOutBookCommand(bookView, library, new HashSet<Role>() {{
+        menuCommands.put("2", new CheckOutBookCommand(bookView, library, new HashSet<Role>() {{
             add(Role.MEMBER);
             add(Role.ADMIN);
         }}));
-        menuCommands.put(3, new CheckInBookCommand(bookView, library, new HashSet<Role>() {{
+        menuCommands.put("3", new CheckInBookCommand(bookView, library, new HashSet<Role>() {{
             add(Role.MEMBER);
             add(Role.ADMIN);
         }}));
-        menuCommands.put(4, new DisplayMoviesCommand(movieView, library, new HashSet<Role>() {{
+        menuCommands.put("4", new DisplayMoviesCommand(movieView, library, new HashSet<Role>() {{
             add(Role.MEMBER);
             add(Role.ADMIN);
         }}));
-        menuCommands.put(5, new CheckOutMovieCommand(movieView, library, new HashSet<Role>() {{
+        menuCommands.put("5", new CheckOutMovieCommand(movieView, library, new HashSet<Role>() {{
             add(Role.MEMBER);
             add(Role.ADMIN);
         }}));
-        menuCommands.put(6, new PrintUserInformationCommand(consoleView, new HashSet<Role>() {{
+        menuCommands.put("6", new PrintUserInformationCommand(consoleView, new HashSet<Role>() {{
             add(Role.MEMBER);
             add(Role.ADMIN);
         }}));
-        menuCommands.put(7, new CheckBookStatusCommand(library, bookView, new HashSet<Role>() {{
+        menuCommands.put("7", new CheckBookStatusCommand(library, bookView, new HashSet<Role>() {{
             add(Role.ADMIN);
         }}));
-        menuCommands.put(8, new CheckMovieStatusCommand(library, movieView, new HashSet<Role>() {{
+        menuCommands.put("8", new CheckMovieStatusCommand(library, movieView, new HashSet<Role>() {{
             add(Role.ADMIN);
         }}));
-        menuCommands.put(9, new QuitCommand(new HashSet<Role>() {{
+        menuCommands.put("Q", new QuitCommand(new HashSet<Role>() {{
             add(Role.MEMBER);
             add(Role.ADMIN);
         }}));
