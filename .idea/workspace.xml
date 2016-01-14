@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c8720c0c-a194-40dc-b26a-2f7a180202b3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/twu/biblioteca/BibliotecaApp.java" afterPath="$PROJECT_DIR$/src/com/twu/biblioteca/BibliotecaApp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/twu/biblioteca/controller/MainController.java" afterPath="$PROJECT_DIR$/src/com/twu/biblioteca/controller/MainController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/twu/biblioteca/view/MenuView.java" afterPath="$PROJECT_DIR$/src/com/twu/biblioteca/view/MenuView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/com/twu/biblioteca/controller/MainControllerTest.java" afterPath="$PROJECT_DIR$/test/com/twu/biblioteca/controller/MainControllerTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/com/twu/biblioteca/view/MenuViewTest.java" afterPath="$PROJECT_DIR$/test/com/twu/biblioteca/view/MenuViewTest.java" />
-    </list>
+    <list default="true" id="c8720c0c-a194-40dc-b26a-2f7a180202b3" name="Default" comment="" />
     <ignored path="twu-biblioteca-alagappan.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
