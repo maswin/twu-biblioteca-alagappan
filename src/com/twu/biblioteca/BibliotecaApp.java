@@ -62,34 +62,42 @@ public class BibliotecaApp {
         Map<Integer, MenuCommand> menuCommands = new HashMap<>();
         menuCommands.put(1, new DisplayBooksCommand(bookView, library, new HashSet<Role>() {{
             add(Role.MEMBER);
+            add(Role.ADMIN);
         }}));
         menuCommands.put(2, new CheckOutBookCommand(bookView, library, new HashSet<Role>() {{
             add(Role.MEMBER);
+            add(Role.ADMIN);
         }}));
         menuCommands.put(3, new CheckInBookCommand(bookView, library, new HashSet<Role>() {{
             add(Role.MEMBER);
+            add(Role.ADMIN);
         }}));
         menuCommands.put(4, new DisplayMoviesCommand(movieView, library, new HashSet<Role>() {{
             add(Role.MEMBER);
+            add(Role.ADMIN);
         }}));
         menuCommands.put(5, new CheckOutMovieCommand(movieView, library, new HashSet<Role>() {{
             add(Role.MEMBER);
+            add(Role.ADMIN);
         }}));
         menuCommands.put(6, new PrintUserInformationCommand(consoleView, new HashSet<Role>() {{
             add(Role.MEMBER);
+            add(Role.ADMIN);
         }}));
         menuCommands.put(7, new CheckBookStatusCommand(library, bookView, new HashSet<Role>() {{
-            add(Role.MEMBER);
+            add(Role.ADMIN);
         }}));
         menuCommands.put(8, new CheckMovieStatusCommand(library, movieView, new HashSet<Role>() {{
-            add(Role.MEMBER);
+            add(Role.ADMIN);
         }}));
         menuCommands.put(9, new QuitCommand(new HashSet<Role>() {{
             add(Role.MEMBER);
+            add(Role.ADMIN);
         }}));
 
         List<User> users = new ArrayList<>();
         users.add(new User("123-4567", "password", "name", "abc@xyz.com", "12345678", Role.MEMBER));
+        users.add(new User("000-0000", "password", "name", "abc@xyz.com", "12345678", Role.ADMIN));
 
         Users authenticator = new Users(users);
 

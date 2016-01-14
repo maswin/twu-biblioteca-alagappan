@@ -23,8 +23,6 @@ public abstract class MenuCommand {
     protected abstract void performCommand(User user) throws Exception;
 
     public boolean isAuthorized(User user){
-        if(authorizedRoles.contains(user.getRole()))
-            return true;
-        return false;
+        return authorizedRoles.contains(user.getRole());
     }
 }

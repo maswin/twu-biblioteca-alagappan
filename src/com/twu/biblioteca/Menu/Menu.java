@@ -1,7 +1,9 @@
 package com.twu.biblioteca.Menu;
 
 import com.twu.biblioteca.command.menu.MenuCommand;
+import com.twu.biblioteca.model.Users.User;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Menu {
@@ -13,8 +15,12 @@ public class Menu {
         this.menuCommands = menuCommands;
     }
 
-    public Map<Integer, String> getMenuOptions() {
-        return menuOptions;
+    public Map<Integer, String> getMenuOptions(User user) {
+        Map<Integer, String> menuOptionsAvailableToThisUser = new HashMap<>();
+        menuCommands.entrySet().stream().filter(commandEntry -> commandEntry.getValue().isAuthorized(user)).forEach(commandEntry -> {
+            menuOptionsAvailableToThisUser.put(commandEntry.getKey(), menuOptions.get(commandEntry.getKey()));
+        });
+        return menuOptionsAvailableToThisUser;
     }
 
     public MenuCommand getCommand(int menuOptionId) {

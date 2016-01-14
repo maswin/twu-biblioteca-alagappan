@@ -44,7 +44,7 @@ public class BibliotecaController {
     private void startUserInteraction(User user) {
         MenuCommand command;
         do {
-            menuView.displayMenu(menu.getMenuOptions());
+            menuView.displayMenu(menu.getMenuOptions(user));
             command = menuView.getMenuOption();
             try {
                 command.execute(user);

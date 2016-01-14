@@ -73,7 +73,7 @@ public class BibliotecaControllerTest {
         doThrow(new UserOperationException("User not found")).when(users).findUserByLibraryNumberAndPassword("123", "xyz");
         User user = mock(User.class);
         when(user.getRole()).thenReturn(Role.MEMBER);
-        
+
         when(users.findUserByLibraryNumberAndPassword(libraryNumber, password)).thenReturn(user);
         when(menuView.getMenuOption()).thenReturn(new QuitCommand(new HashSet<Role>(){{
             add(Role.MEMBER);
