@@ -31,11 +31,7 @@ public class MenuView {
 
     public MenuCommand getMenuOption() {
         String menuOptionId = inputReader.read();
-        if(menu.containsCommand(menuOptionId)) {
-            return menu.getCommand(menuOptionId);
-        } else {
-            return new InvalidCommand(this, new HashSet<Role>());
-        }
+        return menu.getCommand(menuOptionId);
     }
 
     public void displayInvalidOption() {

@@ -50,10 +50,10 @@ public class MenuTest {
     }
 
     @Test
-    public void shouldReturnTrueIfCommandIsAvailable() throws Exception {
+    public void shouldReturnInvalidCommandIfCommandIsUnAvailable() throws Exception {
         MenuCommand menuCommand = mock(MenuCommand.class);
-        menuCommands.put("1", menuCommand);
+        menuCommands.put("invalid", menuCommand);
         Menu menu = new Menu(menuOptions, menuCommands);
-        assertTrue(menu.containsCommand("1"));
+        assertEquals(menuCommand, menu.getCommand("3"));
     }
 }

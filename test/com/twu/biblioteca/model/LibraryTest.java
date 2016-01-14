@@ -23,13 +23,11 @@ public class  LibraryTest {
 
     private List<Book> books;
     private List<Movie> movies;
-    private Set<Copy> copies;
 
     @Before
     public void setUp() throws Exception {
         books = new ArrayList<>();
         movies = new ArrayList<>();
-        copies = new HashSet<>();
     }
 
     @Rule

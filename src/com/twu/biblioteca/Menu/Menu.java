@@ -1,9 +1,12 @@
 package com.twu.biblioteca.Menu;
 
+import com.twu.biblioteca.command.menu.InvalidCommand;
 import com.twu.biblioteca.command.menu.MenuCommand;
+import com.twu.biblioteca.model.Role;
 import com.twu.biblioteca.model.Users.User;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 public class Menu {
@@ -25,10 +28,8 @@ public class Menu {
     }
 
     public MenuCommand getCommand(String menuOptionId) {
+        if(!menuCommands.containsKey(menuOptionId))
+            return menuCommands.get("invalid");
         return menuCommands.get(menuOptionId);
-    }
-
-    public boolean containsCommand(String menuOptionId) {
-        return menuCommands.containsKey(menuOptionId);
     }
 }
