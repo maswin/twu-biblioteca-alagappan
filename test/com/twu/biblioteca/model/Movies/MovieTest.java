@@ -32,9 +32,4 @@ public class MovieTest {
         assertEquals(1234, movieDTO.getIsbn());
     }
 
-    @Test
-    public void testblah() throws Exception {
-        Movie movie = new Movie(123, "blah", "Alagappan", 2015, 4, new HashSet<>(), "Genre");
-
-    }
 }
