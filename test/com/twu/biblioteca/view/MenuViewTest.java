@@ -11,6 +11,7 @@ import org.mockito.Mockito;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -24,13 +25,14 @@ public class MenuViewTest {
 
     @Before
     public void setUp() {
-        outputWriter = Mockito.mock(OutputWriter.class);
-        inputReader = Mockito.mock(InputReader.class);
+        outputWriter = mock(OutputWriter.class);
+        inputReader = mock(InputReader.class);
         menuOptions = new HashMap<>();
         menuOptions.put("1", "option 1");
         menuOptions.put("2", "option 2");
         menuCommands = new HashMap<>();
-        menu = new Menu(menuOptions, menuCommands);
+        MenuView menuView = mock(MenuView.class);
+        menu = new Menu(menuOptions, menuCommands, menuView);
     }
 
     @Test

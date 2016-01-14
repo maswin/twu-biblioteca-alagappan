@@ -1,8 +1,10 @@
 package com.twu.biblioteca.Menu;
 
+import com.twu.biblioteca.command.menu.InvalidCommand;
 import com.twu.biblioteca.command.menu.MenuCommand;
 import com.twu.biblioteca.model.Role;
 import com.twu.biblioteca.model.Users.User;
+import com.twu.biblioteca.view.MenuView;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -17,11 +20,13 @@ public class MenuTest {
 
     private Map<String, String> menuOptions;
     private Map<String, MenuCommand> menuCommands;
+    private MenuView menuView;
     private User user;
 
     @Before
     public void setUp() throws Exception {
         user = mock(User.class);
+        menuView = mock(MenuView.class);
 
         menuOptions = new HashMap<>();
         menuOptions.put("1", "List Books");
@@ -37,7 +42,7 @@ public class MenuTest {
 
     @Test
     public void shouldReturnListOfMenuOptionsAvailableForThatUser() {
-        Menu menu = new Menu(menuOptions, menuCommands);
+        Menu menu = new Menu(menuOptions, menuCommands, menuView);
 
         when(user.getRole()).thenReturn(Role.MEMBER);
         Map<String, String> thisUserMenuOptions;
@@ -47,9 +52,8 @@ public class MenuTest {
 
     @Test
     public void shouldReturnInvalidCommandIfCommandIsUnAvailable() throws Exception {
-        MenuCommand menuCommand = mock(MenuCommand.class);
-        menuCommands.put("invalid", menuCommand);
-        Menu menu = new Menu(menuOptions, menuCommands);
-        assertEquals(menuCommand, menu.getCommand("3"));
+        Menu menu = new Menu(menuOptions, menuCommands, menuView);
+        MenuCommand menuCommand = menu.getCommand("invalid");
+        assertTrue(menuCommand instanceof InvalidCommand);
     }
 }

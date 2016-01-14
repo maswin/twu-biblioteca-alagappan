@@ -25,6 +25,7 @@ public class BibliotecaApp {
     private static MovieView movieView;
     private static Library library;
     private static ConsoleView consoleView;
+    private static MenuView menuView;
 
     public static void main(String[] args) {
         OutputWriter outputWriter = new OutputWriter(System.out);
@@ -42,7 +43,7 @@ public class BibliotecaApp {
         Users users = new Users(userList);
 
         Menu menu = createMenu();
-        MenuView menuView = new MenuView(menu, outputWriter, inputReader);
+        menuView = new MenuView(menu, outputWriter, inputReader);
         MainController mainController = new MainController(menu, users, menuView, consoleView);
         mainController.start();
     }
@@ -78,7 +79,7 @@ public class BibliotecaApp {
         menuOptions.put("6", "User Information");
         menuOptions.put("7", "Check Book Status");
         menuOptions.put("8", "Check Movie Status");
-        menuOptions.put("Q", "Quit");
+        menuOptions.put("quit", "Quit");
 
         Map<String, MenuCommand> menuCommands = new HashMap<>();
         menuCommands.put("1", new DisplayBooksCommand(bookView, library, new HashSet<Role>() {{
@@ -111,12 +112,12 @@ public class BibliotecaApp {
         menuCommands.put("8", new CheckMovieStatusCommand(library, movieView, new HashSet<Role>() {{
             add(Role.ADMIN);
         }}));
-        menuCommands.put("Q", new QuitCommand(new HashSet<Role>() {{
+        menuCommands.put("quit", new QuitCommand(new HashSet<Role>() {{
             add(Role.MEMBER);
             add(Role.ADMIN);
         }}));
 
-        return new Menu(menuOptions, menuCommands);
+        return new Menu(menuOptions, menuCommands, menuView);
     }
 
 }

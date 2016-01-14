@@ -1,18 +1,23 @@
 package com.twu.biblioteca.Menu;
 
+import com.twu.biblioteca.command.menu.InvalidCommand;
 import com.twu.biblioteca.command.menu.MenuCommand;
 import com.twu.biblioteca.model.Users.User;
+import com.twu.biblioteca.view.MenuView;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 public class Menu {
     private Map<String, String> menuOptions;
     private Map<String, MenuCommand> menuCommands;
+    private MenuView menuView;
 
-    public Menu(Map<String, String> menuOptions, Map<String, MenuCommand> menuCommands) {
+    public Menu(Map<String, String> menuOptions, Map<String, MenuCommand> menuCommands, MenuView menuView) {
         this.menuOptions = menuOptions;
         this.menuCommands = menuCommands;
+        this.menuView = menuView;
     }
 
     public Map<String, String> getMenuOptions(User user) {
@@ -26,7 +31,7 @@ public class Menu {
 
     public MenuCommand getCommand(String menuOptionId) {
         if(!menuCommands.containsKey(menuOptionId))
-            return menuCommands.get("invalid");
+            return new InvalidCommand(menuView, new HashSet<>());
         return menuCommands.get(menuOptionId);
     }
 }
