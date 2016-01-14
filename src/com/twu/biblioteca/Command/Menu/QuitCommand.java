@@ -15,4 +15,9 @@ public class QuitCommand extends MenuCommand {
     public void performCommand(User user) throws Exception {
 
     }
+
+    @Override
+    public boolean isAuthorized(User user) {
+        return true;
+    }
 }

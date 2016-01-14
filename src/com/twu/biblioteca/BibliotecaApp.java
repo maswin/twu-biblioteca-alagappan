@@ -42,8 +42,9 @@ public class BibliotecaApp {
 
         Users users = new Users(userList);
 
+        menuView = new MenuView(outputWriter, inputReader);
         Menu menu = createMenu();
-        menuView = new MenuView(menu, outputWriter, inputReader);
+
         MainController mainController = new MainController(menu, users, menuView, consoleView);
         mainController.start();
     }

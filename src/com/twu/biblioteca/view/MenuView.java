@@ -2,18 +2,14 @@ package com.twu.biblioteca.view;
 
 import com.twu.biblioteca.InputOutput.InputReader;
 import com.twu.biblioteca.InputOutput.OutputWriter;
-import com.twu.biblioteca.Menu.Menu;
-import com.twu.biblioteca.command.menu.MenuCommand;
 
 import java.util.Map;
 
 public class MenuView {
-    private Menu menu;
     private OutputWriter outputWriter;
     private InputReader inputReader;
 
-    public MenuView(Menu menu, OutputWriter outputWriter, InputReader inputReader) {
-        this.menu = menu;
+    public MenuView(OutputWriter outputWriter, InputReader inputReader) {
         this.outputWriter = outputWriter;
         this.inputReader = inputReader;
     }
@@ -26,9 +22,9 @@ public class MenuView {
         }
     }
 
-    public MenuCommand getMenuOption() {
-        String menuOptionId = inputReader.read();
-        return menu.getCommand(menuOptionId);
+    public String getMenuOption() {
+        outputWriter.println("Enter Menu Option :");
+        return inputReader.read();
     }
 
     public void displayInvalidOption() {

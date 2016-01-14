@@ -6,7 +6,6 @@ import com.twu.biblioteca.Menu.Menu;
 import com.twu.biblioteca.command.menu.MenuCommand;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,7 +36,7 @@ public class MenuViewTest {
 
     @Test
     public void shouldDisplayMenuOptions() throws Exception {
-        MenuView menuView = new MenuView(menu, outputWriter, inputReader);
+        MenuView menuView = new MenuView(outputWriter, inputReader);
         menuView.displayMenu(menuOptions);
         verify(outputWriter).println("Menu Options :");
         verify(outputWriter).println(String.format("%-10s %s", "Command","Description"));
@@ -47,7 +46,7 @@ public class MenuViewTest {
 
     @Test
     public void shouldReadMenuOption() throws Exception {
-        MenuView menuView = new MenuView(menu, outputWriter, inputReader);
+        MenuView menuView = new MenuView(outputWriter, inputReader);
         when(inputReader.read()).thenReturn("1");
         menuView.getMenuOption();
         verify(inputReader).read();
@@ -55,7 +54,7 @@ public class MenuViewTest {
 
     @Test
     public void shouldDisplayInvalidMenuOption() throws Exception {
-        MenuView menuView = new MenuView(menu, outputWriter, inputReader);
+        MenuView menuView = new MenuView(outputWriter, inputReader);
         menuView.displayInvalidOption();
         verify(outputWriter).println("Select a valid option!");
     }

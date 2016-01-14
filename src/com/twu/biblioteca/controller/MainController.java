@@ -45,10 +45,12 @@ public class MainController {
         MenuCommand command;
         do {
             menuView.displayMenu(menu.getMenuOptions(user));
-            command = menuView.getMenuOption();
+            String optionId = menuView.getMenuOption();
+            command = menu.getCommand(optionId);
             try {
                 command.execute(user);
             } catch (Exception e) {
+                e.printStackTrace();
                 consoleView.printMessage(e.getMessage());
             }
         } while (!(command instanceof QuitCommand));

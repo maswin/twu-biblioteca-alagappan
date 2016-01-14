@@ -29,17 +29,19 @@ public class MainControllerTest {
     @Before
     public void setUp() throws Exception {
         menuView = mock(MenuView.class);
+        when(menuView.getMenuOption()).thenReturn("quit");
         consoleView = mock(ConsoleView.class);
         menuOptions = new HashMap<>();
         menu = mock(Menu.class);
+        when(menu.getCommand("quit")).thenReturn(new QuitCommand(new HashSet<Role>(){{
+            add(Role.MEMBER);
+        }}));
         users = mock(Users.class);
     }
 
     @Test
     public void shouldDisplayWelcomeMessageWhenApplicationIsStarted() {
         MainController mainController = new MainController(menu, users, menuView, consoleView);
-        MenuCommand menuCommand = mock(QuitCommand.class);
-        when(menuView.getMenuOption()).thenReturn(menuCommand);
         mainController.start();
         verify(consoleView).printWelcomeMessage();
     }
@@ -52,9 +54,7 @@ public class MainControllerTest {
         when(user.getRole()).thenReturn(Role.MEMBER);
 
         when(users.findUserByLibraryNumberAndPassword(libraryNumber, password)).thenReturn(user);
-        when(menuView.getMenuOption()).thenReturn(new QuitCommand(new HashSet<Role>(){{
-            add(Role.MEMBER);
-        }}));
+        when(menuView.getMenuOption()).thenReturn("quit");
         when(consoleView.getLibraryNumber()).thenReturn(libraryNumber);
         when(consoleView.getPassword()).thenReturn(password);
 
@@ -75,9 +75,6 @@ public class MainControllerTest {
         when(user.getRole()).thenReturn(Role.MEMBER);
 
         when(users.findUserByLibraryNumberAndPassword(libraryNumber, password)).thenReturn(user);
-        when(menuView.getMenuOption()).thenReturn(new QuitCommand(new HashSet<Role>(){{
-            add(Role.MEMBER);
-        }}));
         when(consoleView.getLibraryNumber()).thenReturn("123", libraryNumber);
         when(consoleView.getPassword()).thenReturn("xyz", password);
 
@@ -99,12 +96,14 @@ public class MainControllerTest {
         when(users.findUserByLibraryNumberAndPassword(libraryNumber, password)).thenReturn(user);
         MenuCommand menuCommand = mock(MenuCommand.class);
 
-        Exception exception = mock(Exception.class);
-        doThrow(exception).when(menuCommand).execute(user);
-
-        when(menuView.getMenuOption()).thenReturn(menuCommand, new QuitCommand(new HashSet<Role>(){{
+        when(menuView.getMenuOption()).thenReturn("1", "quit");
+        when(menu.getCommand("1")).thenReturn(menuCommand);
+        when(menu.getCommand("quit")).thenReturn(new QuitCommand(new HashSet<Role>(){{
             add(Role.MEMBER);
         }}));
+
+        Exception exception = mock(Exception.class);
+        doThrow(exception).when(menuCommand).execute(user);
 
         when(consoleView.getLibraryNumber()).thenReturn(libraryNumber);
         when(consoleView.getPassword()).thenReturn(password);
