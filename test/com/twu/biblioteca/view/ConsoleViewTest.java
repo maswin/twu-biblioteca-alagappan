@@ -66,4 +66,12 @@ public class ConsoleViewTest {
         bookView.printUserInformation(user);
         verify(outputWriter).println(user);
     }
+
+    @Test
+    public void shouldPrintGivenMessage() {
+        ConsoleView bookView = new ConsoleView(outputWriter, inputReader);
+        String message = "Hello";
+        bookView.printMessage(message);
+        verify(outputWriter).println(message);
+    }
 }

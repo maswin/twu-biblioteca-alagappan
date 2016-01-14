@@ -1,6 +1,6 @@
 package com.twu.biblioteca.command.menu;
 
-import com.twu.biblioteca.Exception.InvaliOperationException;
+import com.twu.biblioteca.Exception.InvalidOperationException;
 import com.twu.biblioteca.model.Role;
 import com.twu.biblioteca.model.Users.User;
 
@@ -16,7 +16,7 @@ public abstract class MenuCommand {
 
     public void execute(User user) throws Exception {
         if(!isAuthorized(user))
-            throw new InvaliOperationException("Not Authorized to Perform this command!!");
+            throw new InvalidOperationException("Not Authorized to Perform this command!!");
         performCommand(user);
     }
 

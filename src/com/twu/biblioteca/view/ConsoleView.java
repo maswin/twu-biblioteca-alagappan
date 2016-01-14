@@ -34,4 +34,8 @@ public class ConsoleView {
     public void printUserInformation(User user) {
         outputWriter.println(user);
     }
+
+    public void printMessage(String message) {
+        outputWriter.println(message);
+    }
 }

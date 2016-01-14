@@ -87,4 +87,34 @@ public class BibliotecaControllerTest {
         verify(consoleView).printWelcomeMessage();
         verify(consoleView).printInvalidLoginMessage();
     }
+
+    @Test
+    public void shouldPrintExceptionMessageWhenExceptionIsThrown() throws Exception {
+        String libraryNumber = "123-4567";
+        String password = "password";
+
+        User user = mock(User.class);
+        when(user.getRole()).thenReturn(Role.MEMBER);
+
+        when(users.findUserByLibraryNumberAndPassword(libraryNumber, password)).thenReturn(user);
+        MenuCommand menuCommand = mock(MenuCommand.class);
+
+        Exception exception = mock(Exception.class);
+        doThrow(exception).when(menuCommand).execute(user);
+
+        when(menuView.getMenuOption()).thenReturn(menuCommand, new QuitCommand(new HashSet<Role>(){{
+            add(Role.MEMBER);
+        }}));
+
+        when(consoleView.getLibraryNumber()).thenReturn(libraryNumber);
+        when(consoleView.getPassword()).thenReturn(password);
+
+        BibliotecaController bibliotecaController = new BibliotecaController(menu, users, menuView, consoleView);
+        bibliotecaController.start();
+
+        verify(consoleView).printWelcomeMessage();
+        verify(consoleView).printMessage(exception.getMessage());
+    }
+
+
 }
