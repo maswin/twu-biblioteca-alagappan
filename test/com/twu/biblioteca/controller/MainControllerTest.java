@@ -18,7 +18,7 @@ import java.util.Map;
 
 import static org.mockito.Mockito.*;
 
-public class BibliotecaControllerTest {
+public class MainControllerTest {
 
     private MenuView menuView;
     private Menu menu;
@@ -37,10 +37,10 @@ public class BibliotecaControllerTest {
 
     @Test
     public void shouldDisplayWelcomeMessageWhenApplicationIsStarted() {
-        BibliotecaController bibliotecaController = new BibliotecaController(menu, users, menuView, consoleView);
+        MainController mainController = new MainController(menu, users, menuView, consoleView);
         MenuCommand menuCommand = mock(QuitCommand.class);
         when(menuView.getMenuOption()).thenReturn(menuCommand);
-        bibliotecaController.start();
+        mainController.start();
         verify(consoleView).printWelcomeMessage();
     }
 
@@ -58,8 +58,8 @@ public class BibliotecaControllerTest {
         when(consoleView.getLibraryNumber()).thenReturn(libraryNumber);
         when(consoleView.getPassword()).thenReturn(password);
 
-        BibliotecaController bibliotecaController = new BibliotecaController(menu, users, menuView, consoleView);
-        bibliotecaController.start();
+        MainController mainController = new MainController(menu, users, menuView, consoleView);
+        mainController.start();
 
         verify(consoleView).printWelcomeMessage();
         verify(menuView).displayMenu(menuOptions);
@@ -81,8 +81,8 @@ public class BibliotecaControllerTest {
         when(consoleView.getLibraryNumber()).thenReturn("123", libraryNumber);
         when(consoleView.getPassword()).thenReturn("xyz", password);
 
-        BibliotecaController bibliotecaController = new BibliotecaController(menu, users, menuView, consoleView);
-        bibliotecaController.start();
+        MainController mainController = new MainController(menu, users, menuView, consoleView);
+        mainController.start();
 
         verify(consoleView).printWelcomeMessage();
         verify(consoleView).printInvalidLoginMessage();
@@ -109,8 +109,8 @@ public class BibliotecaControllerTest {
         when(consoleView.getLibraryNumber()).thenReturn(libraryNumber);
         when(consoleView.getPassword()).thenReturn(password);
 
-        BibliotecaController bibliotecaController = new BibliotecaController(menu, users, menuView, consoleView);
-        bibliotecaController.start();
+        MainController mainController = new MainController(menu, users, menuView, consoleView);
+        mainController.start();
 
         verify(consoleView).printWelcomeMessage();
         verify(consoleView).printMessage(exception.getMessage());

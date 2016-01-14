@@ -1,7 +1,7 @@
 package com.twu.biblioteca;
 
 import com.twu.biblioteca.Menu.Menu;
-import com.twu.biblioteca.controller.BibliotecaController;
+import com.twu.biblioteca.controller.MainController;
 import com.twu.biblioteca.model.Books.Book;
 import com.twu.biblioteca.model.Copy;
 import com.twu.biblioteca.InputOutput.InputReader;
@@ -21,24 +21,33 @@ import java.util.*;
 
 public class BibliotecaApp {
 
+    private static BookView bookView;
+    private static MovieView movieView;
+    private static Library library;
+    private static ConsoleView consoleView;
+
     public static void main(String[] args) {
         OutputWriter outputWriter = new OutputWriter(System.out);
         InputReader inputReader = new InputReader(System.in);
-        BookView bookView = new BookView(outputWriter, inputReader);
-        MovieView movieView = new MovieView(outputWriter, inputReader);
-        ConsoleView consoleView = new ConsoleView(outputWriter, inputReader);
+        bookView = new BookView(outputWriter, inputReader);
+        movieView = new MovieView(outputWriter, inputReader);
+        consoleView = new ConsoleView(outputWriter, inputReader);
 
-        Map<String, String> menuOptions = new HashMap<>();
-        menuOptions.put("1", "List of Books");
-        menuOptions.put("2", "CheckOut Book");
-        menuOptions.put("3", "CheckIn Book");
-        menuOptions.put("4", "List of Movies");
-        menuOptions.put("5", "CheckOut Movie");
-        menuOptions.put("6", "User Information");
-        menuOptions.put("7", "Check Book Status");
-        menuOptions.put("8", "Check Movie Status");
-        menuOptions.put("Q", "Quit");
+        library = createLibrary();
 
+        List<User> userList = new ArrayList<>();
+        userList.add(new User("123-4567", "password", "name", "abc@xyz.com", "12345678", Role.MEMBER));
+        userList.add(new User("000-0000", "password", "name", "abc@xyz.com", "12345678", Role.ADMIN));
+
+        Users users = new Users(userList);
+
+        Menu menu = createMenu();
+        MenuView menuView = new MenuView(menu, outputWriter, inputReader);
+        MainController mainController = new MainController(menu, users, menuView, consoleView);
+        mainController.start();
+    }
+
+    private static Library createLibrary() {
         List<Book> books = new ArrayList<>();
         books.add(new Book(1, "Harry Potter", "J.K.Rowling", 2005,
                 new HashSet<>(Arrays.asList(new Copy(1234, null)))));
@@ -56,8 +65,20 @@ public class BibliotecaApp {
         movies.add(new Movie(13, "Endhiran", "Shankar", 2012, 10,
                 new HashSet<>(Arrays.asList(new Copy(5457, null), new Copy(5890, null))), "genre"));
 
-        Library library = new Library(books, movies);
+        return new Library(books, movies);
+    }
 
+    private static Menu createMenu() {
+        Map<String, String> menuOptions = new HashMap<>();
+        menuOptions.put("1", "List of Books");
+        menuOptions.put("2", "CheckOut Book");
+        menuOptions.put("3", "CheckIn Book");
+        menuOptions.put("4", "List of Movies");
+        menuOptions.put("5", "CheckOut Movie");
+        menuOptions.put("6", "User Information");
+        menuOptions.put("7", "Check Book Status");
+        menuOptions.put("8", "Check Movie Status");
+        menuOptions.put("Q", "Quit");
 
         Map<String, MenuCommand> menuCommands = new HashMap<>();
         menuCommands.put("1", new DisplayBooksCommand(bookView, library, new HashSet<Role>() {{
@@ -95,16 +116,7 @@ public class BibliotecaApp {
             add(Role.ADMIN);
         }}));
 
-        List<User> users = new ArrayList<>();
-        users.add(new User("123-4567", "password", "name", "abc@xyz.com", "12345678", Role.MEMBER));
-        users.add(new User("000-0000", "password", "name", "abc@xyz.com", "12345678", Role.ADMIN));
-
-        Users authenticator = new Users(users);
-
-        Menu menu = new Menu(menuOptions, menuCommands);
-        MenuView menuView = new MenuView(menu, outputWriter, inputReader);
-        BibliotecaController bibliotecaController = new BibliotecaController(menu, authenticator, menuView, consoleView);
-        bibliotecaController.start();
+        return new Menu(menuOptions, menuCommands);
     }
 
 }

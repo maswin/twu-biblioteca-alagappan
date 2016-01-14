@@ -9,13 +9,13 @@ import com.twu.biblioteca.model.Users.Users;
 import com.twu.biblioteca.view.ConsoleView;
 import com.twu.biblioteca.view.MenuView;
 
-public class BibliotecaController {
+public class MainController {
     private Menu menu;
     private Users users;
     private ConsoleView consoleView;
     private MenuView menuView;
 
-    public BibliotecaController(Menu menu, Users users, MenuView menuView, ConsoleView consoleView) {
+    public MainController(Menu menu, Users users, MenuView menuView, ConsoleView consoleView) {
         this.menu = menu;
         this.users = users;
         this.consoleView = consoleView;
